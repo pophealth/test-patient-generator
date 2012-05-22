@@ -1,0 +1,2819 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="urn:hl7-org:v3">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   
+      <title>Childhood immunization Status</title><style type="text/css">
+body {
+	color: rgb(26, 26, 26);
+	background-color: rgb(255,255,255);
+	font-family: Verdana, Tahoma, sans-serif;
+	font-size: 11px;
+}
+
+a {
+	color: rgb(0, 0, 255);
+	background-color: rgb(255,255,255);
+}
+
+h1 {
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+h3 {
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+h4 {
+	font-size: 8pt;
+	font-weight: bold;
+}
+
+div {
+	width: 80%;
+}
+
+table {
+	line-height: 10pt;
+	width: 80%;
+}
+
+tr {
+	background-color: rgb(224,224,224);
+}
+
+td {
+	padding: 0.1cm 0.2cm;
+	vertical-align: top;
+}
+
+.h1center {
+	font-size: 12pt;
+	font-weight: bold;
+	text-align: center;
+	width: 80%;
+}
+
+.header_table{
+	border: 1pt inset rgb(0,0,0);
+}
+
+.narr_table {
+	width: 100%;
+}
+
+.narr_tr {
+	background-color: rgb(225,225,225);
+}
+pre {
+ overflow: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+ white-space: pre-wrap; /* css-3 */
+ white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+ white-space: -pre-wrap; /* Opera 4-6 */
+ white-space: -o-pre-wrap; /* Opera 7 */
+ word-wrap: break-word; /* Internet Explorer 5.5+ */
+ font-family: Verdana, Tahoma, sans-serif;
+ font-size: 11px;
+ text-align:left;
+ margin: 0px 0px 0px 0px;
+ padding:0px 0px 0px 0px;
+}
+.narr_th {
+	background-color: rgb(201,201,201);
+}
+
+.td_label{
+	font-weight: bold;
+	color: white;
+}
+	</style></head>
+   <body>
+      <h1 class="h1center">Childhood immunization Status (NQF 0038)</h1>
+      <table class="header_table">
+         <tbody>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">eMeasure Name</span></td>
+               <td width="30%">Childhood immunization Status</td>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">eMeasure Id</span></td>
+               <td width="30%"> A310F21D-7A80-498A-BA33-8B471F205272</td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Version number</span></td>
+               <td width="30%">1</td>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">eMeasure Set Id</span></td>
+               <td width="30%"> DEEBCF9E-5AF4-476B-BD79-936DCB8584B3</td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Available Date</span></td>
+               <td width="30%"> No information </td>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Measurement Period</span></td>
+               <td>January 1, 20xx  through December 31, 20xx </td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Measure Steward</span></td>
+               <td width="80%" colspan="3">National Committee for Quality Assurance</td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Endorsed by</span></td>
+               <td width="80%" colspan="3">National Quality Forum</td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Description</span></td>
+               <td width="80%" colspan="3">The percentage of children 2 years of age who had four diphtheria, tetanus and acellular pertussis (DTaP); three polio (IPV);
+                  one measles, mumps and rubella (MMR); two H influenza type B (HIB); three hepatitis B (Hep B), one chicken pox (VZV); four
+                  pneumococcal conjugate (PCV); two hepatitis A (Hep A); two or three rotavirus (RV); and two influenza (flu) vaccines by their
+                  second birthday. The percentage of children 2 years of age who had the complete series of vaccines by 2 years of age. There
+                  are 12 rates calculated for this measure 10 for the individual immunizations and 2 for the series of immunizations.
+               </td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Copyright</span></td>
+               <td width="80%" colspan="3"><pre>&copy; National Committee for Quality Assurance. All Rights Reserved</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Measure scoring</span></td>
+               <td width="80%" colspan="3">Proportion</td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Measure type</span></td>
+               <td width="80%" colspan="3">Process</td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Stratification</span></td>
+               <td width="80%" colspan="3"><pre>None. (No stratification by age. However, care on how to multiple numerators and exclusions - see HQMF guidance section)</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Risk Adjustment</span></td>
+               <td width="80%" colspan="3"><pre>None</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Data Aggregation</span></td>
+               <td width="80%" colspan="3"><pre></pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Rationale</span></td>
+               <td width="80%" colspan="3"><pre>This measure monitors the appropriate and timely use of vaccines for children prior to their second birthday. Pediatric vaccines are responsible for preventing 10.5 million diseases per birth cohort in the U.S. and are a cost-effective preventive measure. For every dollar spent on immunizations, as many as $29 can be saved in direct and indirect costs. With the development and use of vaccines, the prevalence of some infectious diseases has dramatically reduced; since the beginning of the 20th century, there has been a 99% decline in vaccine-preventable disease morbidity. Despite the established guidelines and well-known benefits of vaccination, however, in 2007, 22.5% of children 19&#8211;35 months of age had not received the recommended immunizations. General clinical consensus notes that if immunization practices ceased, most infectious diseases currently prevented by vaccinations would reemerge as serious health threats. This measure facilitates efforts toward infectious disease prevention among a vulnerable subgroup of the population.</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Clinical Recommendation Statement</span></td>
+               <td width="80%" colspan="3"><pre>Current CDC/ACIP Guidelines recommend infants and toddlers receive the Hepatitis B series, four DTaP vaccinations, four HIB vaccinations, three IPV vaccinations, one MMR vaccination, four pneumococcal conjugate vaccinations, and one varicella vaccination. Some combination products on the market include both the DTaP and HIB vaccines and should only be administered three times. In these cases, children receive three HIB vaccinations instead of the four mentioned above. The recommendation is to receive these vaccinations between birth and 18 months of age. The current HEDIS specifications allow a grace period by measuring compliance with these recommendations between birth and age two.</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Improvement notation</span></td>
+               <td width="80%" colspan="3"><pre>Higher score indicates better quality</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Measurement duration</span></td>
+               <td width="80%" colspan="3"><pre>12 month(s)</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Reference</span></td>
+               <td width="80%" colspan="3"><pre>CDC. General Recommendations on Immunization: Recommendations of the Advisory Committee on Immunization Practices (ACIP). MMWR 2006; 55(RR15);1-48 http://www.cdc.gov/mmwr/preview/mmwrhtml/rr5515a1.htm</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Definition</span></td>
+               <td width="80%" colspan="3"><pre>Initial Patient Population(s): Children age &gt;2 years of age during the measurement period</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Definition</span></td>
+               <td width="80%" colspan="3"><pre>Denominator(s): Patients in the initial population who had an outpatient visit with a primary care physician (PCP) or an obstetrician/gynecologist (OB/GYN) during the measurement period This measure is stratified into 12 populations to allow for a different rate calculation for the individual vaccination that children should receive before their second birthday.
+	
+	Note:  The intent of the measure is to calculate a rate for those children who have received appropriate vaccinations by their second birthday.  The inclusion of vaccine specific rates allows providers an opportunity to identify which vaccinations are not consistently provided to their pediatric patients</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Definition</span></td>
+               <td width="80%" colspan="3"><pre>Denominator Exclusion(s): Population 1:Patients with an active diagnosis of encephalopathy or progressive neurologic disorder
+Population 2:None
+Population 3: Patients with a history of active diagnosis of measles, mumps and rubella; or an active diagnosis of HIV disease, multiple myeloma, leukemia, or immunodeficiency
+Population 4: None
+Population 5: Patients with a history of active or chronic Hepatitis BPopulation 6: Patients with a history of active diagnosis of chickenpox (varicella), or an active diagnosis of or history of cancer of lymphoreticular or histiocytic tissue, or an active diagnosis of HIV disease, multiple myeloma, leukemia, or immunodeficiency
+Population 7: Patients with a history of or an active diagnosis of cancer of lymphoreticular or histiocytic tissue; or patients with an active diagnosis of HIV disease, multiple myeloma, leukemia or immunodeficiency
+Population 8: Patients with a history of active or chronic Hepatitis A
+Population 9: Patients with a history of active or chronic Rotavirus
+Population 10: Patients with a history of or an active diagnosis of cancer of lymphoreticular or histiocytic tissue; or patients with an active diagnosis of HIV disease, multiple myeloma, leukemia or immunodeficiency
+Population 11: Patients who have an active diagnosis of encephalopathy, progressive neurologic disease, HIV disease, multiple myeloma, leukemia, immunodeficiency, cancer of lymphoreticular or histiocytic tissue or a history of cancer of lymphoreticular or histiocytic tissuePopulation 12: Patients who have an active diagnosis of encephalopathy, progressive neurologic disease, HIV disease, multiple myeloma, leukemia, immunodeficiency, cancer of lymphoreticular or histiocytic tissue or a history of cancer of lymphoreticular or histiocytic tissue</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Definition</span></td>
+               <td width="80%" colspan="3"><pre>Numerator(s): Population 1: diphtheria, tetanus, acellular pertussus (DTaP): At least four DTaP vaccinations, with different dates of service on or before the child&#8217;s second birthday. Do not count any vaccination administered prior to 42 days after birth.
+Population 2: inactivated polio vaccine (IPV): At least three IPV vaccinations, with different dates of service on or before the child&#8217;s second birthday. IPV administered prior to 42 days after birth cannot be counted.
+Population 3: measles, mumps and rubella (MMR). At least one MMR vaccination, with the date of service on or before the child&#8217;s second birthday.
+Population 4: hemophilus influenza b (HiB): At least two HiB vaccinations, with different dates of service on or before the child&#8217;s second birthday. Do not count any vaccination administered prior to 42 days after birth.
+Population 5: Hepatitis B: At least three Hepatitis B vaccinations, with different dates of service on or before the child&#8217;s second birthday. 
+Population 6: varicella zoster vaccine (VZV): At least one VZV vaccination, with the date of service on or before the child&#8217;s second birthday.
+Population 7: Pneumococcal conjugate: At least four pneumococcal conjugate vaccinations, with different dates of service on or before the child&#8217;s second birthday. Do not count any vaccination administered prior to 42 days after birth.
+Population 8: Hepatitis A: Two Hepatitis A vaccinations, with different dates of service on or before the child&#8217;s second birthday.  
+Population 9: Rotavirus: The child must receive the required number of rotavirus vaccinations (two doses or three doses, depending on which vaccine is administered), on different dates of service on or before the child&#8217;s second birthday. Do not count any vaccination administered prior to 42 days after birth.  The number of rotavirus doses varies based on the vaccine given. There is a two-dose schedule and a three-dose schedule. 
+Population 10: Influenza: Two influenza vaccinations, with different dates of service on or before the child&#8217;s second birthday. Do not count any vaccination administered prior to six months after birth. 
+Population 11: At least  DTaP, IPV, MMR, HiB, Hep B and VZV vaccination. 
+Population 12: At least DTaP, IPV, MMR, HiB, Hep B, VZV and Pneumococcal vaccinations</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Definition</span></td>
+               <td width="80%" colspan="3"><pre>Denominator Exception(s): Population 1:Patients with an allergy to Dtap vaccine 
+Population 2:Patients with an allergy to IPV, neomycin, streptromycin or polymyxin
+Population 3: Patients with an allergy to the following vaccines: MMR, mumps, measles, rubella
+Population 4: Patients with an allergy to HiB vaccine
+Population 5: Patients with an allergy to Baker&#8217;s Yeast Substance or Hepatitis B vaccine
+Population 6: Patients with an allergy to VZV vaccine
+Population 7: Patients with an allergy to pneumococcal vaccine
+Population 8: Patients with an allergy to Hepatitis A vaccine 
+Population 9: Patients with an allergy to rotavirus vaccine
+Population 10: Patients with an allergy to influenza vaccine
+Population 11: Patients with an allergy to IPV, neomycin, streptomycin, or polymyxin, Dtap vaccine, MMR vaccine, mumps vaccine, measles vaccine, rubella vaccine, HiB vaccine, Baker&#8217;s Yeast Substance, or Hepatitis B vaccine
+Population 12: Patients with an allergy to IPV, neomycin, streptomycin, or polymyxin, Dtap vaccine, MMR vaccine, mumps vaccine, measles vaccine, rubella vaccine, HiB vaccine, Baker&#8217;s Yeast Substance, Hepatitis B vaccine, or pneumococcal vaccine</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Guidance</span></td>
+               <td width="80%" colspan="3"><pre>Measure 0038 lists 12 populations for reporting.  The first ten populations indicate whether any individual has received the appropriate number of a specific immunization by the age of 2.  Note the number of doses of vaccines is specified in the logic; the spacing of vaccines should occur per relevant clinical guidelines. The 11th and 12th populations indicate whether any individual has received all of the expected doses of a group (or bundle) of immunizations.  Note that each of the first 10 populations, referring to a single vaccine (or vaccine combination - MMR) has a specific set of exclusions that apply only to the respective vaccine(s). For populations 11 and 12, if there is an exclusion for any of the individual vaccines, the patient is removed from the denominator. Populations 11 and 12 are intended to show only those patients for whom all of the listed vaccines have been performed.</pre></td>
+            </tr>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Supplemental Data Elements</span></td>
+               <td width="80%" colspan="3"><pre>Report "Patient Characteristic: Gender" using "Gender HL7 Value Set (2.16.840.1.113883.1.11.1)"; Report "Patient Characteristic: Race" using "Race CDC Value Set (2.16.840.1.114222.4.11.836)"; Report "Patient Characteristic: Ethnicity" using "Ethnicity CDC Value Set (2.16.840.1.114222.4.11.837)"; Report "Patient Characteristic: Payer" using "Payer Source of Payment Typology Value Set (2.16.840.1.113883.3.221.5)".</pre></td>
+            </tr>
+         </tbody>
+      </table>
+      <h2><a name="toc">Table of Contents</a></h2>
+      <ul>
+         <li><a href="#d169258e351">Population criteria</a></li>
+         <li><a href="#d169258e27129">Data criteria (QDM Data Elements)</a></li>
+         <li><a href="#d169258e29472">Supplemental Data Elements</a></li>
+      </ul>
+      <hr align="left" color="teal" size="2" width="80%">
+      <h3><a name="d169258e351" href="#toc">Population criteria</a></h3>
+      <div>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 1
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 1 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 1 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 1"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 1 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Diagnosis, Active: encephalopathy"</li>
+                        <li>OR: "Diagnosis, Active: progressive neurologic disorder"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 1 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 1 =</b>
+               
+               <ul>
+                  <li>AND: "Medication, Allergy: Dtap Vaccine"</li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 2
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 2 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 2 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 2"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 2=</b>
+               
+               <ul>
+                  <li>None</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 2 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                        <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                        <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                              <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                              <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: IPV"</li>
+                              <li>OR: THIRD:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: IPV"</li>
+                              <li>OR: THIRD:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 2 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Medication, Allergy: IPV"</li>
+                        <li>OR: "Medication, Allergy: Neomycin"</li>
+                        <li>OR: "Medication, Allergy: Streptomycin"</li>
+                        <li>OR: "Medication, Allergy: Polymyxin"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 3
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 3 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 3 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 3"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 3 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Diagnosis, Active: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Inactive: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Active: HIV disease"</li>
+                        <li>OR: "Diagnosis, Active: multiple myeloma"</li>
+                        <li>OR: "Diagnosis, Active: leukemia"</li>
+                        <li>OR: "Diagnosis, Active: immunodeficiency"</li>
+                        <li>OR: "Diagnosis, Resolved: Rubella"</li>
+                        <li>OR: "Diagnosis, Resolved: Measles"</li>
+                        <li>OR: "Diagnosis, Resolved: mumps"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 3 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Medication, Administered: MMR Vaccine"</li>
+                              <li>OR: "Procedure, Performed: MMR Vaccination"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: 
+                           <ul>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Rubella Vaccination"</li>
+                                    <li>OR: "Medication, Administered: rubella vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Measles Vaccination"</li>
+                                    <li>OR: "Medication, Administered: Measles vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Mumps Vaccination"</li>
+                                    <li>OR: "Medication, Administered: mumps vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 3 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Medication, Allergy: MMR Vaccine"</li>
+                        <li>OR: "Medication, Allergy: mumps vaccine"</li>
+                        <li>OR: "Medication, Allergy: Measles vaccine"</li>
+                        <li>OR: "Medication, Allergy: rubella vaccine"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 4
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 4 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 4 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 4"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 4=</b>
+               
+               <ul>
+                  <li>None</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 4 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                        <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                        <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: HIB"</li>
+                              <li>OR: SECOND:"Procedure, Performed: HIB Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: HIB"</li>
+                              <li>OR: SECOND:"Procedure, Performed: HIB Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 4 =</b>
+               
+               <ul>
+                  <li>AND: "Medication, Allergy: HIB"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 5
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 5 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 5 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 5"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 5 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Diagnosis, Resolved: Hepatitis B Diagnosis"</li>
+                        <li>OR: "Diagnosis, Active: Hepatitis B Diagnosis"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 5 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Hepatitis B vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Hepatitis B vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Hepatitis B vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Hepatitis B vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Hepatitis B vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 5 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Substance, Allergy: Baker's Yeast Substance"</li>
+                        <li>OR: "Medication, Allergy: Hepatitis B vaccine"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 6
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 6 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 6 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 6"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 6 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Diagnosis, Active: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Inactive: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Active: HIV disease"</li>
+                        <li>OR: "Diagnosis, Active: multiple myeloma"</li>
+                        <li>OR: "Diagnosis, Active: leukemia"</li>
+                        <li>OR: "Diagnosis, Active: immunodeficiency"</li>
+                        <li>OR: "Diagnosis, Resolved: VZV"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 6 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Medication, Administered: VZV vaccine"</li>
+                        <li>OR: "Procedure, Performed: VZV Vaccination"</li>
+                        <li>OR: "Diagnosis, Resolved: VZV"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 6 =</b>
+               
+               <ul>
+                  <li>AND: "Medication, Allergy: VZV vaccine"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 7
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 7 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 7 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 7"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 7 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Diagnosis, Active: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Inactive: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Active: HIV disease"</li>
+                        <li>OR: "Diagnosis, Active: multiple myeloma"</li>
+                        <li>OR: "Diagnosis, Active: leukemia"</li>
+                        <li>OR: "Diagnosis, Active: immunodeficiency"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 7 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 7 =</b>
+               
+               <ul>
+                  <li>AND: "Medication, Allergy: pneumococcal vaccine"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 8
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 8 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 8 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 8"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 8 =</b>
+               
+               <ul>
+                  <li>AND: "Diagnosis, Resolved: Hepatitis A Diagnosis"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 8 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Hepatitis A Vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Hepatitis A Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Hepatitis A Vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Hepatitis A Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Hepatitis A Vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Hepatitis A Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 8 =</b>
+               
+               <ul>
+                  <li>AND: "Medication, Allergy: Hepatitis A Vaccine"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 9
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 9 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 9 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 9"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 9 =</b>
+               
+               <ul>
+                  <li>AND: "Diagnosis, Active: Rotavirus"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 9 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Rotavirus vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Rotavirus Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Rotavirus vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Rotavirus Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Rotavirus vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Rotavirus Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Rotavirus vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Rotavirus Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Rotavirus vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Rotavirus Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Rotavirus vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Rotavirus Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 9 =</b>
+               
+               <ul>
+                  <li>AND: "Medication, Allergy: Rotavirus vaccine"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 10
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 10 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 10 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 10"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 10 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Diagnosis, Active: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Inactive: cancer of lymphoreticular or histiocytic tissue"</li>
+                        <li>OR: "Diagnosis, Active: HIV disease"</li>
+                        <li>OR: "Diagnosis, Active: multiple myeloma"</li>
+                        <li>OR: "Diagnosis, Active: leukemia"</li>
+                        <li>OR: "Diagnosis, Active: immunodeficiency"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 10 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: influenza vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Influenza Vaccination"</li>
+                        <li>  &gt;= 6 month(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: influenza vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Influenza Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: influenza vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Influenza Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: influenza vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Influenza Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 6 month(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: influenza vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Influenza Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: influenza vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Influenza Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 10 =</b>
+               
+               <ul>
+                  <li>AND: "Medication, Allergy: influenza vaccine"</li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 11
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 11 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 11 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 11"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 11 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Diagnosis, Active: encephalopathy"</li>
+                              <li>OR: "Diagnosis, Active: progressive neurologic disorder"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Diagnosis, Active: cancer of lymphoreticular or histiocytic tissue"</li>
+                              <li>OR: "Diagnosis, Inactive: cancer of lymphoreticular or histiocytic tissue"</li>
+                              <li>OR: "Diagnosis, Active: HIV disease"</li>
+                              <li>OR: "Diagnosis, Active: multiple myeloma"</li>
+                              <li>OR: "Diagnosis, Active: leukemia"</li>
+                              <li>OR: "Diagnosis, Active: immunodeficiency"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 11 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                        <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                        <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                              <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                              <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: IPV"</li>
+                              <li>OR: THIRD:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: IPV"</li>
+                              <li>OR: THIRD:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Medication, Administered: MMR Vaccine"</li>
+                              <li>OR: "Procedure, Performed: MMR Vaccination"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: 
+                           <ul>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Rubella Vaccination"</li>
+                                    <li>OR: "Medication, Administered: rubella vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Measles Vaccination"</li>
+                                    <li>OR: "Medication, Administered: Measles vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Mumps Vaccination"</li>
+                                    <li>OR: "Medication, Administered: mumps vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                        <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                        <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: HIB"</li>
+                              <li>OR: SECOND:"Procedure, Performed: HIB Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: HIB"</li>
+                              <li>OR: SECOND:"Procedure, Performed: HIB Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FIRST:"Medication, Administered: Hepatitis B vaccine"</li>
+                              <li>OR: FIRST:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>AND: 
+                           <ul>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Hepatitis B vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                    <li>  &gt;= 1 day(s) starts after start of 
+                                       <ul>
+                                          <li>OR: FIRST:"Medication, Administered: Hepatitis B vaccine"</li>
+                                          <li>OR: FIRST:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                       </ul>
+                                       
+                                    </li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>AND: 
+                           <ul>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: Hepatitis B vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                    <li>  &gt;= 1 day(s) starts after start of 
+                                       <ul>
+                                          <li>OR: SECOND:"Medication, Administered: Hepatitis B vaccine"</li>
+                                          <li>OR: SECOND:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                       </ul>
+                                       
+                                    </li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: "Medication, Administered: VZV vaccine"</li>
+                              <li>OR: "Procedure, Performed: VZV Vaccination"</li>
+                              <li>OR: "Diagnosis, Resolved: VZV"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 11 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Medication, Allergy: Dtap Vaccine"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Medication, Allergy: IPV"</li>
+                              <li>OR: "Medication, Allergy: Neomycin"</li>
+                              <li>OR: "Medication, Allergy: Streptomycin"</li>
+                              <li>OR: "Medication, Allergy: Polymyxin"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Medication, Allergy: MMR Vaccine"</li>
+                              <li>OR: "Medication, Allergy: mumps vaccine"</li>
+                              <li>OR: "Medication, Allergy: Measles vaccine"</li>
+                              <li>OR: "Medication, Allergy: rubella vaccine"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: "Medication, Allergy: HIB"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Substance, Allergy: Baker's Yeast Substance"</li>
+                              <li>OR: "Medication, Allergy: Hepatitis B vaccine"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+         <p><span style="font-weight:bold; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------ 
+               Population Criteria 12
+                ------</span></p>
+         
+         <ul>
+            <li>
+               <b>Initial Patient Population 12 =</b>
+               
+               <ul>
+                  <li>AND: "Patient Characteristic: birth date"  &gt;= 1 year(s) starts before start of "Measurement period"</li>
+                  <li>AND: "Patient Characteristic: birth date"  &lt; 2 year(s) starts before start of "Measurement period"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator 12 =</b>
+               
+               <ul>
+                  <li>AND: "Initial Patient Population 12"</li>
+                  <li>AND: "Encounter: encounter outpatient w/ PCP &amp; obgyn" starts before or during "Measurement end date"</li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exclusions 12 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Diagnosis, Active: encephalopathy"</li>
+                              <li>OR: "Diagnosis, Active: progressive neurologic disorder"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Diagnosis, Active: cancer of lymphoreticular or histiocytic tissue"</li>
+                              <li>OR: "Diagnosis, Inactive: cancer of lymphoreticular or histiocytic tissue"</li>
+                              <li>OR: "Diagnosis, Active: HIV disease"</li>
+                              <li>OR: "Diagnosis, Active: multiple myeloma"</li>
+                              <li>OR: "Diagnosis, Active: leukemia"</li>
+                              <li>OR: "Diagnosis, Active: immunodeficiency"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Numerator 12 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: Dtap Vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Dtap Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: Dtap Vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Dtap Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                        <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                        <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                              <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                              <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: IPV"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: IPV"</li>
+                              <li>OR: THIRD:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: IPV"</li>
+                              <li>OR: THIRD:"Procedure, Performed: IPV Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: IPV"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: IPV Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Medication, Administered: MMR Vaccine"</li>
+                              <li>OR: "Procedure, Performed: MMR Vaccination"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: 
+                           <ul>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Rubella Vaccination"</li>
+                                    <li>OR: "Medication, Administered: rubella vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Measles Vaccination"</li>
+                                    <li>OR: "Medication, Administered: Measles vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                              <li>AND: 
+                                 <ul>
+                                    <li>OR: "Procedure, Performed: Mumps Vaccination"</li>
+                                    <li>OR: "Medication, Administered: mumps vaccine"</li>
+                                    <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                        <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                        <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: HIB"</li>
+                              <li>OR: SECOND:"Procedure, Performed: HIB Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: HIB"</li>
+                              <li>OR: SECOND:"Procedure, Performed: HIB Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: HIB"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: HIB Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: Hepatitis B vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: Hepatitis B vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: Hepatitis B vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: Hepatitis B vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: Hepatitis B vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Hepatitis B Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Medication, Administered: VZV vaccine"</li>
+                        <li>OR: "Procedure, Performed: VZV Vaccination"</li>
+                        <li>OR: "Diagnosis, Resolved: VZV"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                        <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: FIRST:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: FIRST:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: SECOND:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: SECOND:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &gt;= 42 day(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+                  <li>AND: 
+                     <ul>
+                        <li>AND: 
+                           <ul>
+                              <li>OR: FOURTH:"Medication, Administered: pneumococcal vaccine"</li>
+                              <li>OR: FOURTH:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                              <li>  &gt;= 1 day(s) starts after start of 
+                                 <ul>
+                                    <li>OR: THIRD:"Medication, Administered: pneumococcal vaccine"</li>
+                                    <li>OR: THIRD:"Procedure, Performed: Pneumococcal Vaccination"</li>
+                                 </ul>
+                                 
+                              </li>
+                           </ul>
+                           
+                        </li>
+                        <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+            <li>
+               <b>Denominator Exceptions 12 =</b>
+               
+               <ul>
+                  <li>AND: 
+                     <ul>
+                        <li>OR: "Medication, Allergy: Dtap Vaccine"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Medication, Allergy: IPV"</li>
+                              <li>OR: "Medication, Allergy: Neomycin"</li>
+                              <li>OR: "Medication, Allergy: Streptomycin"</li>
+                              <li>OR: "Medication, Allergy: Polymyxin"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Medication, Allergy: MMR Vaccine"</li>
+                              <li>OR: "Medication, Allergy: mumps vaccine"</li>
+                              <li>OR: "Medication, Allergy: Measles vaccine"</li>
+                              <li>OR: "Medication, Allergy: rubella vaccine"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: "Medication, Allergy: HIB"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                        <li>OR: 
+                           <ul>
+                              <li>OR: "Substance, Allergy: Baker's Yeast Substance"</li>
+                              <li>OR: "Medication, Allergy: Hepatitis B vaccine"</li>
+                              <li>  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                           </ul>
+                           
+                        </li>
+                        <li>OR: "Medication, Allergy: pneumococcal vaccine"  &lt; 2 year(s) starts after start of "Patient Characteristic: birth date"</li>
+                     </ul>
+                     
+                  </li>
+               </ul>
+               
+            </li>
+         </ul>
+         
+      </div>
+      <h3><a name="d169258e27129" href="#toc">Data criteria (QDM Data Elements)</a></h3>
+      <div>
+         
+         <ul>
+            <li>
+               "Diagnosis, Active: cancer of lymphoreticular or histiocytic tissue" using "cancer of lymphoreticular or histiocytic tissue Value Set GROUPING (2.16.840.1.113883.3.464.0001.181)"
+            </li>
+            <li>
+               "Diagnosis, Active: encephalopathy" using "encephalopathy Value Set GROUPING (2.16.840.1.113883.3.464.0001.226)"
+            </li>
+            <li>
+               "Diagnosis, Active: Hepatitis B Diagnosis" using "Hepatitis B Diagnosis Value Set GROUPING (2.16.840.1.113883.3.464.0001.260)"
+            </li>
+            <li>
+               "Diagnosis, Active: HIV disease" using "HIV disease Value Set GROUPING (2.16.840.1.113883.3.464.0001.167)"
+            </li>
+            <li>
+               "Diagnosis, Active: immunodeficiency" using "immunodeficiency Value Set GROUPING (2.16.840.1.113883.3.464.0001.278)"
+            </li>
+            <li>
+               "Diagnosis, Active: leukemia" using "leukemia Value Set GROUPING (2.16.840.1.113883.3.464.0001.297)"
+            </li>
+            <li>
+               "Diagnosis, Active: multiple myeloma" using "multiple myeloma Value Set GROUPING (2.16.840.1.113883.3.464.0001.330)"
+            </li>
+            <li>
+               "Diagnosis, Active: progressive neurologic disorder" using "progressive neurologic disorder SNOMED-CT Value Set (2.16.840.1.113883.3.464.0001.383)"
+            </li>
+            <li>
+               "Diagnosis, Active: Rotavirus" using "Rotavirus Value Set GROUPING (2.16.840.1.113883.3.464.0001.555)"
+            </li>
+            <li>
+               "Diagnosis, Inactive: cancer of lymphoreticular or histiocytic tissue" using "cancer of lymphoreticular or histiocytic tissue Value Set GROUPING (2.16.840.1.113883.3.464.0001.181)"
+            </li>
+            <li>
+               "Diagnosis, Resolved: Hepatitis A Diagnosis" using "Hepatitis A Diagnosis Value Set GROUPING (2.16.840.1.113883.3.464.0001.253)"
+            </li>
+            <li>
+               "Diagnosis, Resolved: Hepatitis B Diagnosis" using "Hepatitis B Diagnosis Value Set GROUPING (2.16.840.1.113883.3.464.0001.260)"
+            </li>
+            <li>
+               "Diagnosis, Resolved: Measles" using "Measles Value Set GROUPING (2.16.840.1.113883.3.464.0001.314)"
+            </li>
+            <li>
+               "Diagnosis, Resolved: mumps" using "mumps Grouping Value Set (2.16.840.1.113883.3.464.0001.334)"
+            </li>
+            <li>
+               "Diagnosis, Resolved: Rubella" using "Rubella Value Set GROUPING (2.16.840.1.113883.3.464.0001.390)"
+            </li>
+            <li>
+               "Diagnosis, Resolved: VZV" using "VZV Value Set GROUPING (2.16.840.1.113883.3.464.0001.419)"
+            </li>
+            <li>
+               "Encounter: encounter outpatient w/ PCP &amp; obgyn" using "encounter outpatient w/ PCP &amp; obgyn Value Set GROUPING (2.16.840.1.113883.3.464.0001.235)"
+            </li>
+            <li>
+               "Medication, Administered: Dtap Vaccine" using "Dtap Vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.221)"
+            </li>
+            <li>
+               "Medication, Administered: Hepatitis A Vaccine" using "Hepatitis A Vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.259)"
+            </li>
+            <li>
+               "Medication, Administered: Hepatitis B vaccine" using "Hepatitis B vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.266)"
+            </li>
+            <li>
+               "Medication, Administered: HIB" using "HIB RxNorm Value Set (2.16.840.1.113883.3.464.0001.267)"
+            </li>
+            <li>
+               "Medication, Administered: influenza vaccine" using "influenza vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.284)"
+            </li>
+            <li>
+               "Medication, Administered: IPV" using "IPV RxNorm Value Set (2.16.840.1.113883.3.464.0001.287)"
+            </li>
+            <li>
+               "Medication, Administered: Measles vaccine" using "Measles vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.322)"
+            </li>
+            <li>
+               "Medication, Administered: MMR Vaccine" using "MMR Vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.328)"
+            </li>
+            <li>
+               "Medication, Administered: mumps vaccine" using "mumps vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.340)"
+            </li>
+            <li>
+               "Medication, Administered: pneumococcal vaccine" using "pneumococcal vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.97)"
+            </li>
+            <li>
+               "Medication, Administered: Rotavirus vaccine" using "Rotavirus vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.389)"
+            </li>
+            <li>
+               "Medication, Administered: rubella vaccine" using "rubella vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.396)"
+            </li>
+            <li>
+               "Medication, Administered: VZV vaccine" using "VZV vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.424)"
+            </li>
+            <li>
+               "Medication, Allergy: Dtap Vaccine" using "Dtap Vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.221)"
+            </li>
+            <li>
+               "Medication, Allergy: Hepatitis A Vaccine" using "Hepatitis A Vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.259)"
+            </li>
+            <li>
+               "Medication, Allergy: Hepatitis B vaccine" using "Hepatitis B vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.266)"
+            </li>
+            <li>
+               "Medication, Allergy: HIB" using "HIB RxNorm Value Set (2.16.840.1.113883.3.464.0001.267)"
+            </li>
+            <li>
+               "Medication, Allergy: influenza vaccine" using "influenza vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.284)"
+            </li>
+            <li>
+               "Medication, Allergy: IPV" using "IPV RxNorm Value Set (2.16.840.1.113883.3.464.0001.287)"
+            </li>
+            <li>
+               "Medication, Allergy: Measles vaccine" using "Measles vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.322)"
+            </li>
+            <li>
+               "Medication, Allergy: MMR Vaccine" using "MMR Vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.328)"
+            </li>
+            <li>
+               "Medication, Allergy: mumps vaccine" using "mumps vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.340)"
+            </li>
+            <li>
+               "Medication, Allergy: Neomycin" using "Neomycin RxNorm Value Set (2.16.840.1.113883.3.464.0001.342)"
+            </li>
+            <li>
+               "Medication, Allergy: pneumococcal vaccine" using "pneumococcal vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.97)"
+            </li>
+            <li>
+               "Medication, Allergy: Polymyxin" using "Polymyxin RxNorm Value Set (2.16.840.1.113883.3.464.0001.375)"
+            </li>
+            <li>
+               "Medication, Allergy: Rotavirus vaccine" using "Rotavirus vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.389)"
+            </li>
+            <li>
+               "Medication, Allergy: rubella vaccine" using "rubella vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.396)"
+            </li>
+            <li>
+               "Medication, Allergy: Streptomycin" using "Streptomycin RxNorm Value Set (2.16.840.1.113883.3.464.0001.405)"
+            </li>
+            <li>
+               "Medication, Allergy: VZV vaccine" using "VZV vaccine RxNorm Value Set (2.16.840.1.113883.3.464.0001.424)"
+            </li>
+            <li>
+               "Patient Characteristic: birth date" using "birth date LOINC Value Set (2.16.840.1.113883.3.560.100.4)"
+            </li>
+            <li>
+               "Procedure, Performed: Dtap Vaccination" using "Dtap Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.431)"
+            </li>
+            <li>
+               "Procedure, Performed: Hepatitis A Vaccination" using "Hepatitis A Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.432)"
+            </li>
+            <li>
+               "Procedure, Performed: Hepatitis B Vaccination" using "Hepatitis B Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.433)"
+            </li>
+            <li>
+               "Procedure, Performed: HIB Vaccination" using "HIB Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.434)"
+            </li>
+            <li>
+               "Procedure, Performed: Influenza Vaccination" using "Influenza Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.435)"
+            </li>
+            <li>
+               "Procedure, Performed: IPV Vaccination" using "IPV Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.436)"
+            </li>
+            <li>
+               "Procedure, Performed: Measles Vaccination" using "Measles Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.438)"
+            </li>
+            <li>
+               "Procedure, Performed: MMR Vaccination" using "MMR Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.439)"
+            </li>
+            <li>
+               "Procedure, Performed: Mumps Vaccination" using "Mumps Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.440)"
+            </li>
+            <li>
+               "Procedure, Performed: Pneumococcal Vaccination" using "Pneumococcal Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.441)"
+            </li>
+            <li>
+               "Procedure, Performed: Rotavirus Vaccination" using "Rotavirus Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.442)"
+            </li>
+            <li>
+               "Procedure, Performed: Rubella Vaccination" using "Rubella Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.443)"
+            </li>
+            <li>
+               "Procedure, Performed: VZV Vaccination" using "VZV Vaccination Value Set GROUPING (2.16.840.1.113883.3.464.0001.444)"
+            </li>
+            <li>
+               "Substance, Allergy: Baker's Yeast Substance" using "Baker's Yeast Substance SNOMED-CT Value Set (2.16.840.1.113883.3.464.0001.428)"
+            </li>
+         </ul>
+         
+      </div>
+      <h3><a name="d169258e29472" href="#toc">Supplemental Data Elements</a></h3>
+      <div>
+         
+         <ul>
+            <li>"Patient Characteristic: Gender" using "Gender HL7 Value Set (2.16.840.1.113883.1.11.1)"</li>
+            <li>"Patient Characteristic: Race" using "Race CDC Value Set (2.16.840.1.114222.4.11.836)"</li>
+            <li>"Patient Characteristic: Ethnicity" using "Ethnicity CDC Value Set (2.16.840.1.114222.4.11.837)"</li>
+            <li>"Patient Characteristic: Payer" using "Payer Source of Payment Typology Value Set (2.16.840.1.113883.3.221.5)"</li>
+         </ul>
+         
+      </div><br><hr align="left" color="teal" size="2" width="80%"><br><table class="header_table">
+         <tbody>
+            <tr>
+               <td width="20%" bgcolor="#656565" style="background-color:#656565"><span class="td_label">Measure set</span></td>
+               <td colspan="3">CLINICAL QUALITY MEASURE SET 2011-2012</td>
+            </tr>
+         </tbody>
+      </table>
+   </body>
+</html>

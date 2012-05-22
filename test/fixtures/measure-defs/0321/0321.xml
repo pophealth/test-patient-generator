@@ -1,0 +1,1813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xslt/eMeasure_Updated_Dec_2011.xsl"?>
+<QualityMeasureDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3">
+         
+      <!--
+         **************************************************************   
+         Measure Header Section
+         **************************************************************
+      --><typeId root="2.16.840.1.113883.1.3" extension="POQM_HD000001"/>
+   <id root="896EB5FF-5C5B-4CCC-85D0-DE1DAC4B1BDD"/>
+   <code code="57024-2" codeSystem="2.16.840.1.113883.6.1" displayName="Health Quality Measure Document"/>
+   <title>End Stage Renal Disease (ESRD): Plan of Care for Inadequate Peritoneal Dialysis</title>
+   <text>Percentage of patients aged 18 years and older with a diagnosis of ESRD receiving peritoneal dialysis who have a Kt/V&gt;=1.7 OR patients wo havea  Kt/V&lt;1.7 with a documented plan of care 3 times a year (every 4 months) during the 12 month reporting period.</text>
+   <statusCode code="completed"/>
+   <setId root="1499184D-46C1-4A12-B458-E1CF2CDBC262"/>
+   <versionNumber value="1"/>
+   <author typeCode="AUT">
+      <assignedPerson classCode="ASSIGNED">
+         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id root="2.16.840.1.113883.3.526"/>
+            <name>American Medical Association - Physician Consortium for Performance Improvement</name>
+            <contactParty classCode="CON" nullFlavor="UNK"/>
+         </representedOrganization>
+      </assignedPerson>
+   </author>
+   <custodian>
+      <assignedPerson classCode="ASSIGNED">
+         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id root="2.16.840.1.113883.3.526"/>
+            <name>American Medical Association - Physician Consortium for Performance Improvement</name>
+            <contactParty classCode="CON" nullFlavor="UNK"/>
+         </representedOrganization>
+      </assignedPerson>
+   </custodian>
+   <verifier typeCode="VRF">
+      <assignedPerson classCode="ASSIGNED">
+         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+            <name>National Quality Forum</name>
+            <contactParty classCode="CON" nullFlavor="UNK"/>
+         </representedOrganization>
+      </assignedPerson>
+   </verifier>
+   <subjectOf>
+      <measureAttribute>
+         <code code="COPY" codeSystem="2.16.840.1.113883.5.4" displayName="Copyright"/>
+         <value xsi:type="ED" mediaType="text/plain">© 2010 American Medical Association. All Rights Reserved</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRSCORE" codeSystem="2.16.840.1.113883.5.4" displayName="Measure scoring"/>
+         <value xsi:type="CD" code="PROPOR" codeSystem="2.16.840.1.113883.1.11.20367" displayName="Proportion"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRTYPE" codeSystem="2.16.840.1.113883.5.4" displayName="Measure type"/>
+         <value xsi:type="CD" code="PROCESS" codeSystem="2.16.840.1.113883.1.11.20368" displayName="Process"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="STRAT" codeSystem="2.16.840.1.113883.5.4" displayName="Stratification"/>
+         <value xsi:type="ED" mediaType="text/plain">None</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRADJ" codeSystem="2.16.840.1.113883.5.4" displayName="Risk Adjustment"/>
+         <value xsi:type="ED" mediaType="text/plain">None</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRAGG" codeSystem="2.16.840.1.113883.5.4" displayName="Data Aggregation"/>
+         <value xsi:type="ED" mediaType="text/plain"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="RAT" codeSystem="2.16.840.1.113883.5.4" displayName="Rationale"/>
+         <value xsi:type="ED" mediaType="text/plain">Patients receiving peritoneal dialysis must be monitored (by assessing Kt/V) regularly to ensure that their dialysis dose is sufficient. A patient receiving peritoneal dialysis whose Kt/V level is less than 1.7 is not receiving optimal dialysis. This measure assesses whether the treating physician addressed the low Kt/V level. A plan of care (may include assessing for non-adherence with the peritoneal prescription, sampling, and collection; assessing for error in the peritoneal dialysis prescription and/or inadequate monitoring of the delivered dose; performing peritoneal equilibrium testing; assessing for inadequate patient education; increasing the exchange volume; or increasing the number of exchanges per 24 hours) should be documented by the physician for every time Kt/V is less than 1.7.</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="CRS" codeSystem="2.16.840.1.113883.3.560" displayName="Clinical Recommendation Statement"/>
+         <value xsi:type="ED" mediaType="text/plain">Total solute clearance (residual kidney and peritoneal, in terms of Kt/Vurea) should be measured within the first month after initiating dialysis therapy and at least once every 4 months thereafter. (KDOQI™)
+
+For patients with residual kidney function (considered to be significant when urine volume is &gt; 100 mL/d): The minimal "delivered" dose of total small-solute clearance should be a total (peritoneal and kidney) Kt/Vurea of at least 1.7 per week.
+
+For patients without RKF (considered insignificant when urine volume is &lt;=100 mL/d): The minimal "delivered" dose of total small-solute clearance should be a peritoneal Kt/Vurea of at least 1.7 per week measured within the first month after starting dialysis therapy and at least once every 4 months thereafter. (KDOQI™)</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="IDUR" codeSystem="2.16.840.1.113883.3.560" displayName="Improvement notation"/>
+         <value xsi:type="ED" mediaType="text/plain">Higher score indicates better quality</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText>NQF ID Number</originalText>
+         </code>
+         <value xsi:type="II" root="2.16.840.1.113883.3.560.1" extension="0321"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <templateId root="2.16.840.1.113883.3.560.1.74"/>
+         <id root="098C95D8-4B10-4CF2-B389-843F0F17B56F"/>
+         <code code="MSRTP" displayName="Measurement period" codeSystem="2.16.840.1.113883.3.560"/>
+         <value xsi:type="EXPR_PQ" value="12" unit="mo">
+            <expression mediaType="text/plain">measureEndDate - measureStartDate</expression>
+         </value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <localVariableName>measureStartDate</localVariableName>
+      <measureAttribute>
+         <templateId root="2.16.840.1.113883.3.560.1.75"/>
+         <id root="413EC5F6-215D-4C8A-B4D8-5B8C4F7D2CC0"/>
+         <code code="MSRSD" displayName="Measurement start date" codeSystem="2.16.840.1.113883.3.560"/>
+         <value xsi:type="TS" value="00000101"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <localVariableName>measureEndDate</localVariableName>
+      <measureAttribute>
+         <templateId root="2.16.840.1.113883.3.560.1.75"/>
+         <id root="D518515A-03A8-4968-A0E6-7F6126A060E8"/>
+         <code code="MSRED" displayName="Measurement end date" codeSystem="2.16.840.1.113883.3.560"/>
+         <value xsi:type="TS" value="00001231"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRMD" codeSystem="2.16.840.1.113883.3.560" displayName="Measurement duration"/>
+         <value xsi:type="ED" mediaType="text/plain">12 month(s)</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4" displayName="Reference"/>
+         <value xsi:type="ED" mediaType="text/plain">National Kidney Foundation. K/DOQI Clinical Practice Guidelines for Peritoneal Dialysis Adequacy, Update 2006. Available at: http://www.kidney.org/professionals/KDOQI/guidelines.cfm.</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.3.560" displayName="Definition"/>
+         <value xsi:type="ED" mediaType="text/plain">Plan of Care: A documented plan of care may include assessing for non-adherence with the peritoneal prescription, sampling, and collection; assessing for error in the peritoneal dialysis prescription and/or inadequate monitoring of the delivered dose; performing peritoneal equilibrium testing; assessing for inadequate patient education; increasing the exchange volume; increasing the number of exchanges per 24 hours; assessing for modality (CAPD or CCPD).</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.3.560" displayName="Definition"/>
+         <value xsi:type="ED" mediaType="text/plain">Initial Patient Population(s): Patient Age: Patients aged 18 years and older before the start of the measurement period. 
+Diagnosis Active: Patient has a documented diagnosis of ESRD.
+Procedure: Patient receiving peritoneal dialysis during the measurement period.</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.3.560" displayName="Definition"/>
+         <value xsi:type="ED" mediaType="text/plain">Denominator(s): All patients aged 18 years and older with a diagnosis of ESRD receiving peritoneal dialysis.</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.3.560" displayName="Definition"/>
+         <value xsi:type="ED" mediaType="text/plain">Denominator Exclusion(s): N/A</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.3.560" displayName="Definition"/>
+         <value xsi:type="ED" mediaType="text/plain">Numerator(s): Patients who have a Kt/V&gt;=1.7 OR patients who have a Kt/V&lt;1.7 with a documented plan of care 3 times a year (every 4 months) during the 12 month reporting period.</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.3.560" displayName="Definition"/>
+         <value xsi:type="ED" mediaType="text/plain">Denominator Exception(s): N/A</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="GUIDE" codeSystem="2.16.840.1.113883.5.4" displayName="Guidance"/>
+         <value xsi:type="ED" mediaType="text/plain">The numerator logic requires that a Kt/V value is performed at least once in every consecutive 4 month period (beginning with January 1) with an allowance for a 7-day overlap.  Therefore, the 4 month periods are: December 23 (of the prior year) to May 7 (of the current year); April 23 to September 7 (of the current year), August (need date) (of the current year) to January 7 ( of the subsequent year).
+		
+Note, in each four month period a Kt/V value is expected (and intervention (plan of care) if the value is too low).  However, if peritoneal dialysis was not performed during that four month period, the patient remains in the measure. Hence the numerator includes (a) Kt/V value =&gt; 1.7 OR Kt/V &lt; 1.7 AND intervention is performed, OR No peritoneal dialysis occurred during that four month period.
+
+To account for leap years, for the first four-month period, the timing window is defined as days forward from the start of the measurement period (i.e. x days starts after the start of the "Measurement period"); for the remainder of the four-month periods, the timing windows are defined as days backward from the measurement end date (i.e. x days starts before or during the "Measurement end date").</value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText>Supplemental Data Elements</originalText>
+         </code>
+         <value xsi:type="ED" mediaType="text/plain">Report "Patient Characteristic: Gender" using "Gender HL7 Value Set (2.16.840.1.113883.1.11.1)"; Report "Patient Characteristic: Race" using "Race CDC Value Set (2.16.840.1.114222.4.11.836)"; Report "Patient Characteristic: Ethnicity" using "Ethnicity CDC Value Set (2.16.840.1.114222.4.11.837)"; Report "Patient Characteristic: Payer" using "Payer Source of Payment Typology Value Set (2.16.840.1.113883.3.221.5)".</value>
+      </measureAttribute>
+   </subjectOf>
+   <componentOf>
+      <qualityMeasureSet classCode="ACT">
+         <id root="B1EB421F-C28C-453C-8DEE-7C6EFE318EB1"/>
+         <title>CLINICAL QUALITY MEASURE SET 2011-2012</title>
+      </qualityMeasureSet>
+   </componentOf>
+         
+      <!--
+         **************************************************************   
+         Population Criteria Section
+         **************************************************************
+      --><component typeCode="COMP">
+      <section>
+         <code code="57026-7" codeSystem="2.16.840.1.113883.6.1" displayName="Population criteria"/>
+         <title>Population criteria</title>
+         <text>
+            <list>
+               <item>
+                  <content styleCode="Bold">Initial Patient Population =</content>
+                  <list>
+                     <item>AND: "Patient Characteristic: birth date"  &gt;= 18 year(s) starts before start of "Measurement period"</item>
+                     <item>AND: <list>
+                           <item>AND: "Diagnosis, Active: End Stage Renal Disease"</item>
+                           <item>AND: <list>
+                                 <item>OR: "Procedure, Performed: Peritoneal Dialysis-Procedure"</item>
+                                 <item>OR: "Encounter: Peritoneal Dialysis-Encounter"</item>
+                              </list>
+                           </item>
+                           <item> during "Measurement period"</item>
+                        </list>
+                     </item>
+                  </list>
+               </item>
+               <item>
+                  <content styleCode="Bold">Denominator =</content>
+                  <list>
+                     <item>AND: "Initial Patient Population"</item>
+                  </list>
+               </item>
+               <item>
+                  <content styleCode="Bold">Denominator Exclusions =</content>
+                  <list>
+                     <item>None</item>
+                  </list>
+               </item>
+               <item>
+                  <content styleCode="Bold">Numerator =</content>
+                  <list>
+                     <item>AND: <list>
+                           <item>AND: "Laboratory Test, Performed: Kt/V"</item>
+                           <item>AND: <list>
+                                 <item>OR: MOST RECENT:"Laboratory Test, Result: Kt/V (result &gt;= 1.7 )"</item>
+                                 <item>OR: <list>
+                                       <item>AND: MOST RECENT:"Laboratory Test, Result: Kt/V (result &lt; 1.7 )"</item>
+                                       <item>AND: <list>
+                                             <item>OR: "Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)"</item>
+                                             <item>OR: "Intervention, Performed: Performing peritoneal equilibrium testing"</item>
+                                             <item>OR: "Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase exchange volume of peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Peritoneal Dialysis Modality"</item>
+                                             <item>OR: "Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection"</item>
+                                             <item>OR: "Intervention, Result: Assessing for peritoneal dialysis prescription error"</item>
+                                          </list>
+                                       </item>
+                                    </list>
+                                 </item>
+                                 <item>OR: <list>
+                                       <item>OR NOT: "Procedure, Performed: Peritoneal Dialysis-Procedure"</item>
+                                       <item>OR NOT: "Encounter: Peritoneal Dialysis-Encounter"</item>
+                                    </list>
+                                 </item>
+                              </list>
+                           </item>
+                           <item>  &lt;= 128 day(s) starts after start of "Measurement period"</item>
+                        </list>
+                     </item>
+                     <item>AND: <list>
+                           <item>AND: "Occurrence A of Laboratory Test, Performed: Kt/V"</item>
+                           <item>AND: <list>
+                                 <item>OR: MOST RECENT:"Occurrence A of Laboratory Test, Result: Kt/V (result &gt;= 1.7 )"</item>
+                                 <item>OR: <list>
+                                       <item>AND: MOST RECENT:"Occurrence A of Laboratory Test, Result: Kt/V (result &lt; 1.7 )"</item>
+                                       <item>AND: <list>
+                                             <item>OR: "Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)"</item>
+                                             <item>OR: "Intervention, Performed: Performing peritoneal equilibrium testing"</item>
+                                             <item>OR: "Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase exchange volume of peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Peritoneal Dialysis Modality"</item>
+                                             <item>OR: "Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection"</item>
+                                             <item>OR: "Intervention, Result: Assessing for peritoneal dialysis prescription error"</item>
+                                          </list>
+                                       </item>
+                                    </list>
+                                 </item>
+                                 <item>OR: <list>
+                                       <item>OR NOT: "Occurrence A of Procedure, Performed: Peritoneal Dialysis-Procedure"</item>
+                                       <item>OR NOT: "Occurrence A of Encounter: Peritoneal Dialysis-Encounter"</item>
+                                    </list>
+                                 </item>
+                              </list>
+                           </item>
+                           <item>  &gt;= 116 day(s) starts before or during "Measurement end date"</item>
+                        </list>
+                     </item>
+                     <item>AND: <list>
+                           <item>AND: "Occurrence A of Laboratory Test, Performed: Kt/V"</item>
+                           <item>AND: <list>
+                                 <item>OR: MOST RECENT:"Occurrence A of Laboratory Test, Result: Kt/V (result &gt;= 1.7 )"</item>
+                                 <item>OR: <list>
+                                       <item>AND: MOST RECENT:"Occurrence A of Laboratory Test, Result: Kt/V (result &lt; 1.7 )"</item>
+                                       <item>AND: <list>
+                                             <item>OR: "Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)"</item>
+                                             <item>OR: "Intervention, Performed: Performing peritoneal equilibrium testing"</item>
+                                             <item>OR: "Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase exchange volume of peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Peritoneal Dialysis Modality"</item>
+                                             <item>OR: "Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection"</item>
+                                             <item>OR: "Intervention, Result: Assessing for peritoneal dialysis prescription error"</item>
+                                          </list>
+                                       </item>
+                                    </list>
+                                 </item>
+                                 <item>OR: <list>
+                                       <item>OR NOT: "Occurrence A of Procedure, Performed: Peritoneal Dialysis-Procedure"</item>
+                                       <item>OR NOT: "Occurrence A of Encounter: Peritoneal Dialysis-Encounter"</item>
+                                    </list>
+                                 </item>
+                              </list>
+                           </item>
+                           <item>  &lt;= 253 day(s) starts before or during "Measurement end date"</item>
+                        </list>
+                     </item>
+                     <item>AND: <list>
+                           <item>AND: "Laboratory Test, Performed: Kt/V"</item>
+                           <item>AND: <list>
+                                 <item>OR: MOST RECENT:"Laboratory Test, Result: Kt/V (result &gt;= 1.7 )"</item>
+                                 <item>OR: <list>
+                                       <item>AND: MOST RECENT:"Laboratory Test, Result: Kt/V (result &lt; 1.7 )"</item>
+                                       <item>AND: <list>
+                                             <item>OR: "Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)"</item>
+                                             <item>OR: "Intervention, Performed: Performing peritoneal equilibrium testing"</item>
+                                             <item>OR: "Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase exchange volume of peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis"</item>
+                                             <item>OR: "Intervention, Performed: Peritoneal Dialysis Modality"</item>
+                                             <item>OR: "Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection"</item>
+                                             <item>OR: "Intervention, Result: Assessing for peritoneal dialysis prescription error"</item>
+                                          </list>
+                                       </item>
+                                    </list>
+                                 </item>
+                                 <item>OR: <list>
+                                       <item>OR NOT: "Procedure, Performed: Peritoneal Dialysis-Procedure"</item>
+                                       <item>OR NOT: "Encounter: Peritoneal Dialysis-Encounter"</item>
+                                    </list>
+                                 </item>
+                              </list>
+                           </item>
+                           <item>  &lt;= 130 day(s) starts before or during "Measurement end date"</item>
+                        </list>
+                     </item>
+                  </list>
+               </item>
+               <item>
+                  <content styleCode="Bold">Denominator Exceptions =</content>
+                  <list>
+                     <item>None</item>
+                  </list>
+               </item>
+            </list>
+         </text><!--
+            **************************************************************   
+            Population Criteria Section: population 
+            **************************************************************
+      -->
+         <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN.CRT" isCriterionInd="true">
+               <id root="C55E81CD-075C-4AB0-A51F-7D3A843F2CB2"/>
+               <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+               <value xsi:type="CD" code="IPP" codeSystem="2.16.840.1.113883.5.1063" codeSystemName="HL7 Observation Value" displayName="Initial Patient Population"/><!--  top and/or -->
+               <sourceOf typeCode="PRCN">
+                  <conjunctionCode code="AND"/>
+                  <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Patient Characteristic pattern -->
+                     <templateId root="2.16.840.1.113883.3.560.1.25"/>
+                     <id root="4100DF97-9A06-44C6-B33A-29FA45D8DED4"/>
+                     <code code="45970-1" displayName="Demographics" codeSystem="2.16.840.1.113883.6.1"/>
+                     <sourceOf typeCode="COMP">
+                        <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                           <code code="2.16.840.1.113883.3.560.100.4" displayName="birth date LOINC Value Set"/>
+                           <title>Patient Characteristic: birth date</title>
+                           <sourceOf typeCode="SBS">
+                              <pauseQuantity xsi:type="IVL_PQ">
+                                 <low value="18" unit="a" inclusive="true"/>
+                              </pauseQuantity>
+                              <observation classCode="OBS" moodCode="EVN">
+                                 <id root="098C95D8-4B10-4CF2-B389-843F0F17B56F"/>
+                                 <title>Measurement period</title>
+                              </observation>
+                           </sourceOf>
+                        </observation>
+                     </sourceOf>
+                  </act>
+               </sourceOf>
+               <sourceOf typeCode="PRCN">
+                  <conjunctionCode code="AND"/>
+                  <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Diagnosis, Active pattern -->
+                           <templateId root="2.16.840.1.113883.3.560.1.2"/>
+                           <id root="D141D705-1006-469A-9CE5-93ADDFD5C874"/>
+                           <code code="11450-4" displayName="Problem" codeSystem="2.16.840.1.113883.6.1"/>
+                           <sourceOf typeCode="COMP">
+                              <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                 <code code="55607006" codeSystem="2.16.840.1.113883.6.96" displayName="Problem"/>
+                                 <title>Diagnosis, Active: End Stage Renal Disease</title>
+                                 <value xsi:type="CD" code="2.16.840.1.113883.3.526.03.353" displayName="End Stage Renal Disease Value Set GROUPING"/>
+                                 <sourceOf typeCode="REFR">
+                                    <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                       <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+                                       <value xsi:type="CD" code="55561003" displayName="active" codeSystem="2.16.840.1.113883.6.96"/>
+                                    </observation>
+                                 </sourceOf>
+                              </observation>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Procedure, Performed pattern -->
+                                 <templateId root="2.16.840.1.113883.3.560.1.6"/>
+                                 <id root="849E8DEE-6F49-4130-8FE5-6A07FAFFFA35"/>
+                                 <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                 <sourceOf typeCode="COMP">
+                                    <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                       <code code="2.16.840.1.113883.3.526.03.354" displayName="Peritoneal Dialysis-Procedure Value Set GROUPING"/>
+                                       <title>Procedure, Performed: Peritoneal Dialysis-Procedure</title>
+                                    </procedure>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Encounter pattern -->
+                                 <templateId root="2.16.840.1.113883.3.560.1.4"/>
+                                 <id root="B796F9A3-8B49-4EA6-82FB-7A809C33E9ED"/>
+                                 <code code="46240-8" displayName="Encounter list" codeSystem="2.16.840.1.113883.6.1"/>
+                                 <sourceOf typeCode="COMP">
+                                    <encounter classCode="ENC" moodCode="EVN" isCriterionInd="true">
+                                       <code code="2.16.840.1.113883.3.526.03.594" displayName="Peritoneal Dialysis-Encounter Value Set GROUPING"/>
+                                       <title>Encounter: Peritoneal Dialysis-Encounter</title>
+                                    </encounter>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="DURING">
+                        <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                           <id root="098C95D8-4B10-4CF2-B389-843F0F17B56F"/>
+                           <title>Measurement period</title>
+                        </observation>
+                     </sourceOf>
+                  </act>
+               </sourceOf>
+            </observation>
+         </entry><!--
+            **************************************************************   
+            Population Criteria Section: denominator 
+            **************************************************************
+      -->
+         <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN.CRT" isCriterionInd="true">
+               <id root="82852C84-DAF5-4830-899F-1F203E4E412C"/>
+               <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+               <value xsi:type="CD" code="DENOM" codeSystem="2.16.840.1.113883.5.1063" codeSystemName="HL7 Observation Value" displayName="Denominator"/><!--  top and/or -->
+               <sourceOf typeCode="PRCN">
+                  <conjunctionCode code="AND"/>
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <id root="C55E81CD-075C-4AB0-A51F-7D3A843F2CB2"/>
+                     <title>Initial Patient Population</title>
+                  </observation>
+               </sourceOf>
+            </observation>
+         </entry><!--
+            **************************************************************   
+            Population Criteria Section: numerator 
+            **************************************************************
+      -->
+         <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN.CRT" isCriterionInd="true">
+               <id root="DD2C78AC-E7C5-4BBF-881B-7C83000C5260"/>
+               <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+               <value xsi:type="CD" code="NUMER" codeSystem="2.16.840.1.113883.5.1063" codeSystemName="HL7 Observation Value" displayName="Numerator"/><!--  top and/or -->
+               <sourceOf typeCode="PRCN">
+                  <conjunctionCode code="AND"/>
+                  <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Performed pattern -->
+                           <templateId root="2.16.840.1.113883.3.560.1.5"/>
+                           <id root="300E34EC-185D-4A65-A37E-81983B5F2469"/>
+                           <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                           <sourceOf typeCode="COMP">
+                              <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                 <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                 <title>Laboratory Test, Performed: Kt/V</title>
+                                 <statusCode code="completed"/>
+                              </observation>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <subsetCode code="RECENT"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                 <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                 <id root="300E34EC-185D-4A65-A37E-81983B5F243A"/>
+                                 <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                 <sourceOf typeCode="COMP">
+                                    <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                       <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                       <title>Laboratory Test, Result: Kt/V (result &gt;= 1.7 )</title>
+                                       <statusCode code="completed"/>
+                                    </observation>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <subsetCode code="RECENT"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                       <id root="300E34EC-185D-4A65-A37E-81983B5F243A"/>
+                                       <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                             <title>Laboratory Test, Result: Kt/V (result &lt; 1.7 )</title>
+                                             <statusCode code="completed"/>
+                                          </observation>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="4ED422A7-E0E8-47ED-B35A-FD23E96BFB52"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.567" displayName="Assessing for inadequate monitoring of delivered dose of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)</title>
+                                                   <statusCode code="completed"/>
+                                                   <sourceOf typeCode="REFR">
+                                                      <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                                         <templateId root="2.16.840.1.113883.3.560.1.1019.1"/>
+                                                         <code code="385676005" codeSystem="2.16.840.1.113883.6.96" displayName="result" codeSystemName="SNOMED-CT"/>
+                                                         <value xsi:type="ANYNonNull"/>
+                                                      </observation>
+                                                   </sourceOf>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="1E458AF2-4E0E-47BB-A2A9-4FE7862947CC"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.568" displayName="Performing peritoneal equilibrium testing SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Performing peritoneal equilibrium testing</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="172A36B5-6302-4B02-91FE-A4624BBAAE0D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.569" displayName="Assessing for inadequate patient education for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F02BEFE6-3D47-4B11-8FF4-D9CD1EFCD00D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.570" displayName="Increase exchange volume of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase exchange volume of peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F7C53B29-919C-42D6-99C8-86C730C6BE37"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.571" displayName="Increase number of perfusion exchanges for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="92FAABD8-9542-4E6E-9DA9-FF26F1D62B7C"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.587" displayName="Peritoneal Dialysis Modality SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Peritoneal Dialysis Modality</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="0A75EFB1-85E0-4EE5-ACDA-DEA80C8F0EB9"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.565" displayName="Assessing for Non-Adherence with peritoneal prescription, sampling, collection SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="52F7D0FD-13B4-44E2-9746-318432F40096"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.566" displayName="Assessing for peritoneal dialysis prescription error SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for peritoneal dialysis prescription error</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Procedure, Performed pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.6"/>
+                                       <id root="849E8DEE-6F49-4130-8FE5-6A07FAFFFA35"/>
+                                       <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.354" displayName="Peritoneal Dialysis-Procedure Value Set GROUPING"/>
+                                             <title>Procedure, Performed: Peritoneal Dialysis-Procedure</title>
+                                          </procedure>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Encounter pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.4"/>
+                                       <id root="B796F9A3-8B49-4EA6-82FB-7A809C33E9ED"/>
+                                       <code code="46240-8" displayName="Encounter list" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <encounter classCode="ENC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.594" displayName="Peritoneal Dialysis-Encounter Value Set GROUPING"/>
+                                             <title>Encounter: Peritoneal Dialysis-Encounter</title>
+                                          </encounter>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="SAS">
+                        <pauseQuantity xsi:type="URG_PQ">
+                           <high value="128" unit="d" inclusive="true"/>
+                        </pauseQuantity>
+                        <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                           <id root="098C95D8-4B10-4CF2-B389-843F0F17B56F"/>
+                           <title>Measurement period</title>
+                        </observation>
+                     </sourceOf>
+                  </act>
+               </sourceOf>
+               <sourceOf typeCode="PRCN">
+                  <conjunctionCode code="AND"/>
+                  <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Performed pattern -->
+                           <templateId root="2.16.840.1.113883.3.560.1.5"/>
+                           <id root="786D1167-8282-4FDF-9D9D-1BF0C7277369"/>
+                           <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                           <sourceOf typeCode="COMP">
+                              <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                 <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                 <title>Occurrence A of Laboratory Test, Performed: Kt/V</title>
+                                 <statusCode code="completed"/>
+                              </observation>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <subsetCode code="RECENT"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                 <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                 <id root="786D1167-8282-4FDF-9D9D-1BF0C7276969"/>
+                                 <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                 <sourceOf typeCode="COMP">
+                                    <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                       <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                       <title>Occurrence A of Laboratory Test, Result: Kt/V (result &gt;= 1.7 )</title>
+                                       <statusCode code="completed"/>
+                                    </observation>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <subsetCode code="RECENT"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                       <id root="786D1167-8282-4FDF-9D9D-1BF0C7276969"/>
+                                       <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                             <title>Occurrence A of Laboratory Test, Result: Kt/V (result &lt; 1.7 )</title>
+                                             <statusCode code="completed"/>
+                                          </observation>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="4ED422A7-E0E8-47ED-B35A-FD23E96BFB52"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.567" displayName="Assessing for inadequate monitoring of delivered dose of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)</title>
+                                                   <statusCode code="completed"/>
+                                                   <sourceOf typeCode="REFR">
+                                                      <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                                         <templateId root="2.16.840.1.113883.3.560.1.1019.1"/>
+                                                         <code code="385676005" codeSystem="2.16.840.1.113883.6.96" displayName="result" codeSystemName="SNOMED-CT"/>
+                                                         <value xsi:type="ANYNonNull"/>
+                                                      </observation>
+                                                   </sourceOf>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="1E458AF2-4E0E-47BB-A2A9-4FE7862947CC"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.568" displayName="Performing peritoneal equilibrium testing SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Performing peritoneal equilibrium testing</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="172A36B5-6302-4B02-91FE-A4624BBAAE0D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.569" displayName="Assessing for inadequate patient education for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F02BEFE6-3D47-4B11-8FF4-D9CD1EFCD00D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.570" displayName="Increase exchange volume of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase exchange volume of peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F7C53B29-919C-42D6-99C8-86C730C6BE37"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.571" displayName="Increase number of perfusion exchanges for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="92FAABD8-9542-4E6E-9DA9-FF26F1D62B7C"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.587" displayName="Peritoneal Dialysis Modality SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Peritoneal Dialysis Modality</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="0A75EFB1-85E0-4EE5-ACDA-DEA80C8F0EB9"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.565" displayName="Assessing for Non-Adherence with peritoneal prescription, sampling, collection SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="52F7D0FD-13B4-44E2-9746-318432F40096"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.566" displayName="Assessing for peritoneal dialysis prescription error SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for peritoneal dialysis prescription error</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Procedure, Performed pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.6"/>
+                                       <id root="696D1167-8282-69DF-9D69-6969C7696969"/>
+                                       <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.354" displayName="Peritoneal Dialysis-Procedure Value Set GROUPING"/>
+                                             <title>Occurrence A of Procedure, Performed: Peritoneal Dialysis-Procedure</title>
+                                          </procedure>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Encounter pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.4"/>
+                                       <id root="696D1167-8282-4FDF-9D69-6969C7696969"/>
+                                       <code code="46240-8" displayName="Encounter list" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <encounter classCode="ENC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.594" displayName="Peritoneal Dialysis-Encounter Value Set GROUPING"/>
+                                             <title>Occurrence A of Encounter: Peritoneal Dialysis-Encounter</title>
+                                          </encounter>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="EAS" inversionInd="true">
+                        <pauseQuantity xsi:type="URG_PQ">
+                           <low value="116" unit="d" inclusive="true"/>
+                        </pauseQuantity>
+                        <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                           <id root="D518515A-03A8-4968-A0E6-7F6126A060E8"/>
+                           <title>Measurement end date</title>
+                        </observation>
+                     </sourceOf>
+                  </act>
+               </sourceOf>
+               <sourceOf typeCode="PRCN">
+                  <conjunctionCode code="AND"/>
+                  <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Performed pattern -->
+                           <templateId root="2.16.840.1.113883.3.560.1.5"/>
+                           <id root="786D1167-8282-4FDF-9D9D-1BF0C7277369"/>
+                           <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                           <sourceOf typeCode="COMP">
+                              <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                 <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                 <title>Occurrence A of Laboratory Test, Performed: Kt/V</title>
+                                 <statusCode code="completed"/>
+                              </observation>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <subsetCode code="RECENT"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                 <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                 <id root="786D1167-8282-4FDF-9D9D-1BF0C7276969"/>
+                                 <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                 <sourceOf typeCode="COMP">
+                                    <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                       <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                       <title>Occurrence A of Laboratory Test, Result: Kt/V (result &gt;= 1.7 )</title>
+                                       <statusCode code="completed"/>
+                                    </observation>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <subsetCode code="RECENT"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                       <id root="786D1167-8282-4FDF-9D9D-1BF0C7276969"/>
+                                       <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                             <title>Occurrence A of Laboratory Test, Result: Kt/V (result &lt; 1.7 )</title>
+                                             <statusCode code="completed"/>
+                                          </observation>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="4ED422A7-E0E8-47ED-B35A-FD23E96BFB52"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.567" displayName="Assessing for inadequate monitoring of delivered dose of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)</title>
+                                                   <statusCode code="completed"/>
+                                                   <sourceOf typeCode="REFR">
+                                                      <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                                         <templateId root="2.16.840.1.113883.3.560.1.1019.1"/>
+                                                         <code code="385676005" codeSystem="2.16.840.1.113883.6.96" displayName="result" codeSystemName="SNOMED-CT"/>
+                                                         <value xsi:type="ANYNonNull"/>
+                                                      </observation>
+                                                   </sourceOf>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="1E458AF2-4E0E-47BB-A2A9-4FE7862947CC"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.568" displayName="Performing peritoneal equilibrium testing SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Performing peritoneal equilibrium testing</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="172A36B5-6302-4B02-91FE-A4624BBAAE0D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.569" displayName="Assessing for inadequate patient education for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F02BEFE6-3D47-4B11-8FF4-D9CD1EFCD00D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.570" displayName="Increase exchange volume of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase exchange volume of peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F7C53B29-919C-42D6-99C8-86C730C6BE37"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.571" displayName="Increase number of perfusion exchanges for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="92FAABD8-9542-4E6E-9DA9-FF26F1D62B7C"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.587" displayName="Peritoneal Dialysis Modality SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Peritoneal Dialysis Modality</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="0A75EFB1-85E0-4EE5-ACDA-DEA80C8F0EB9"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.565" displayName="Assessing for Non-Adherence with peritoneal prescription, sampling, collection SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="52F7D0FD-13B4-44E2-9746-318432F40096"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.566" displayName="Assessing for peritoneal dialysis prescription error SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for peritoneal dialysis prescription error</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Procedure, Performed pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.6"/>
+                                       <id root="696D1167-8282-69DF-9D69-6969C7696969"/>
+                                       <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.354" displayName="Peritoneal Dialysis-Procedure Value Set GROUPING"/>
+                                             <title>Occurrence A of Procedure, Performed: Peritoneal Dialysis-Procedure</title>
+                                          </procedure>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Encounter pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.4"/>
+                                       <id root="696D1167-8282-4FDF-9D69-6969C7696969"/>
+                                       <code code="46240-8" displayName="Encounter list" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <encounter classCode="ENC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.594" displayName="Peritoneal Dialysis-Encounter Value Set GROUPING"/>
+                                             <title>Occurrence A of Encounter: Peritoneal Dialysis-Encounter</title>
+                                          </encounter>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="EAS" inversionInd="true">
+                        <pauseQuantity xsi:type="URG_PQ">
+                           <high value="253" unit="d" inclusive="true"/>
+                        </pauseQuantity>
+                        <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                           <id root="D518515A-03A8-4968-A0E6-7F6126A060E8"/>
+                           <title>Measurement end date</title>
+                        </observation>
+                     </sourceOf>
+                  </act>
+               </sourceOf>
+               <sourceOf typeCode="PRCN">
+                  <conjunctionCode code="AND"/>
+                  <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Performed pattern -->
+                           <templateId root="2.16.840.1.113883.3.560.1.5"/>
+                           <id root="300E34EC-185D-4A65-A37E-81983B5F2469"/>
+                           <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                           <sourceOf typeCode="COMP">
+                              <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                 <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                 <title>Laboratory Test, Performed: Kt/V</title>
+                                 <statusCode code="completed"/>
+                              </observation>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="PRCN">
+                        <conjunctionCode code="AND"/>
+                        <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <subsetCode code="RECENT"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                 <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                 <id root="300E34EC-185D-4A65-A37E-81983B5F243A"/>
+                                 <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                 <sourceOf typeCode="COMP">
+                                    <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                       <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                       <title>Laboratory Test, Result: Kt/V (result &gt;= 1.7 )</title>
+                                       <statusCode code="completed"/>
+                                    </observation>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <subsetCode code="RECENT"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.12"/>
+                                       <id root="300E34EC-185D-4A65-A37E-81983B5F243A"/>
+                                       <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                                             <title>Laboratory Test, Result: Kt/V (result &lt; 1.7 )</title>
+                                             <statusCode code="completed"/>
+                                          </observation>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="AND"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="4ED422A7-E0E8-47ED-B35A-FD23E96BFB52"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.567" displayName="Assessing for inadequate monitoring of delivered dose of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis (result)</title>
+                                                   <statusCode code="completed"/>
+                                                   <sourceOf typeCode="REFR">
+                                                      <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                                                         <templateId root="2.16.840.1.113883.3.560.1.1019.1"/>
+                                                         <code code="385676005" codeSystem="2.16.840.1.113883.6.96" displayName="result" codeSystemName="SNOMED-CT"/>
+                                                         <value xsi:type="ANYNonNull"/>
+                                                      </observation>
+                                                   </sourceOf>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="1E458AF2-4E0E-47BB-A2A9-4FE7862947CC"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.568" displayName="Performing peritoneal equilibrium testing SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Performing peritoneal equilibrium testing</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="172A36B5-6302-4B02-91FE-A4624BBAAE0D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.569" displayName="Assessing for inadequate patient education for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F02BEFE6-3D47-4B11-8FF4-D9CD1EFCD00D"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.570" displayName="Increase exchange volume of peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase exchange volume of peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="F7C53B29-919C-42D6-99C8-86C730C6BE37"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.571" displayName="Increase number of perfusion exchanges for peritoneal dialysis SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.46"/>
+                                             <id root="92FAABD8-9542-4E6E-9DA9-FF26F1D62B7C"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.587" displayName="Peritoneal Dialysis Modality SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Performed: Peritoneal Dialysis Modality</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="0A75EFB1-85E0-4EE5-ACDA-DEA80C8F0EB9"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.565" displayName="Assessing for Non-Adherence with peritoneal prescription, sampling, collection SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                       <sourceOf typeCode="PRCN">
+                                          <conjunctionCode code="OR"/>
+                                          <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+                                             <templateId root="2.16.840.1.113883.3.560.1.47"/>
+                                             <id root="52F7D0FD-13B4-44E2-9746-318432F40096"/>
+                                             <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                             <sourceOf typeCode="COMP">
+                                                <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                                   <code code="2.16.840.1.113883.3.526.02.566" displayName="Assessing for peritoneal dialysis prescription error SNOMED-CT Value Set"/>
+                                                   <title>Intervention, Result: Assessing for peritoneal dialysis prescription error</title>
+                                                   <statusCode code="completed"/>
+                                                </procedure>
+                                             </sourceOf>
+                                          </act>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                           <sourceOf typeCode="PRCN">
+                              <conjunctionCode code="OR"/>
+                              <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Procedure, Performed pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.6"/>
+                                       <id root="849E8DEE-6F49-4130-8FE5-6A07FAFFFA35"/>
+                                       <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.354" displayName="Peritoneal Dialysis-Procedure Value Set GROUPING"/>
+                                             <title>Procedure, Performed: Peritoneal Dialysis-Procedure</title>
+                                          </procedure>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                                 <sourceOf typeCode="PRCN">
+                                    <conjunctionCode code="OR"/>
+                                    <act classCode="ACT" moodCode="EVN" isCriterionInd="true" actionNegationInd="true"><!-- Encounter pattern -->
+                                       <templateId root="2.16.840.1.113883.3.560.1.4"/>
+                                       <id root="B796F9A3-8B49-4EA6-82FB-7A809C33E9ED"/>
+                                       <code code="46240-8" displayName="Encounter list" codeSystem="2.16.840.1.113883.6.1"/>
+                                       <sourceOf typeCode="COMP">
+                                          <encounter classCode="ENC" moodCode="EVN" isCriterionInd="true">
+                                             <code code="2.16.840.1.113883.3.526.03.594" displayName="Peritoneal Dialysis-Encounter Value Set GROUPING"/>
+                                             <title>Encounter: Peritoneal Dialysis-Encounter</title>
+                                          </encounter>
+                                       </sourceOf>
+                                    </act>
+                                 </sourceOf>
+                              </act>
+                           </sourceOf>
+                        </act>
+                     </sourceOf>
+                     <sourceOf typeCode="EAS" inversionInd="true">
+                        <pauseQuantity xsi:type="URG_PQ">
+                           <high value="130" unit="d" inclusive="true"/>
+                        </pauseQuantity>
+                        <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                           <id root="D518515A-03A8-4968-A0E6-7F6126A060E8"/>
+                           <title>Measurement end date</title>
+                        </observation>
+                     </sourceOf>
+                  </act>
+               </sourceOf>
+            </observation>
+         </entry>
+      </section>
+   </component>
+         
+      <!--
+         ******************************************   
+         Data Criteria Section
+         ******************************************
+      --><component typeCode="COMP">
+      <section>
+         <code code="57025-9" codeSystem="2.16.840.1.113883.6.1" displayName="Data criteria (QDM Data Elements)"/>
+         <title>Data criteria (QDM Data Elements)</title>
+         <text>
+            <list>
+               <item>
+                  <content>"Diagnosis, Active: End Stage Renal Disease"</content> using "End Stage Renal Disease Value Set GROUPING (2.16.840.1.113883.3.526.03.353)"</item>
+               <item>
+                  <content>"Encounter: Peritoneal Dialysis-Encounter"</content> using "Peritoneal Dialysis-Encounter Value Set GROUPING (2.16.840.1.113883.3.526.03.594)"</item>
+               <item>
+                  <content>"Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis"</content> using "Assessing for inadequate patient education for peritoneal dialysis SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.569)"</item>
+               <item>
+                  <content>"Intervention, Performed: Increase exchange volume of peritoneal dialysis"</content> using "Increase exchange volume of peritoneal dialysis SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.570)"</item>
+               <item>
+                  <content>"Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis"</content> using "Increase number of perfusion exchanges for peritoneal dialysis SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.571)"</item>
+               <item>
+                  <content>"Intervention, Performed: Performing peritoneal equilibrium testing"</content> using "Performing peritoneal equilibrium testing SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.568)"</item>
+               <item>
+                  <content>"Intervention, Performed: Peritoneal Dialysis Modality"</content> using "Peritoneal Dialysis Modality SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.587)"</item>
+               <item>
+                  <content>"Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis"</content> using "Assessing for inadequate monitoring of delivered dose of peritoneal dialysis SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.567)"</item>
+               <item>
+                  <content>"Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection"</content> using "Assessing for Non-Adherence with peritoneal prescription, sampling, collection SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.565)"</item>
+               <item>
+                  <content>"Intervention, Result: Assessing for peritoneal dialysis prescription error"</content> using "Assessing for peritoneal dialysis prescription error SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.566)"</item>
+               <item>
+                  <content>"Laboratory Test, Performed: Kt/V"</content> using "Kt/V SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.355)"</item>
+               <item>
+                  <content>"Laboratory Test, Result: Kt/V"</content> using "Kt/V SNOMED-CT Value Set (2.16.840.1.113883.3.526.02.355)"</item>
+               <item>
+                  <content>"Patient Characteristic: birth date"</content> using "birth date LOINC Value Set (2.16.840.1.113883.3.560.100.4)"</item>
+               <item>
+                  <content>"Procedure, Performed: Peritoneal Dialysis-Procedure"</content> using "Peritoneal Dialysis-Procedure Value Set GROUPING (2.16.840.1.113883.3.526.03.354)"</item>
+            </list>
+         </text>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.47"/>
+               <id root="4ED422A7-E0E8-47ED-B35A-FD23E96BFB52"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.567" displayName="Assessing for inadequate monitoring of delivered dose of peritoneal dialysis SNOMED-CT Value Set"/>
+                     <title>Intervention, Result: Assessing for inadequate monitoring of delivered dose of peritoneal dialysis</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.46"/>
+               <id root="172A36B5-6302-4B02-91FE-A4624BBAAE0D"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.569" displayName="Assessing for inadequate patient education for peritoneal dialysis SNOMED-CT Value Set"/>
+                     <title>Intervention, Performed: Assessing for inadequate patient education for peritoneal dialysis</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.47"/>
+               <id root="0A75EFB1-85E0-4EE5-ACDA-DEA80C8F0EB9"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.565" displayName="Assessing for Non-Adherence with peritoneal prescription, sampling, collection SNOMED-CT Value Set"/>
+                     <title>Intervention, Result: Assessing for Non-Adherence with peritoneal prescription, sampling, collection</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Result pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.47"/>
+               <id root="52F7D0FD-13B4-44E2-9746-318432F40096"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.566" displayName="Assessing for peritoneal dialysis prescription error SNOMED-CT Value Set"/>
+                     <title>Intervention, Result: Assessing for peritoneal dialysis prescription error</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Patient Characteristic pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.25"/>
+               <id root="4100DF97-9A06-44C6-B33A-29FA45D8DED4"/>
+               <code code="45970-1" displayName="Demographics" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.560.100.4" displayName="birth date LOINC Value Set"/>
+                     <title>Patient Characteristic: birth date</title>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Diagnosis, Active pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.2"/>
+               <id root="D141D705-1006-469A-9CE5-93ADDFD5C874"/>
+               <code code="11450-4" displayName="Problem" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="55607006" codeSystem="2.16.840.1.113883.6.96" displayName="Problem"/>
+                     <title>Diagnosis, Active: End Stage Renal Disease</title>
+                     <value xsi:type="CD" code="2.16.840.1.113883.3.526.03.353" displayName="End Stage Renal Disease Value Set GROUPING"/>
+                     <sourceOf typeCode="REFR">
+                        <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                           <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+                           <value xsi:type="CD" code="55561003" displayName="active" codeSystem="2.16.840.1.113883.6.96"/>
+                        </observation>
+                     </sourceOf>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.46"/>
+               <id root="F02BEFE6-3D47-4B11-8FF4-D9CD1EFCD00D"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.570" displayName="Increase exchange volume of peritoneal dialysis SNOMED-CT Value Set"/>
+                     <title>Intervention, Performed: Increase exchange volume of peritoneal dialysis</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.46"/>
+               <id root="F7C53B29-919C-42D6-99C8-86C730C6BE37"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.571" displayName="Increase number of perfusion exchanges for peritoneal dialysis SNOMED-CT Value Set"/>
+                     <title>Intervention, Performed: Increase number of perfusion exchanges for peritoneal dialysis</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Result pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.12"/>
+               <id root="300E34EC-185D-4A65-A37E-81983B5F243A"/>
+               <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                     <title>Laboratory Test, Result: Kt/V</title>
+                     <statusCode code="completed"/>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Laboratory Test, Performed pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.5"/>
+               <id root="300E34EC-185D-4A65-A37E-81983B5F2469"/>
+               <code code="30954-2" displayName="Results" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.355" displayName="Kt/V SNOMED-CT Value Set"/>
+                     <title>Laboratory Test, Performed: Kt/V</title>
+                     <statusCode code="completed"/>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.46"/>
+               <id root="1E458AF2-4E0E-47BB-A2A9-4FE7862947CC"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.568" displayName="Performing peritoneal equilibrium testing SNOMED-CT Value Set"/>
+                     <title>Intervention, Performed: Performing peritoneal equilibrium testing</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Intervention, Performed pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.46"/>
+               <id root="92FAABD8-9542-4E6E-9DA9-FF26F1D62B7C"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.02.587" displayName="Peritoneal Dialysis Modality SNOMED-CT Value Set"/>
+                     <title>Intervention, Performed: Peritoneal Dialysis Modality</title>
+                     <statusCode code="completed"/>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Encounter pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.4"/>
+               <id root="B796F9A3-8B49-4EA6-82FB-7A809C33E9ED"/>
+               <code code="46240-8" displayName="Encounter list" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <encounter classCode="ENC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.03.594" displayName="Peritoneal Dialysis-Encounter Value Set GROUPING"/>
+                     <title>Encounter: Peritoneal Dialysis-Encounter</title>
+                  </encounter>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- Procedure, Performed pattern -->
+               <templateId root="2.16.840.1.113883.3.560.1.6"/>
+               <id root="849E8DEE-6F49-4130-8FE5-6A07FAFFFA35"/>
+               <code code="47519-4" displayName="Procedures" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <procedure classCode="PROC" moodCode="EVN" isCriterionInd="true">
+                     <code code="2.16.840.1.113883.3.526.03.354" displayName="Peritoneal Dialysis-Procedure Value Set GROUPING"/>
+                     <title>Procedure, Performed: Peritoneal Dialysis-Procedure</title>
+                  </procedure>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.12"/>
+               <id root="786D1167-8282-4FDF-9D9D-1BF0C7276969"/>
+               <sourceOf typeCode="DRIV">
+                  <localVariableName>Kt/V</localVariableName>
+                  <observation classCode="OBS" moodCode="CRT">
+                     <id root="300E34EC-185D-4A65-A37E-81983B5F243A"/>
+                  </observation>
+               </sourceOf>
+            </observation>
+         </entry>
+         <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.5"/>
+               <id root="786D1167-8282-4FDF-9D9D-1BF0C7277369"/>
+               <sourceOf typeCode="DRIV">
+                  <localVariableName>Kt/V</localVariableName>
+                  <observation classCode="OBS" moodCode="CRT">
+                     <id root="300E34EC-185D-4A65-A37E-81983B5F2469"/>
+                  </observation>
+               </sourceOf>
+            </observation>
+         </entry>
+         <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.4"/>
+               <id root="696D1167-8282-4FDF-9D69-6969C7696969"/>
+               <sourceOf typeCode="DRIV">
+                  <localVariableName>Peritoneal Dialysis-Encounter</localVariableName>
+                  <observation classCode="OBS" moodCode="CRT">
+                     <id root="B796F9A3-8B49-4EA6-82FB-7A809C33E9ED"/>
+                  </observation>
+               </sourceOf>
+            </observation>
+         </entry>
+         <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.6"/>
+               <id root="696D1167-8282-69DF-9D69-6969C7696969"/>
+               <sourceOf typeCode="DRIV">
+                  <localVariableName>Peritoneal Dialysis-Procedure</localVariableName>
+                  <observation classCode="OBS" moodCode="CRT">
+                     <id root="849E8DEE-6F49-4130-8FE5-6A07FAFFFA35"/>
+                  </observation>
+               </sourceOf>
+            </observation>
+         </entry>
+      </section>
+   </component>
+   <component typeCode="COMP">
+      <section>
+         <code code="69670-8" codeSystem="2.16.840.1.113883.6.1" displayName="Health quality measure supplemental data"/>
+         <title>Supplemental Data Elements</title>
+         <text>
+            <list>
+               <item>"Patient Characteristic: Gender" using "Gender HL7 Value Set (2.16.840.1.113883.1.11.1)"</item>
+               <item>"Patient Characteristic: Race" using "Race CDC Value Set (2.16.840.1.114222.4.11.836)"</item>
+               <item>"Patient Characteristic: Ethnicity" using "Ethnicity CDC Value Set (2.16.840.1.114222.4.11.837)"</item>
+               <item>"Patient Characteristic: Payer" using "Payer Source of Payment Typology Value Set (2.16.840.1.113883.3.221.5)"</item>
+            </list>
+         </text>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.1001"/>
+               <id root="E95864C7-C036-403C-9A4E-80F9D1BEB0BD"/>
+               <code code="45970-1" displayName="Demographics" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="21840-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Gender"/>
+                     <title>Patient Characteristic: Gender</title>
+                     <value xsi:type="CD" code="2.16.840.1.113883.1.11.1" displayName="HL7 Administrative Gender Value Set"/>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.1001"/>
+               <id root="6EF71336-1E79-4E82-8BCF-D45D9DD96F78"/>
+               <code code="45970-1" displayName="Demographics" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="32624-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Race"/>
+                     <title>Patient Characteristic: Race</title>
+                     <value xsi:type="CD" code="2.16.840.1.114222.4.11.836" displayName="CDC Race Value Set"/>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.1001"/>
+               <id root="BA487998-EBE0-4E19-AFD1-E8D9159791E4"/>
+               <code code="45970-1" displayName="Demographics" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="54133-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Ethnicity"/>
+                     <title>Patient Characteristic: Ethnicity</title>
+                     <value xsi:type="CD" code="2.16.840.1.114222.4.11.837" displayName="CDC Ethnicity Value Set"/>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+         <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="DEF">
+               <templateId root="2.16.840.1.113883.3.560.1.1001"/>
+               <id root="B0C8DEAB-6A89-407F-8A5B-4522B5420079"/>
+               <code code="45970-1" displayName="Demographics" codeSystem="2.16.840.1.113883.6.1"/>
+               <sourceOf typeCode="COMP">
+                  <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
+                     <code code="48768-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Payer"/>
+                     <title>Patient Characteristic: Payer</title>
+                     <value xsi:type="CD" code="2.16.840.1.113883.3.221.5" displayName="Source of Payment Typology Health Insurance Type Value Set"/>
+                  </observation>
+               </sourceOf>
+            </act>
+         </entry>
+      </section>
+   </component>
+</QualityMeasureDocument>
