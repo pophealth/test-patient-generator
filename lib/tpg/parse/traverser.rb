@@ -1,97 +1,7 @@
 module TPG
-  module Generation
+  module Parse
     class Traverser
-      # Returns an array of Records tailored to test the logic of this measure
-      def generate_patients
-        patients = []
-        base_patient = Record.new
-
-        # Attach the reason each patient was dropped from a population criteria
-        #  e.g. "denominator", "missing: medication pneumococcal vaccine all ages "
-        base_patient.final_destination = nil
-        base_patient.final_destination_reason = nil
-
-        # We start with an empty patient and will build out many from each population.
-        # At each step, we grow our base patient to represent the tree we've traversed so far.
-        # Each recursive step will return an array that we merge into our patients.
-        patients.concat(generate_patients_from_preconditions(self.population_criteria["IPP"], base_patient))
-
-        # For every IPP base patient who potentially qualifies for the denominator, continue to recursively define all permutations
-        # patients.each do |patient|
-        #       if patient.final_destination.nil?
-        #         patients.concat(generate_patients_from_preconditions(self.population_criteria["DENOM"], patient))
-        #       end
-        #     end
-
-        # For every DENOM base patient who potentially qualifies for the numerator, continue to recursively define all permutations
-        # patients.each do |patient|
-        #       if patient.final_destination.nil?
-        #         patients.concat(generate_patients_from_preconditions(self.population_criteria["NUMER"], patient))
-        #       end
-        #     end
-
-        patients
-      end
-      
-      def remove_category_from_name(name, category)
-        return name unless category
-        last_word_of_category = category.split.last.gsub(/_/,' ')
-        name =~ /#{last_word_of_category}. (.*)/i # The portion after autoformatted text, i.e. actual name (e.g. pneumococcal vaccine)
-        $1
-      end
-
-      # This is a helper for parse_hqmf_preconditions.
-      # Return a human readable title and category for a given data criteria
-      def parse_hqmf_data_criteria(criteria)
-        fragment = {}
-
-        name_and_category = parse_name_and_category(criteria)
-        name = name_and_category[:name]
-        category = name_and_category[:category]
-
-        if criteria["value"] # Some exceptions have the value key. Bump it forward so criteria is idenical to the format of usual coded entries
-          criteria = criteria["value"]
-        else # Find the display name as per usual for the coded entry
-          criteria = criteria["effective_time"] if criteria["effective_time"]
-        end
-
-        measure_period["name"] = "the measure period"
-        temporal_text = parse_hqmf_time(criteria, measure_period)
-        title = "#{name} #{temporal_text}"
-
-        fragment["title"] = title
-        fragment["category"] = category.gsub(/_/,' ') if category
-        fragment
-      end
-
-      # Takes criteria and does a best effort to produce the name and category that briefly describes the precondition
-      # Returns a hash with name and category keys
-      def parse_name_and_category(criteria)
-        name_and_category = {}
-
-        name = criteria["property"].to_s
-        category = criteria["standard_category"]
-        criteria_orig = criteria
-        # QDS data type is most specific, so use it if available. Otherwise use the standard category.
-        category_mapping = { "individual_characteristic" => "patient characteristic" }
-        if criteria["qds_data_type"]
-          category = criteria["qds_data_type"].gsub(/_/, " ") # "medication_administered" = "medication administered"
-        elsif category_mapping[category]
-          category = category_mapping[category]
-        end
-
-        name = remove_category_from_name(criteria["title"], category)
-
-        { name: name, category: category}
-      end
-
-      ####################################################################################################################################
-      # Patient Generation - TODO move this into a proper separate project. Keeping it here for an easy and quick start
-      # 
-      # This process is going to look very similar to the parameter at first while exploring to see what's tractable
-      ####################################################################################################################################
-
-      def generate_patients_from_preconditions(criteria, base_patient)
+      def self.traverse_preconditions(criteria, base_patient)
         patients = []
 
         if criteria["conjunction?"] # We're at the top of the tree
@@ -112,7 +22,7 @@ module TPG
         patients
       end
 
-      def generate_patients_from_data_criteria(criteria, base_patient)
+      def self.generate_patients_from_data_criteria(criteria, base_patient)
         patients = []
 
         # If this is not a coded entry and just a property, it's simple generation
@@ -144,7 +54,7 @@ module TPG
         patients
       end
 
-      def generate_patients_from_property(criteria, base_patient)
+      def self.generate_patients_from_property(criteria, base_patient)
         patients = []
 
         if (criteria["property"] == :age)
@@ -161,7 +71,7 @@ module TPG
       # Exactly equal, exactly low, exactly high
       #   Off by 1 second, 1 minute, 1 hour, 1 day, 1 week, 1 month, 1 year
       #     Up to the coarsest available granulatiry (i.e., if the time interval is only a month, we can't test for a year)
-      def generate_temporal_permutations(criteria, relative_time)
+      def self.generate_temporal_permutations(criteria, relative_time)
         permutations = []
 
         case criteria["type"]
@@ -185,7 +95,7 @@ module TPG
         temporal_permutations << { time: time, start_time: start_time, end_time: end_time }
       end
 
-      def generate_time_vector(criteria, relative_time)
+      def self.generate_time_vector(criteria, relative_time)
         permutations = []
 
         time = Time.new(criteria["effective_time"]["high"]["value"])
@@ -219,7 +129,7 @@ module TPG
 
       end
 
-      def generate_value_permutations(criteria)
+      def self.generate_value_permutations(criteria)
         value_permutations = []
       end
     end

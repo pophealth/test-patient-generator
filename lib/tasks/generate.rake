@@ -1,7 +1,9 @@
-#require_relative '../test-patient-generator'
 require 'bundler/setup'
+
 require 'hqmf-parser'
 require 'hqmf2js'
+
+require_relative '../test-patient-generator'
 
 namespace :generate do
   # @param [String] hqmf An XML file that defines a clinical quality measure.
@@ -22,22 +24,10 @@ namespace :generate do
     format = args[:format]
     out_path = args[:out_path]
     
-    # Parse all of the value sets
-    value_set_parser = HQMF::ValueSet::Parser.new()
-    value_set_format ||= HQMF::ValueSet::Parser.get_format(value_set_path)
-    value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
+    # Generate the patients
+    patients = TPG::Patient::Generator.patients_from_hqmf(hqmf_path, value_set_path)
+    
+    # Zip the patients up into the requested format to the out_path
 
-    # Parsed the HQMF file into a model
-    codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets) if (value_sets) 
-    hqmf_contents = Nokogiri::XML(File.new hqmf_path).to_s
-    hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
-    
-    # Generate the patients given the requested format
-    
-    
-    # Zip up all of the records to the requested out_path
-    
-    
-    binding.pry
   end
 end

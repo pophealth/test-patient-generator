@@ -1,10 +1,29 @@
+require 'set'
+
 module TPG
-  module Generation
-    # Provides functionality for filling information for test patients.
-    #
-    # Fields are either trivial (i.e. no impact on CQM) and randomly chosen,
-    #  or provided with criteria to drive generation.
+  module Patient
     class Randomizer
+      UNIQUE_PATIENT_IDS = Set.new
+      
+      # Add trivial demographics info to a Record. Trivial fields are ones that identify a patient as unique to a human eye
+      # but have no impact on CQM, e.g. address. This is essentially an upsert, so any preexisting info will be wiped.
+      #
+      # @param [Record] The Record to which we will be adding random demographics
+      # @return The Record that was given to us with the following fields randomly generated:
+      #         race/ethnicity, language, last name
+      def self.attach_random_demographics(patient)
+        race_and_ethnicity = randomize_race_and_ethnicity
+        patient.race = race_and_ethnicity[:race]
+        patient.ethnicity = race_and_ethnicity[:ethnicity]
+        
+        patient.languages = []
+        patient.languages << randomize_language
+        patient.last = randomize_last_name
+        patient.medical_record_number = randomize_patient_id
+        
+        patient
+      end
+      
       # Picks a race based on 2010 census estimates
       #
       # Pacific Islander 0.2%
@@ -13,7 +32,7 @@ module TPG
       # Black persons 12.6%
       # Hispanic 16.3%
       # White 63.7%
-      def race_and_ethnicity
+      def self.randomize_race_and_ethnicity
         race_percent = rand(999)
         
         case race_percent
@@ -52,7 +71,7 @@ module TPG
       # 00.1% persian
       # 00.1% us sign
       # 03.0% other
-      def language
+      def self.randomize_language
         language_percent = rand(999)
         
         case language_percent
@@ -101,7 +120,7 @@ module TPG
       #
       # @param [String] gender The gender of the patient for whom we're generating a name. Expected to be either 'M' or 'F'.
       # @return A suitable forename.
-      def first_name(gender)
+      def self.randomize_first_name(gender)
         # 300 most popular forenames according to US census 1990
         forenames = {
           'M' => %w{James John Robert Michael William David Richard Charles Joseph Thomas Christopher Daniel Paul Mark Donald George Kenneth Steven Edward Brian Ronald Anthony Kevin Jason Matthew Gary Timothy Jose Larry Jeffrey Frank Scott Eric Stephen Andrew Raymond Gregory Joshua Jerry Dennis Walter Patrick Peter Harold Douglas Henry Carl Arthur Ryan Roger Joe Juan Jack Albert Jonathan Justin Terry Gerald Keith Samuel Willie Ralph Lawrence Nicholas Roy Benjamin Bruce Brandon Adam Harry Fred Wayne Billy Steve Louis Jeremy Aaron Randy Howard Eugene Carlos Russell Bobby Victor Martin Ernest Phillip Todd Jesse Craig Alan Shawn Clarence Sean Philip Chris Johnny Earl Jimmy Antonio Danny Bryan Tony Luis Mike Stanley Leonard Nathan Dale Manuel Rodney Curtis Norman Allen Marvin Vincent Glenn Jeffery Travis Jeff Chad Jacob Lee Melvin Alfred Kyle Francis Bradley Jesus Herbert Frederick Ray Joel Edwin Don Eddie Ricky Troy Randall Barry Alexander Bernard Mario Leroy Francisco Marcus Micheal Theodore Clifford Miguel Oscar Jay Jim Tom Calvin Alex Jon Ronnie Bill Lloyd Tommy Leon Derek Warren Darrell Jerome Floyd Leo Alvin Tim Wesley Gordon Dean Greg Jorge Dustin Pedro Derrick Dan Lewis Zachary Corey Herman Maurice Vernon Roberto Clyde Glen Hector Shane Ricardo Sam Rick Lester Brent Ramon Charlie Tyler Gilbert Gene Marc Reginald Ruben Brett Angel Nathaniel Rafael Leslie Edgar Milton Raul Ben Chester Cecil Duane Franklin Andre Elmer Brad Gabriel Ron Mitchell Roland Arnold Harvey Jared Adrian Karl Cory Claude Erik Darryl Jamie Neil Jessie Christian Javier Fernando Clinton Ted Mathew Tyrone Darren Lonnie Lance Cody Julio Kelly Kurt Allan Nelson Guy Clayton Hugh Max Dwayne Dwight Armando Felix Jimmie Everett Jordan Ian Wallace Ken Bob Jaime Casey Alfredo Alberto Dave Ivan Johnnie Sidney Byron Julian Isaac Morris Clifton Willard Daryl Ross Virgil Andy Marshall Salvador Perry Kirk Sergio Marion Tracy Seth Kent Terrance Rene Eduardo Terrence Enrique Freddie Wade},
@@ -114,7 +133,7 @@ module TPG
       # Pick a surname at random.
       #
       # @return A surname.
-      def last_name
+      def self.randomize_last_name
         # 500 most popular surnames according to US census 1990
         surnames = %w{Smith Johnson Williams Jones Brown Davis Miller Wilson Moore Taylor Anderson Thomas Jackson White Harris Martin Thompson Garcia Martinez Robinson Clark Rodriguez Lewis Lee Walker Hall Allen Young Hernandez King Wright Lopez Hill Scott Green Adams Baker Gonzalez Nelson Carter Mitchell Perez Roberts Turner Phillips Campbell Parker Evans Edwards Collins Stewart Sanchez Morris Rogers Reed Cook Morgan Bell Murphy Bailey Rivera Cooper Richardson Cox Howard Ward Torres Peterson Gray Ramirez James Watson Brooks Kelly Sanders Price Bennett Wood Barnes Ross Henderson Coleman Jenkins Perry Powell Long Patterson Hughes Flores Washington Butler Simmons Foster Gonzales Bryant Alexander Russell Griffin Diaz Hayes Myers Ford Hamilton Graham Sullivan Wallace Woods Cole West Jordan Owens Reynolds Fisher Ellis Harrison Gibson Mcdonald Cruz Marshall Ortiz Gomez Murray Freeman Wells Webb Simpson Stevens Tucker Porter Hunter Hicks Crawford Henry Boyd Mason Morales Kennedy Warren Dixon Ramos Reyes Burns Gordon Shaw Holmes Rice Robertson Hunt Black Daniels Palmer Mills Nichols Grant Knight Ferguson Rose Stone Hawkins Dunn Perkins Hudson Spencer Gardner Stephens Payne Pierce Berry Matthews Arnold Wagner Willis Ray Watkins Olson Carroll Duncan Snyder Hart Cunningham Bradley Lane Andrews Ruiz Harper Fox Riley Armstrong Carpenter Weaver Greene Lawrence Elliott Chavez Sims Austin Peters Kelley Franklin Lawson Fields Gutierrez Ryan Schmidt Carr Vasquez Castillo Wheeler Chapman Oliver Montgomery Richards Williamson Johnston Banks Meyer Bishop Mccoy Howell Alvarez Morrison Hansen Fernandez Garza Harvey Little Burton Stanley Nguyen George Jacobs Reid Kim Fuller Lynch Dean Gilbert Garrett Romero Welch Larson Frazier Burke Hanson Day Mendoza Moreno Bowman Medina Fowler Brewer Hoffman Carlson Silva Pearson Holland Douglas Fleming Jensen Vargas Byrd Davidson Hopkins May Terry Herrera Wade Soto Walters Curtis Neal Caldwell Lowe Jennings Barnett Graves Jimenez Horton Shelton Barrett Obrien Castro Sutton Gregory Mckinney Lucas Miles Craig Rodriquez Chambers Holt Lambert Fletcher Watts Bates Hale Rhodes Pena Beck Newman Haynes Mcdaniel Mendez Bush Vaughn Parks Dawson Santiago Norris Hardy Love Steele Curry Powers Schultz Barker Guzman Page Munoz Ball Keller Chandler Weber Leonard Walsh Lyons Ramsey Wolfe Schneider Mullins Benson Sharp Bowen Daniel Barber Cummings Hines Baldwin Griffith Valdez Hubbard Salazar Reeves Warner Stevenson Burgess Santos Tate Cross Garner Mann Mack Moss Thornton Dennis Mcgee Farmer Delgado Aguilar Vega Glover Manning Cohen Harmon Rodgers Robbins Newton Todd Blair Higgins Ingram Reese Cannon Strickland Townsend Potter Goodwin Walton Rowe Hampton Ortega Patton Swanson Joseph Francis Goodman Maldonado Yates Becker Erickson Hodges Rios Conner Adkins Webster Norman Malone Hammond Flowers Cobb Moody Quinn Blake Maxwell Pope Floyd Osborne Paul Mccarthy Guerrero Lindsey Estrada Sandoval Gibbs Tyler Gross Fitzgerald Stokes Doyle Sherman Saunders Wise Colon Gill Alvarado Greer Padilla Simon Waters Nunez Ballard Schwartz Mcbride Houston Christensen Klein Pratt Briggs Parsons Mclaughlin Zimmerman French Buchanan Moran Copeland Roy Pittman Brady Mccormick Holloway Brock Poole Frank Logan Owen Bass Marsh Drake Wong Jefferson Park Morton Abbott Sparks Patrick Norton Huff Clayton Massey Lloyd Figueroa Carson Bowers Roberson Barton Tran Lamb Harrington Casey Boone Cortez Clarke Mathis Singleton Wilkins Cain Bryan Underwood Hogan Mckenzie Collier Luna Phelps Mcguire Allison Bridges Wilkerson Nash Summers Atkins}
         
@@ -124,7 +143,7 @@ module TPG
       # Create an address at random
       #
       # @return An address hash
-      def address
+      def self.randomize_address
         streetnames = %w{Park Main Oak Pine Maple Cedar Elm Lake Hill Second Washington}
         zipcodes = {
           '01000' => {'city' => 'Springfield', 'state'=> 'MA'},
@@ -155,6 +174,17 @@ module TPG
         }.to_json
       end
 
+      # Randomize patient IDs for a given patients. We ensure that this ID is unique.
+      #
+      # @return The same patient with a random, non-duplicate ID assigned.
+      def self.randomize_patient_id
+        # Keep trying to add a new ID to the set. Return the ID when we find one that's unique.
+        loop do
+          id = (0...10).map{ ('0'..'9').to_a[rand(10)] }.join.to_s
+          break id if UNIQUE_PATIENT_IDS.size < UNIQUE_PATIENT_IDS.add(id).size
+        end
+      end
+
       # Return a set of randomly selected numbers between two bounds
       #
       # @param [int] min The lower inclusive bound
@@ -162,7 +192,7 @@ module TPG
       # @param [int] least The minimum count to return
       # @param [int] most The maximum count to return
       # @return [String] A JSON format array of numbers
-      def n_between(min, max, least=1, most=1)
+      def self.n_between(min, max, least=1, most=1)
         count = least + rand(1 + most - least).to_i
         result = []
         
@@ -178,7 +208,7 @@ module TPG
       # @param [int] min The lower inclusive bound
       # @param [int] max The upper inclusive bound
       # @return [int] A random number between the min and max bounds
-      def between(min, max)
+      def self.between(min, max)
         span = max.to_i - min.to_i + 1
         min.to_i + rand(span)
       end
@@ -187,7 +217,7 @@ module TPG
       #
       # @param [int] probability the probability of getting true as a percentage
       # @return [boolean] true or false
-      def percent(probability)
+      def self.percent(probability)
         return rand(100)<probability
       end
     end
