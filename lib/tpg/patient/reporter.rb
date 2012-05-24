@@ -1,7 +1,5 @@
 module TPG
-  module Patient
-    class Reporter
+  class Reporter
       
-    end
   end
 end

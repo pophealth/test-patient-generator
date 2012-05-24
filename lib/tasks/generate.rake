@@ -25,7 +25,7 @@ namespace :generate do
     out_path = args[:out_path]
     
     # Generate the patients
-    patients = TPG::Patient::Generator.patients_from_hqmf(hqmf_path, value_set_path)
+    patients = TPG::Generator.generate_patients(hqmf_path, value_set_path)
     
     # Zip the patients up into the requested format to the out_path
 

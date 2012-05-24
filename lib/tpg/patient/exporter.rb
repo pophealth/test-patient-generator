@@ -1,7 +1,5 @@
 module TPG
-  module Patient
-    class Exporter
+  class Exporter
       
-    end
   end
 end
