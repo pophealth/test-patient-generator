@@ -2,6 +2,7 @@ require 'bundler/setup'
 
 require 'hqmf-parser'
 require 'hqmf2js'
+require 'fileutils'
 
 require_relative '../test-patient-generator'
 
@@ -12,7 +13,7 @@ namespace :generate do
   # @param [String] out_path The location where we will store a zip of all generated patients. Default is project_root/tmp.
   desc "Generate a zip file of test patients that cover all logical paths through a clinical quality measure."
   task :patients, [:hqmf_path, :value_set_path, :format, :out_path] do |t, args|
-    args.with_defaults(:format => "c32", :out_path => ".")
+    args.with_defaults(:format => "c32", :out_path => "tmp/patients.zip")
     
     # If no HQMF file or value set file were specified, we shall not pass
     raise "The path to an HQMF file must be specified" unless args[:hqmf_path]
@@ -24,10 +25,24 @@ namespace :generate do
     format = args[:format]
     out_path = args[:out_path]
     
+    # Parse all of the value sets
+    value_set_parser = HQMF::ValueSet::Parser.new()
+    value_set_format ||= HQMF::ValueSet::Parser.get_format(value_set_path)
+    value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
+
+    # Parsed the HQMF file into a model
+    codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets) if (value_sets) 
+    hqmf_contents = Nokogiri::XML(File.new hqmf_path).to_s
+    hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
+    
     # Generate the patients
-    patients = TPG::Generator.generate_patients(hqmf_path, value_set_path)
+    patients = TPG::Generator.generate_patients(hqmf, value_sets)
+    #patient = TPG::Generator.create_base_patient
+    #patient = TPG::Generator.finalize_patient(patient)
+    #patients << patient
     
     # Zip the patients up into the requested format to the out_path
-
+    zip = TPG::Exporter.zip(patients, format)
+    FileUtils.mv(zip.path, out_path)
   end
 end

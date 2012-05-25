@@ -1,31 +1,28 @@
 module TPG
   class Generator
+    attr_reader :patients
+    attr_reader :visiting_prefix
+    
+    def initialize(traverser)
+      @visiting_prefix = "generate_from"
+      @traverser = traverser
+      
+      @patients = []
+      @base_patient = Generator.create_base_patient()
+    end
+    
     # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
     # paths through the logic of this particular clinical quality measure. The non-relevant demographic info
-    #
-    # @params [String] hqmf_path The location of an HQMF file that we will parse
-    # @params [String] value_set_path THe location of an XLS or XLSX value set file that we will parse
-    # @return An array of Records tailored to test the logic of a clinicial quality measure
-    def self.generate_patients(hqmf_path, value_set_path)
-      patients = []
+    def self.generate_patients(hqmf, value_sets)
+      traverser = TPG::Traverser.new(hqmf, value_sets)
+      generator = TPG::Generator.new(traverser)
       
-      # Parse all of the value sets
-      value_set_parser = HQMF::ValueSet::Parser.new()
-      value_set_format ||= HQMF::ValueSet::Parser.get_format(value_set_path)
-      value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
-
-      # Parsed the HQMF file into a model
-      codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets) if (value_sets) 
-      hqmf_contents = Nokogiri::XML(File.new hqmf_path).to_s
-      hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
-
-      # Create a base patient for the whole traversal
-      base_patient = create_base_patient()
-
-      # We start with an empty patient and will build out many from each population.
-      # At each step, we grow our base patient to represent the tree we've traversed so far.
-      # Each recursive step will return an array that we merge into our patients.
-      patients.concat(Traverser.generate_patients_from_preconditions(hqmf.population_criteria("IPP"), base_patient))
+      traverser.attach_visitors(generator)
+      traverser.traverse()
+      
+      generator.patients
+      
+      #patients.concat(@traverser.traverser_preconditions(hqmf.population_criteria("IPP"), base_patient))
 
       # For every IPP base patient who potentially qualifies for the denominator, continue to recursively define all permutations
       # patients.each do |patient|
@@ -40,8 +37,6 @@ module TPG
       #         patients.concat(generate_patients_from_preconditions(self.population_criteria["NUMER"], patient))
       #       end
       #     end
-
-      patients
     end
     
     # Create a patient with trivial demographic information and no coded entries.
@@ -69,17 +64,22 @@ module TPG
     #   
     def self.finalize_patient(patient)
       if patient.birthdate.nil?
-        
+        patient.birthdate = Time.now.to_i
       end
       
       if patient.gender.nil?
         # Set gender
-        # Set first name based on that gender
+        rand(2) == 0 ? patient.gender = "M" : patient.gender = "F"
+        patient.first = Randomizer.randomize_first_name(patient.gender)
       end
       
       # Some chance of death
       
       patient
+    end
+    
+    def generate_from_population(population)
+
     end
   end
 end

@@ -1,27 +1,60 @@
 module TPG
   class Traverser
-    def self.generate_patients_from_preconditions(criteria, base_patient)
+    def initialize(hqmf, value_sets)
+      @hqmf = hqmf
+      @value_sets = value_sets
+      @visitors = []
+    end
+    
+    def attach_visitors(*visitors)
+      visitors.each do |visitor|
+        @visitors << visitor
+      end
+    end
+    
+    def call_visitors(task, data)
+      @visitors.each do |visitor|
+        visitor.try("#{visitor.visiting_prefix}_#{task}".to_sym, data)
+      end
+    end
+    
+    def traverse
+      traverse_population_criteria
+    end
+    
+    def traverse_population_criteria
+      ["IPP"].each do |population|
+        call_visitors("population", @hqmf.population_criteria(population))
+        traverse_population_preconditions(@hqmf.population_criteria(population))
+      end
+    end
+    
+    def traverse_population_preconditions(precondition)
+
+    end
+    
+    def generate_patients_from_preconditions(criteria, base_patient)
       patients = []
 
-      if criteria["conjunction?"] # We're at the top of the tree
-        criteria["preconditions"].each do |precondition|
+      if criteria.conjunction? # We're at the top of the tree
+        criteria.preconditions.each do |precondition|
           patients.concat(generate_patients_from_preconditions(precondition, base_patient))
         end
       else # We're somewhere in the middle
         conjunction = criteria["conjunction_code"]
-        criteria["preconditions"].each do |precondition|
-          if precondition["reference"] # We've hit a leaf node - This is a data criteria reference
-            patients.concat(generate_patients_from_data_criteria(data_criteria[precondition["reference"]], base_patient))
+        criteria.preconditions.each do |precondition|
+          if precondition.reference # We've hit a leaf node - This is a data criteria reference
+            patients.concat(generate_patients_from_data_criteria(data_criteria[precondition.reference], base_patient))
           else # There are additional layers below
             patients.concat(generate_patients_from_preconditions(precondition, base_patient))
           end
-        end if criteria["preconditions"]
+        end if criteria.preconditions
       end
 
       patients
     end
 
-    def self.generate_patients_from_data_criteria(criteria, base_patient)
+    def generate_patients_from_data_criteria(criteria, base_patient)
       patients = []
 
       # If this is not a coded entry and just a property, it's simple generation
@@ -53,7 +86,7 @@ module TPG
       patients
     end
 
-    def self.generate_patients_from_property(criteria, base_patient)
+    def generate_patients_from_property(criteria, base_patient)
       patients = []
 
       if (criteria["property"] == :age)
@@ -70,7 +103,7 @@ module TPG
     # Exactly equal, exactly low, exactly high
     #   Off by 1 second, 1 minute, 1 hour, 1 day, 1 week, 1 month, 1 year
     #     Up to the coarsest available granulatiry (i.e., if the time interval is only a month, we can't test for a year)
-    def self.generate_temporal_permutations(criteria, relative_time)
+    def generate_temporal_permutations(criteria, relative_time)
       permutations = []
 
       case criteria["type"]
@@ -94,7 +127,7 @@ module TPG
       temporal_permutations << { time: time, start_time: start_time, end_time: end_time }
     end
 
-    def self.generate_time_vector(criteria, relative_time)
+    def generate_time_vector(criteria, relative_time)
       permutations = []
 
       time = Time.new(criteria["effective_time"]["high"]["value"])
@@ -128,7 +161,7 @@ module TPG
 
     end
 
-    def self.generate_value_permutations(criteria)
+    def generate_value_permutations(criteria)
       value_permutations = []
     end
   end

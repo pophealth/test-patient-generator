@@ -9,5 +9,8 @@ Gem::Specification.new do |s|
   s.authors = ["Adam Goldstein"]
   s.version = '0.1.0'
 
-  s.files = Dir.glob('lib/**/*.rb') + ["Gemfile", "README", "Rakefile"]
+  s.add_dependency 'nokogiri', '~> 1.5.2'
+  s.add_dependency 'health-data-standards', '~> 0.8.0'
+
+  s.files = Dir.glob('lib/**/*.rb') + ["Gemfile", "README", "Rakefile", "public/cda.xsl"]
 end
