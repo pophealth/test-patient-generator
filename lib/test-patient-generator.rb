@@ -1,6 +1,5 @@
-require 'bundler/setup'
-require 'health-data-standards'
 require 'hqmf-parser'
+require 'health-data-standards'
 
 require_relative 'tpg/ext/record'
 
