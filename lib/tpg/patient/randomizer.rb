@@ -183,6 +183,16 @@ module TPG
         break id if UNIQUE_PATIENT_IDS.size < UNIQUE_PATIENT_IDS.add(id).size
       end
     end
+    
+    # More accurately, randomize a believable birthdate. Given a patient, find all coded entries that
+    # have age-related implications and make sure the patient is at least that old. Since that is complicated,
+    # for now let's just make them 45
+    #
+    # @param A patient with coded entries that dictate potential birthdates
+    # @return A realistic birthdate for the given patient
+    def self.randomize_birthdate(patient)
+      Time.now
+    end
 
     # Return a set of randomly selected numbers between two bounds
     #

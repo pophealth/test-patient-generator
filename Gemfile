@@ -12,3 +12,4 @@ gem 'health-data-standards', :git => 'https://github.com/projectcypress/health-d
 gem 'rake'
 gem 'pry'
 gem 'pry-nav'
+gem 'bson_ext'
