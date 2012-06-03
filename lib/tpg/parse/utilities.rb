@@ -1,4 +1,5 @@
 module TPG
+  # Various utility functions to parse information from an HQMF model.
   class Utilities
     # The names of criteria from HQMF usually have the category contained within them from auto-generated text.
     # Here we attempt to parse out the category and form a more human readable version of the name.

@@ -1,8 +1,10 @@
 require 'set'
 
 module TPG
+  # Contains functions that can be used to randomly generate fields for patients.
+  # Also includes utility functions for randomly generating numbers and dates or choosing options within a range.
   class Randomizer
-    UNIQUE_PATIENT_IDS = Set.new
+    UNIQUE_PATIENT_IDS = Set.new # Used to make sure we don't duplicate randomly generated patient IDs
     
     # Add trivial demographics info to a Record. Trivial fields are ones that identify a patient as unique to a human eye
     # but have no impact on CQM, e.g. address. This is essentially an upsert, so any preexisting info will be wiped.

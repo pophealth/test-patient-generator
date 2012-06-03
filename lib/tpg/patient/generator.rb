@@ -6,8 +6,7 @@ module TPG
   class Generator
     VISITING_PREFIX = "generate_from"
     
-    # @patients - 
-    # @pending_patients - 
+    # @param [Record] base_patient An original patient from whom we will generate more to exhaustively test CQM logic.
     def initialize(base_patient = Generator.create_base_patient)
       @patients = [] # Our bin for patients once we're done with them.
       @pending_patients = [base_patient] # Our patients who are under construction. Carry them into the next population.
@@ -80,6 +79,21 @@ module TPG
     # @param [Precondition] precondition The precondition that is currently being visited.
     def generate_from_precondition(precondition)
       binding.pry
+    end
+    
+    # Traversal Hook for when the document is completed. We'll move all pending_patients into the patients array
+    # and finalize everyone to be sure they are fully fleshed out.
+    def generate_from_eof(data)
+      until @pending_patients.empty?
+        patient = @pending_patients.shift
+        patient.elimination_population = 'eof'
+        patients.elimination_reason = 'eof'
+        @patients << patient
+      end
+      
+      @patients.each do |patient|
+        patient = Generator.finalize_patient(patient)
+      end
     end
     
     # 

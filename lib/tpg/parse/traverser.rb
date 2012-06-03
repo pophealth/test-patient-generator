@@ -3,13 +3,12 @@ module TPG
   # Visitors who need to act on the logic tree can be attached and given a chance to do
   # work at each context. The goal is to traverse once, but perform arbitrarily many actions.
   class Traverser
-    # @hqmf - 
-    # @value_sets - 
-    # @visitors - 
+    # @param [HqmfDocument] hqmf A model representing the logic of a given HQMF document.
+    # @param [Hash] value_sets All of the 
     def initialize(hqmf, value_sets)
       @hqmf = hqmf
       @value_sets = value_sets
-      @visitors = []
+      @visitors = [] # All Visitors who will act at each step of the HQMF logic tree.
     end
     
     # Add all of the Visitors that will be acting on this traversal. Each will be called at
@@ -35,6 +34,7 @@ module TPG
     # Kick off the whole traversal
     def traverse
       traverse_population_criteria
+      call_visitors('eof', nil) # Trigger the completion of the traversal
     end
     
     # Dive into each population criteria for the given HQMF file
