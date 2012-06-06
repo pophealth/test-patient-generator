@@ -41,31 +41,29 @@ module TPG
     def traverse_population_criteria
       ["IPP"].each do |population|
         call_visitors('population', @hqmf.population_criteria(population))
-        traverse_population_preconditions(@hqmf.population_criteria(population))
+        traverse_preconditions(@hqmf.population_criteria(population))
       end
     end
     
     # Recursively traverse all preconditions of the given precondition
     #
     # @param [Precondition] precondition The current precondition to look at
-    def traverse_population_preconditions(precondition)
-      call_visitors('precondition', precondition)
-      
-      binding.pry
-      
-      if criteria.conjunction? # We're at the top of the tree
-        criteria.preconditions.each do |precondition|
-          patients.concat(generate_patients_from_preconditions(precondition, base_patient))
+    def traverse_preconditions(preconditions)      
+      if preconditions.conjunction? # We're at the top of the tree
+        binding.pry
+        call_visitors('operation', preconditions)
+        preconditions.preconditions.each do |precondition|
+          traverse_preconditions(precondition)
         end
       else # We're somewhere in the middle
-        conjunction = criteria["conjunction_code"]
-        criteria.preconditions.each do |precondition|
+        binding.pry
+        preconditions.preconditions.each do |precondition|
           if precondition.reference # We've hit a leaf node - This is a data criteria reference
-            patients.concat(generate_patients_from_data_criteria(data_criteria[precondition.reference], base_patient))
+            call_visitors('data_criteria', @hqmf.all_data_criteria[precondition.reference])
           else # There are additional layers below
-            patients.concat(generate_patients_from_preconditions(precondition, base_patient))
+            traverse_preconditions(precondition)
           end
-        end if criteria.preconditions
+        end
       end
     end
   end

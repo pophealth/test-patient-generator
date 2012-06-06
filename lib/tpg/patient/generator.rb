@@ -6,6 +6,8 @@ module TPG
   class Generator
     VISITING_PREFIX = "generate_from"
     
+    attr_reader :patients
+    
     # @param [Record] base_patient An original patient from whom we will generate more to exhaustively test CQM logic.
     def initialize(base_patient = Generator.create_base_patient)
       @patients = [] # Our bin for patients once we're done with them.
@@ -51,7 +53,7 @@ module TPG
     # @return A patient with guaranteed complete information necessary for standard formats.
     def self.finalize_patient(patient)
       if patient.birthdate.nil?
-        patient.birthdate = Randomizer.generate_birthdate()
+        patient.birthdate = Randomizer.randomize_birthdate(patient)
         patient.birthdate = Time.now.to_i
       end
       
@@ -81,13 +83,21 @@ module TPG
       binding.pry
     end
     
+    def generate_from_operation(precondition)
+      
+    end
+    
+    def generate_from_data_criteria(criteria)
+      
+    end
+    
     # Traversal Hook for when the document is completed. We'll move all pending_patients into the patients array
     # and finalize everyone to be sure they are fully fleshed out.
     def generate_from_eof(data)
       until @pending_patients.empty?
         patient = @pending_patients.shift
         patient.elimination_population = 'eof'
-        patients.elimination_reason = 'eof'
+        patient.elimination_reason = 'eof'
         @patients << patient
       end
       
@@ -118,7 +128,7 @@ module TPG
       patients
     end
 
-    def generate_patients_from_data_criteria(criteria, base_patient)
+    def generate_patients_from_data_criteriaZ(criteria, base_patient)
       patients = []
 
       # If this is not a coded entry and just a property, it's simple generation
