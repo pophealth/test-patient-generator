@@ -42,7 +42,7 @@ namespace :generate do
     #patients << patient
     
     # Zip the patients up into the requested format to the out_path
-    zip = TPG::Exporter.zip(patients, format)
-    FileUtils.mv(zip.path, out_path)
+    #zip = TPG::Exporter.zip(patients, format)
+    #FileUtils.mv(zip.path, out_path)
   end
 end

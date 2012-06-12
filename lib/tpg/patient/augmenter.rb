@@ -1,110 +1,24 @@
 module TPG
-  # A Generator serves as a visitor to an HQMF Traverser.
-  #
-  # At each step, the generator will create as many patients as possible to exhaustively test the logic
-  # of the given clinical quality measure.
-  class Generator
-    VISITING_PREFIX = "generate_from"
-    
-    attr_reader :patients
-    
-    # @param [Record] base_patient An original patient from whom we will generate more to exhaustively test CQM logic.
-    def initialize(base_patient = Generator.create_base_patient)
-      @patients = [] # Our bin for patients once we're done with them.
-      @pending_patients = [base_patient] # Our patients who are under construction. Carry them into the next population.
-      @nested_patients = []
-    end
-    
-    # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
-    # paths through the logic of this particular clinical quality measure.
-    def self.generate_patients(hqmf, value_sets)
-      traverser = TPG::Traverser.new(hqmf, value_sets)
-      augmenter = TPG::Augmenter.new()
-      generator = TPG::Generator.new()
-      
-      traverser.traverse(augmenter)
-      #traverser.traverse(generator)
-      
-      generator.patients
-    end
-    
-    # Create a patient with trivial demographic information and no coded entries.
-    #
-    # @return A Record with a blank slate
-    def self.create_base_patient
-      patient = Record.new
-      patient.elimination_population = nil
-      patient.elimination_reason = nil
-      
-      patient = Randomizer.attach_random_demographics(patient)
-    end
-    
-    # Take an existing patient with some coded entries on them and redefine their trivial demographic information
-    #
-    # @param [Record] base_patient The patient that we're using as a base to create a new one
-    # @return A new Record with an identical medical history to the given patient but new trivial demographic information
-    def self.extend_patient(base_patient)
-      patient = base_patient.clone()
-      
-      patient = Randomizer.attach_random_demographics(patient)
-    end
-    
-    # Fill in any missing details that should be filled in on a patient. These include: age, gender, and first name.
-    #
-    # @param [Record] patient The patient for whom we are about to fill in remaining demographic information.
-    # @return A patient with guaranteed complete information necessary for standard formats.
-    def self.finalize_patient(patient)
-      if patient.birthdate.nil?
-        patient.birthdate = Randomizer.randomize_birthdate(patient)
-        patient.birthdate = Time.now.to_i
-      end
-      
-      if patient.gender.nil?
-        # Set gender
-        rand(2) == 0 ? patient.gender = "M" : patient.gender = "F"
-        patient.first = Randomizer.randomize_first_name(patient.gender)
-      end
-      
-      patient
-    end
-    
-    # Traversal Hook that marks all pending patients with the current population name as the one that elimiantes them.
-    # If they are logically eliminated, the reason will be added by the condition that removes them from the pool.
-    #
-    # @param [PopulationCriteria] population The Population Criteria that is currently being visited.
-    def generate_from_population(population)
-      @pending_patients.each do |patient|
-        patient.elimination_population = population
-      end
-    end
-    
-    # Traversal Hook that will set generation variables to prepare for an operator
-    #
-    # @param [Precondition] precondition The operator that is currently being visited.
-    def generate_from_operator(operator)
+  class Augmenter
+    VISITING_PREFIX = "augment"
 
+    # Given a string representation we can get a handle on a module
+    def module_by_name(module_name)
+      module_name.split('::').inject(Kernel) {|scope, name| scope.const_get(name)}
     end
-    
-    def generate_from_data_criteria(criteria)
+
+    def augment_conjunction(conjunction)
       binding.pry
     end
     
-    # Traversal Hook for when the document is completed. We'll move all pending_patients into the patients array
-    # and finalize everyone to be sure they are fully fleshed out.
-    def generate_from_eof(data)
-      until @pending_patients.empty?
-        patient = @pending_patients.shift
-        patient.elimination_population = 'eof'
-        patient.elimination_reason = 'eof'
-        @patients << patient
-      end
+    def augment_operator(operator)
       
-      @patients.each do |patient|
-        patient = Generator.finalize_patient(patient)
-      end
     end
     
-    # 
+    def augment_data_criteria(criteria)
+      
+    end
+
     def generate_from_operatorZ()
       patients = []
 

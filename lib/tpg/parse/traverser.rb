@@ -15,7 +15,9 @@ module TPG
     # each logical juncture of the HQMF document.
     #
     # @param [Visitor] visitors Some amount of Visitors who will be called during traversal
-    def attach_visitors(*visitors)
+    def attach_visitors(visitors)
+      @visitors = []
+      
       visitors.each do |visitor|
         @visitors << visitor
       end
@@ -27,12 +29,17 @@ module TPG
     # @param [Object] data - Whatever data exists at the current location in the tree.
     def call_visitors(task, data)
       @visitors.each do |visitor|
-        visitor.try("#{visitor.class::VISITING_PREFIX}_#{task}".to_sym, data)
+        hook = "#{visitor.class::VISITING_PREFIX}_#{task}".to_sym
+        visitor.send(hook, data) if visitor.respond_to? hook
       end
     end
     
     # Kick off the whole traversal
-    def traverse
+    #
+    # @param [Visitor] visitors Some amount of Visitors that will be attached for this traversal.
+    def traverse(*visitors)
+      attach_visitors(visitors)
+      
       traverse_population_criteria
       call_visitors('eof', nil) # Trigger the completion of the traversal
     end
@@ -48,22 +55,16 @@ module TPG
     # Recursively traverse all preconditions of the given precondition
     #
     # @param [Precondition] precondition The current precondition to look at
-    def traverse_preconditions(preconditions)      
-      if preconditions.conjunction? # We're at the top of the tree
-        binding.pry
-        call_visitors('operation', preconditions)
+    def traverse_preconditions(preconditions)
+      if preconditions.conjunction?
+        # We're somewhere in the middle or top of the tree
+        call_visitors('conjunction', preconditions)
         preconditions.preconditions.each do |precondition|
           traverse_preconditions(precondition)
         end
-      else # We're somewhere in the middle
-        binding.pry
-        preconditions.preconditions.each do |precondition|
-          if precondition.reference # We've hit a leaf node - This is a data criteria reference
-            call_visitors('data_criteria', @hqmf.all_data_criteria[precondition.reference])
-          else # There are additional layers below
-            traverse_preconditions(precondition)
-          end
-        end
+      elsif preconditions.reference
+        # We've hit a leaf node - This is a data criteria reference
+        call_visitors('data_criteria', @hqmf.data_criteria(preconditions.reference.id))
       end
     end
   end
