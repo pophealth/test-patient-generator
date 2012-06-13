@@ -1,31 +1,23 @@
 module TPG
-  # A Generator serves as a visitor to an HQMF Traverser.
-  #
-  # At each step, the generator will create as many patients as possible to exhaustively test the logic
-  # of the given clinical quality measure.
+  # The generator will create as many patients as possible to exhaustively test the logic of a given clinical quality measure.
   class Generator
     VISITING_PREFIX = "generate_from"
     
     attr_reader :patients
     
-    # @param [Record] base_patient An original patient from whom we will generate more to exhaustively test CQM logic.
-    def initialize(base_patient = Generator.create_base_patient)
-      @patients = [] # Our bin for patients once we're done with them.
-      @pending_patients = [base_patient] # Our patients who are under construction. Carry them into the next population.
-      @nested_patients = []
+    # @param [HQMF::Document] hqmf A model representing the logic of a given HQMF document.
+    # @param [Hash] value_sets All of the value sets referenced by this particular HQMF document.
+    def initialize(hqmf, value_sets)
+      @patients = []
+      @hqmf = hqmf
+      @value_sets = value_sets
     end
     
     # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
     # paths through the logic of this particular clinical quality measure.
-    def self.generate_patients(hqmf, value_sets)
-      traverser = TPG::Traverser.new(hqmf, value_sets)
-      augmenter = TPG::Augmenter.new()
-      generator = TPG::Generator.new()
-      
-      traverser.traverse(augmenter)
-      #traverser.traverse(generator)
-      
-      generator.patients
+    def generate_patients
+      base_patient = Generator.create_base_patient
+      @hqmf.population_criteria("IPP").generate_patients([base_patient])
     end
     
     # Create a patient with trivial demographic information and no coded entries.
@@ -66,27 +58,6 @@ module TPG
       end
       
       patient
-    end
-    
-    # Traversal Hook that marks all pending patients with the current population name as the one that elimiantes them.
-    # If they are logically eliminated, the reason will be added by the condition that removes them from the pool.
-    #
-    # @param [PopulationCriteria] population The Population Criteria that is currently being visited.
-    def generate_from_population(population)
-      @pending_patients.each do |patient|
-        patient.elimination_population = population
-      end
-    end
-    
-    # Traversal Hook that will set generation variables to prepare for an operator
-    #
-    # @param [Precondition] precondition The operator that is currently being visited.
-    def generate_from_operator(operator)
-
-    end
-    
-    def generate_from_data_criteria(criteria)
-      binding.pry
     end
     
     # Traversal Hook for when the document is completed. We'll move all pending_patients into the patients array

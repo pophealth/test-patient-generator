@@ -1,14 +1,20 @@
 require 'hqmf-parser'
 require 'health-data-standards'
 
+require_relative 'tpg/ext/coded'
+require_relative 'tpg/ext/conjunction'
+require_relative 'tpg/ext/data_criteria'
+require_relative 'tpg/ext/population_criteria'
+require_relative 'tpg/ext/precondition'
+require_relative 'tpg/ext/range'
 require_relative 'tpg/ext/record'
+require_relative 'tpg/ext/subset_operator'
+require_relative 'tpg/ext/temporal_reference'
+require_relative 'tpg/ext/value'
 
-
-require_relative 'tpg/parse/traverser'
 require_relative 'tpg/parse/utilities'
 
 require_relative 'tpg/patient/exporter'
 require_relative 'tpg/patient/generator'
 require_relative 'tpg/patient/randomizer'
 require_relative 'tpg/patient/reporter'
-require_relative 'tpg/patient/augmenter'

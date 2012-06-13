@@ -3,8 +3,7 @@ module TPG
   # Visitors who need to act on the logic tree can be attached and given a chance to do
   # work at each context. The goal is to traverse once, but perform arbitrarily many actions.
   class Traverser
-    # @param [HqmfDocument] hqmf A model representing the logic of a given HQMF document.
-    # @param [Hash] value_sets All of the 
+    
     def initialize(hqmf, value_sets)
       @hqmf = hqmf
       @value_sets = value_sets
