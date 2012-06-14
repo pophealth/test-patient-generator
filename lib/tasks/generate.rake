@@ -36,7 +36,7 @@ namespace :generate do
     hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
     
     # Generate the patients
-    generator = TPG::Generator.new(hqmf, value_sets)
+    generator = HQMF::Generator.new(hqmf, value_sets)
     patients = generator.generate_patients()
     #patient = TPG::Generator.create_base_patient
     #patient = TPG::Generator.finalize_patient(patient)

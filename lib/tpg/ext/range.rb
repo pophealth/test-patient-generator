@@ -1,15 +1,21 @@
 module HQMF
   class Range
-    def generate_patients(base_patient)
-      
+    def generate_permutations
+      {}
     end
     
-    def generate_to_pass(base_patient)
+    def generate_permutations_to_pass
+      permutations = []
       
+      permutations.concat(low.generate_permutations_to_pass) if low
+      permutations.concat(high.generate_permutations_to_pass) if high
+      binding.pry
+      
+      permutations
     end
     
-    def generate_to_fail(base_patient)
-      
+    def generate_permutations_to_fail
+      []
     end
   end
 end

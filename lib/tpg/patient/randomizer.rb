@@ -1,6 +1,6 @@
 require 'set'
 
-module TPG
+module HQMF
   # Contains functions that can be used to randomly generate fields for patients.
   # Also includes utility functions for randomly generating numbers and dates or choosing options within a range.
   class Randomizer

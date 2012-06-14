@@ -1,23 +1,29 @@
-module TPG
+module HQMF
   # The generator will create as many patients as possible to exhaustively test the logic of a given clinical quality measure.
   class Generator
     VISITING_PREFIX = "generate_from"
     
     attr_reader :patients
     
+    # TODO - This is a hack and a half. Need a better way to resolve data_criteria from any point in the tree.
+    class << self
+      attr_accessor :hqmf
+      attr_accessor :value_sets
+    end
+    
     # @param [HQMF::Document] hqmf A model representing the logic of a given HQMF document.
     # @param [Hash] value_sets All of the value sets referenced by this particular HQMF document.
     def initialize(hqmf, value_sets)
       @patients = []
-      @hqmf = hqmf
-      @value_sets = value_sets
+      Generator.hqmf = hqmf
+      Generator.value_sets = value_sets
     end
     
     # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
     # paths through the logic of this particular clinical quality measure.
     def generate_patients
       base_patient = Generator.create_base_patient
-      @hqmf.population_criteria("IPP").generate_patients([base_patient])
+      Generator.hqmf.population_criteria("IPP").generate_patients([base_patient])
     end
     
     # Create a patient with trivial demographic information and no coded entries.

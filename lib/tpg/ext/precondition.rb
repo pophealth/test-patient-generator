@@ -12,7 +12,8 @@ module HQMF
         extend conjunction_module
         base_patients.concat(generate_to_pass(base_patients))
       elsif reference
-        binding.pry
+         data_criteria = HQMF::Generator.hqmf.data_criteria(reference.id)
+         base_patients.concat(data_criteria.generate_to_pass(base_patients))
       else
         binding.pry
         base_patients
