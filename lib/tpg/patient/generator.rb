@@ -23,7 +23,7 @@ module HQMF
     # paths through the logic of this particular clinical quality measure.
     def generate_patients
       base_patient = Generator.create_base_patient
-      Generator.hqmf.population_criteria("IPP").generate_patients([base_patient])
+      Generator.hqmf.population_criteria("DENOM").generate_patients([base_patient])
     end
     
     # Create a patient with trivial demographic information and no coded entries.
@@ -65,6 +65,15 @@ module HQMF
       
       patient
     end
+    
+    def self.generate_from_value(value)
+      
+    end
+    
+    def self.generate_from_date(date)
+      
+    end
+      
     
     # Traversal Hook for when the document is completed. We'll move all pending_patients into the patients array
     # and finalize everyone to be sure they are fully fleshed out.
