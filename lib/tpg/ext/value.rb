@@ -10,8 +10,9 @@ module HQMF
       
     end
     
-    # Sign comes in as 1 or -1 to decide if we're generating values above or below the original
-    def generate_permutations(modifier)
+    # Modifier comes in as a PQ Value
+    # This will gives us the coarsest grain that we will add to create permutations.
+    def generate_permutations(modifier, width = nil)
       permutations = []
 
       # If the value is in inclusive, be sure to add itself to the permutation list
@@ -19,9 +20,9 @@ module HQMF
         permutations << Value.new(type, unit, value, inclusive, derived?, expression)
       end
 
-      # Add one of each grain size less than and equal to the current value
-      #   e.g. For 1 year, we add 1 year, 1 year and 1 month, 1 year and 1 day, 1 year and 1 hour, and 1 year and 1 min.
-      units = ["a", "mo", "d", "h", "min"]
+      # For TS values
+      unit = width if unit.nil?
+
       coarsest_granularity = units.rindex(unit)
       finest_granularity = units.length
       units[coarsest_granularity..finest_granularity].each do |grain|
@@ -29,7 +30,7 @@ module HQMF
         new_value = Value.new(type, unit, value, inclusive, derived?, expression)
         new_value.modifying_values ||= []
 
-        modifying_value = Value.new(type, grain, 1 * modifier, inclusive, derived?, expression)
+        modifying_value = Value.new("PQ", grain, 1 * modifier, inclusive, derived?, expression)
         new_value.modifying_values << modifying_value
         
         permutations << new_value

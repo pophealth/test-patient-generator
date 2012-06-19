@@ -9,18 +9,16 @@ module HQMF
       accessor = "birthdate="
 
       # Get the permutations of all fields on this criteria
-      if property == :age
-        
-      else
-        temporal_references.each do |reference|
-          permutations.concat(reference.generate_permutations_to_pass)
-        end
-        binding.pry
+      temporal_references.each do |reference|
+        permutations.concat(reference.generate_permutations_to_pass)
       end
       
       # Derive what kind of coded entry we're looking at
       value_set = Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == code_list_id}]
       entry = standard_category.classify.constantize.new      
+      
+      binding.pry
+      #if property == :age
       
       # Create patients with each permutation of the coded entry
       new_patients = []
@@ -38,7 +36,9 @@ module HQMF
     def generate_to_fail(base_patients)
       # First the case where the coded entry does not exist
       
+      
       # Then give the entry but make temporal info (etc.) miss
+      
     end
   end
 end
