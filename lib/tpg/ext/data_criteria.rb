@@ -4,28 +4,29 @@ module HQMF
       
     end
     
+    def generate_permutations
+      
+    end
+    
     def generate_to_pass(base_patients)
-      permutations = []
       accessor = "birthdate="
 
-      # Get the permutations of all fields on this criteria
+      potential_times = []
       temporal_references.each do |reference|
-        permutations.concat(reference.generate_permutations_to_pass)
+        base_patients.concat(reference.generate_patients_to_pass)
+        potential_times.concat(reference.generate_permutations_to_pass)
       end
       
       # Derive what kind of coded entry we're looking at
       value_set = Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == code_list_id}]
-      entry = standard_category.classify.constantize.new      
-      
-      binding.pry
-      #if property == :age
+      entry = standard_category.classify.constantize.new
       
       # Create patients with each permutation of the coded entry
       new_patients = []
       base_patients.each do |patient|
         new_patient = Generator.extend_patient(patient)
-        permutations.each do |permutation|
-          new_patient.send(accessor, permutation)
+        potential_times.each do |time|
+          new_patient.send(accessor, entry)
         end
         new_patients << new_patient
       end

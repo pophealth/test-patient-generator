@@ -1,6 +1,10 @@
 module HQMF
   class TemporalReference
-    def generate_patients(base_patient)
+    def generate_patients(base_patients)
+      
+    end
+    
+    def generate_patients_to_pass(base_patients)
       
     end
     
@@ -12,18 +16,13 @@ module HQMF
       if reference.id == "MeasurePeriod"
         relative_time = Generator::hqmf.measure_period
       else
-        relative_time = Generator::hqmf.data_criteria(reference.id)
+        data_criteria = Generator::hqmf.data_criteria(reference.id)
       end
       
-      
-      #TYPES = ['DURING','SBS','SAS','SBE','SAE','EBS','EAS','EBE','EAE','SDU','EDU','ECW','SCW','CONCURRENT']
-      #INVERSION = {'SBS' => 'EAE','EAE' => 'SBS','SAS' => 'EBE','EBE' => 'SAS','SBE' => 'EAS','EAS' => 'SBE','SAE' => 'EBS','EBS' => 'SAE'}
-      
-      
+      binding.pry
       case type
       when "DURING"
-        
-        relative_time
+        range_permutations = relative_time.generate_permutations()
       when "SBS" # Starts before start
         
       when "SAS" # Starts after start
@@ -56,9 +55,7 @@ module HQMF
     end
     
     def generate_to_fail(base_patient)
-      binding.pry
 
-      []
     end
   end
 end
