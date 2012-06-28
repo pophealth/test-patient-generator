@@ -1,36 +1,53 @@
-# These modules assume you are including them on a class that has preconditions
+# Takes a population
+# Returns a modified population
 module Conjunction
   module AllTrue
-    def generate_patients(base_patients)
+    def generate(base_patients)
       base_patients.concat(generate_to_pass(base_patients))
       base_patients.concat(generate_to_fail(base_patients))
     end
     
-    def generate_to_pass(base_patients)
+    def generate_pass(base_patients)
+      
+    end
+    
+    def generate_fail(base_patients)
+      
+    end
+
+    def generate_match(base_patients)
       self.preconditions.each do |precondition|
-        base_patients.concat(precondition.generate_to_pass(base_patients))
+        precondition.generate_match(base_patients)
       end
     end
     
-    def generate_to_fail(base_patients)
-      base_patients
+    private
+    
+    def generate_permutations(base_patients)
+      
     end
   end
   
   module AtLeastOneTrue
-    def generate_patients(base_patients)
-      self.preconditions.each do |precondition|
-        
-      end
+    def generate(base_patients)
 
-      base_patients
     end
     
-    def generate_to_pass(base_patients)
+    def generate_pass(base_patients)
       
     end
     
-    def generate_to_fail(base_patients)
+    def generate_fail(base_patients)
+      
+    end
+    
+    def generate_match(base_patients)
+      self.preconditions.sample.generate_match(base_patients)
+    end
+    
+    private
+    
+    def generate_permutations(base_patients)
       
     end
   end

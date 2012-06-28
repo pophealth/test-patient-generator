@@ -19,6 +19,7 @@ module HQMF
       
       patient.languages = []
       patient.languages << randomize_language
+      patient.first = randomize_first_name(patient.gender) if patient.gender
       patient.last = randomize_last_name
       patient.medical_record_number = randomize_patient_id
       

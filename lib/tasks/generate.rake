@@ -38,12 +38,11 @@ namespace :generate do
     # Generate the patients
     generator = HQMF::Generator.new(hqmf, value_sets)
     patients = generator.generate_patients()
-    #patient = TPG::Generator.create_base_patient
-    #patient = TPG::Generator.finalize_patient(patient)
-    #patients << patient
+    
+
     
     # Zip the patients up into the requested format to the out_path
-    #zip = TPG::Exporter.zip(patients, format)
-    #FileUtils.mv(zip.path, out_path)
+    zip = TPG::Exporter.zip(patients, format)
+    FileUtils.mv(zip.path, out_path)
   end
 end

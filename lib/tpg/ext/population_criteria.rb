@@ -1,11 +1,28 @@
 module HQMF
+  # Takes a population
+  # Returns a new population
   class PopulationCriteria
-    def generate_patients(base_patients)
-      conjunction_module = "Conjunction::#{self.conjunction_code.classify}"
-      conjunction_module = conjunction_module.split('::').inject(Kernel) {|scope, name| scope.const_get(name)}
-
-      extend conjunction_module
-      base_patients.concat(generate_patients(base_patients))
+    def generate(base_patients)
+      
+    end
+    
+    def generate_pass(base_patients)
+      
+    end
+    
+    def generate_fail(base_patients)
+      
+    end
+    
+    def generate_match(base_patients)
+      # All population criteria begin with a single conjunction precondition
+      preconditions.first.generate_match(base_patients)
+    end
+    
+    private
+    
+    def generate_permutations(base_patients)
+      
     end
   end
 end

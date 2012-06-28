@@ -22,8 +22,20 @@ module HQMF
     # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
     # paths through the logic of this particular clinical quality measure.
     def generate_patients
-      base_patient = Generator.create_base_patient
-      Generator.hqmf.population_criteria("DENOM").generate_patients([base_patient])
+      base_patients = [Generator.create_base_patient]
+      generated_patients = []
+      
+      ["IPP", "DENOM", "NUMER", "EXCL"].each do |population|
+        criteria = Generator.hqmf.population_criteria(population)
+        criteria.generate_match(base_patients) unless criteria.preconditions.empty?
+        
+        base_patients.collect! do |patient|
+          generated_patients.push(Generator.finalize_patient(patient))
+          Generator.extend_patient(patient)
+        end
+      end
+      
+      generated_patients
     end
     
     # Create a patient with trivial demographic information and no coded entries.
@@ -43,8 +55,7 @@ module HQMF
     # @return A new Record with an identical medical history to the given patient but new trivial demographic information
     def self.extend_patient(base_patient)
       patient = base_patient.clone()
-      
-      patient = Randomizer.attach_random_demographics(patient)
+      Randomizer.attach_random_demographics(patient)
     end
     
     # Fill in any missing details that should be filled in on a patient. These include: age, gender, and first name.

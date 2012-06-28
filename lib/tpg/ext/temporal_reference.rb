@@ -1,30 +1,33 @@
 module HQMF
+  # Generates a Range to define the timing of a data_criteria
   class TemporalReference
-    def generate_patients(base_patients)
+    def generate(base_patients)
       
     end
     
-    def generate_patients_to_pass(base_patients)
+    def generate_pass(base_patients)
       
     end
     
-    def generate_permutations_to_pass
-      permutations = []
-      range_permutations = []
+    def generate_fail(base_patients)
       
-      # Find the reference we're talking about
+    end
+    
+    def generate_match(base_patients)
+      acceptable_times = []
+      
       if reference.id == "MeasurePeriod"
         relative_time = Generator::hqmf.measure_period
       else
         data_criteria = Generator::hqmf.data_criteria(reference.id)
+        relative_time = data_criteria.generate_match(base_patients)
       end
-      
-      binding.pry
+
       case type
       when "DURING"
-        range_permutations = relative_time.generate_permutations()
+        matching_times = relative_time.generate_permutations(1, 1)
       when "SBS" # Starts before start
-        
+        matching_times = relative_time.generate_permutations(-1, 1)
       when "SAS" # Starts after start
         
       when "SBE" # Starts before end
@@ -50,12 +53,36 @@ module HQMF
       when "CONCURRENT"
         
       end
+      
+      matching_times.each do |matching_time|
+        if range
+          acceptable_times << Range.merge_ranges(range, matching_time)
+        else
+          acceptable_times << matching_time
+        end
+      end
 
-      permutations
+      # Note we return the possible times to the calling data criteria, not patients
+      return acceptable_times
     end
     
-    def generate_to_fail(base_patient)
+    private
+    
+    def generate_permutations(base_patients)
+      permutations = []
+      range_permutations = []
+      
+      # Find the reference we're talking about
+      if reference.id == "MeasurePeriod"
+        relative_time = Generator::hqmf.measure_period
+      else
+        data_criteria = Generator::hqmf.data_criteria(reference.id)
+      end
+      
+      binding.pry
+      
 
+      permutations
     end
   end
 end
