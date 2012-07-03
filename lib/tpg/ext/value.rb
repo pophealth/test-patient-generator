@@ -25,7 +25,7 @@ module HQMF
         month = ts.value[4,2]
         day = ts.value[6,2]
         
-        time = Time.gm(year, month, day)
+        time = Time.new(year, month, day)
         case pq.unit
         when "a"
           time = time.advance(years: pq.value.to_i * modifier)
@@ -86,7 +86,7 @@ module HQMF
       month = value[4,2]
       day = value[6,2]
       
-      Time.gm(year, month, day).to_i
+      Time.new(year, month, day).to_i
     end
   end
 end
