@@ -12,7 +12,7 @@ module HQMF
     # @param [Record] The Record to which we will be adding random demographics
     # @return The Record that was given to us with the following fields randomly generated:
     #         race/ethnicity, language, last name
-    def self.attach_random_demographics(patient)
+    def self.randomize_demographics(patient)
       race_and_ethnicity = randomize_race_and_ethnicity
       patient.race = race_and_ethnicity[:race]
       patient.ethnicity = race_and_ethnicity[:ethnicity]
@@ -230,7 +230,7 @@ module HQMF
     # @param [int] probability the probability of getting true as a percentage
     # @return [boolean] true or false
     def self.percent(probability)
-      return rand(100)<probability
+      return rand(100) < probability
     end
   end
 end

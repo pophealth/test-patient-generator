@@ -1,7 +1,5 @@
 module HQMF
   class Value
-    attr_accessor :modifying_values
-    
     def self.negotiate_value(value1, value2)
       
     end
@@ -29,11 +27,15 @@ module HQMF
         case pq.unit
         when "a"
           time = time.advance(years: pq.value.to_i * modifier)
-        when "m"
+        when "mo"
           binding.pry
         when "w"
           binding.pry
         when "d"
+          binding.pry
+        when "h"
+          binding.pry
+        when "min"
           binding.pry
         end
         

@@ -39,8 +39,6 @@ namespace :generate do
     generator = HQMF::Generator.new(hqmf, value_sets)
     patients = generator.generate_patients()
     
-
-    
     # Zip the patients up into the requested format to the out_path
     zip = TPG::Exporter.zip(patients, format)
     FileUtils.mv(zip.path, out_path)

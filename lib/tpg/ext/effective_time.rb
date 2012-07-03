@@ -13,5 +13,3 @@ module HQMF
     end
   end
 end
-    
-    

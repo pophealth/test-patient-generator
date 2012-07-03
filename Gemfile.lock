@@ -106,6 +106,10 @@ GEM
       todonotes (>= 0.1.0)
     ruby-ole (1.2.11.3)
     rubyzip (0.9.9)
+    simplecov (0.6.4)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.5.3)
+    simplecov-html (0.5.3)
     slop (2.4.4)
     spreadsheet (0.6.8)
       ruby-ole (>= 1.0)
@@ -133,3 +137,4 @@ DEPENDENCIES
   pry
   pry-nav
   rake
+  simplecov
