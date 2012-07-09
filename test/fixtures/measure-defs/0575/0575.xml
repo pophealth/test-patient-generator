@@ -139,7 +139,7 @@ American Diabetes Association:
       <localVariableName>measureEndDate</localVariableName>
       <measureAttribute>
          <templateId root="2.16.840.1.113883.3.560.1.75"/>
-         <id root="5248ABA8-BDA8-4A9D-AAC5-692F6693F2F8"/>
+         <id root="5313BF27-317F-4381-BC2E-2BF06D16011D"/>
          <code code="MSRED" displayName="Measurement end date" codeSystem="2.16.840.1.113883.3.560"/>
          <value xsi:type="TS" value="00001231"/>
       </measureAttribute>

@@ -133,7 +133,7 @@ ACCP:  For long-term treatment after PCI, the guideline developers recommend asp
       <localVariableName>measureEndDate</localVariableName>
       <measureAttribute>
          <templateId root="2.16.840.1.113883.3.560.1.75"/>
-         <id root="7B5BCD82-8B29-4011-B3C6-F46C73967042"/>
+         <id root="4E978794-A18A-4E3C-8626-B6613AFF2B03"/>
          <code code="MSRED" displayName="Measurement end date" codeSystem="2.16.840.1.113883.3.560"/>
          <value xsi:type="TS" value="00001231"/>
       </measureAttribute>

@@ -109,6 +109,14 @@ Reference: American Psychiatric Association practice guideline for the treatment
    </subjectOf>
    <subjectOf>
       <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText>NQF ID Number</originalText>
+         </code>
+         <value xsi:type="II" root="2.16.840.1.113883.3.560.1" extension="0105"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
          <templateId root="2.16.840.1.113883.3.560.1.74"/>
          <id root="31A36E76-2F04-447E-B78A-4E642EC94669"/>
          <code code="MSRTP" displayName="Measurement period" codeSystem="2.16.840.1.113883.3.560"/>
@@ -599,7 +607,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                      </sourceOf>
                      <sourceOf typeCode="SBS">
                         <pauseQuantity xsi:type="URG_PQ">
-                           <high value="90" unit="days" inclusive="true"/>
+                           <high value="90" unit="d" inclusive="true"/>
                         </pauseQuantity>
                         <subsetCode code="FIRST"/>
                         <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
@@ -710,7 +718,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <code code="10190451000046105" codeSystem="2.16.840.1.113883.6.96" displayName="cumulative medication duration"/>
                                              <value xsi:type="IVL_PQ">
-                                                <low value="84" unit="days" inclusive="true"/>
+                                                <low value="84" unit="d" inclusive="true"/>
                                              </value>
                                           </observation>
                                        </sourceOf>
@@ -738,7 +746,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <code code="10190451000046105" codeSystem="2.16.840.1.113883.6.96" displayName="cumulative medication duration"/>
                                              <value xsi:type="IVL_PQ">
-                                                <low value="84" unit="days" inclusive="true"/>
+                                                <low value="84" unit="d" inclusive="true"/>
                                              </value>
                                           </observation>
                                        </sourceOf>
@@ -766,7 +774,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <code code="10190451000046105" codeSystem="2.16.840.1.113883.6.96" displayName="cumulative medication duration"/>
                                              <value xsi:type="IVL_PQ">
-                                                <low value="84" unit="days" inclusive="true"/>
+                                                <low value="84" unit="d" inclusive="true"/>
                                              </value>
                                           </observation>
                                        </sourceOf>
@@ -784,7 +792,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                      </sourceOf>
                      <sourceOf typeCode="EAS">
                         <pauseQuantity xsi:type="URG_PQ">
-                           <high value="114" unit="days" inclusive="true"/>
+                           <high value="114" unit="d" inclusive="true"/>
                         </pauseQuantity>
                         <subsetCode code="FIRST"/>
                         <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->
@@ -851,7 +859,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <code code="10190451000046105" codeSystem="2.16.840.1.113883.6.96" displayName="cumulative medication duration"/>
                                              <value xsi:type="IVL_PQ">
-                                                <low value="180" unit="days" inclusive="true"/>
+                                                <low value="180" unit="d" inclusive="true"/>
                                              </value>
                                           </observation>
                                        </sourceOf>
@@ -879,7 +887,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <code code="10190451000046105" codeSystem="2.16.840.1.113883.6.96" displayName="cumulative medication duration"/>
                                              <value xsi:type="IVL_PQ">
-                                                <low value="180" unit="days" inclusive="true"/>
+                                                <low value="180" unit="d" inclusive="true"/>
                                              </value>
                                           </observation>
                                        </sourceOf>
@@ -907,7 +915,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <code code="10190451000046105" codeSystem="2.16.840.1.113883.6.96" displayName="cumulative medication duration"/>
                                              <value xsi:type="IVL_PQ">
-                                                <low value="180" unit="days" inclusive="true"/>
+                                                <low value="180" unit="d" inclusive="true"/>
                                              </value>
                                           </observation>
                                        </sourceOf>
@@ -925,7 +933,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                      </sourceOf>
                      <sourceOf typeCode="EAS">
                         <pauseQuantity xsi:type="URG_PQ">
-                           <high value="231" unit="days" inclusive="true"/>
+                           <high value="231" unit="d" inclusive="true"/>
                         </pauseQuantity>
                         <subsetCode code="FIRST"/>
                         <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->
@@ -1024,7 +1032,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SBS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="245" unit="days" inclusive="true"/>
+                                             <high value="245" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <id root="31A36E76-2F04-447E-B78A-4E642EC94669"/>
@@ -1065,7 +1073,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SAS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="120" unit="days" inclusive="true"/>
+                                             <high value="120" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <id root="31A36E76-2F04-447E-B78A-4E642EC94669"/>
@@ -1161,7 +1169,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SBS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="30" unit="days" inclusive="true"/>
+                                             <high value="30" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <subsetCode code="FIRST"/>
                                           <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->
@@ -1273,7 +1281,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SAS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="14" unit="days" inclusive="true"/>
+                                             <high value="14" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <subsetCode code="FIRST"/>
                                           <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->
@@ -1404,7 +1412,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SBS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="245" unit="days" inclusive="true"/>
+                                             <high value="245" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <id root="31A36E76-2F04-447E-B78A-4E642EC94669"/>
@@ -1504,7 +1512,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SAS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="120" unit="days" inclusive="true"/>
+                                             <high value="120" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <id root="31A36E76-2F04-447E-B78A-4E642EC94669"/>
@@ -1651,7 +1659,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                  </sourceOf>
                                  <sourceOf typeCode="SBS">
                                     <pauseQuantity xsi:type="URG_PQ">
-                                       <low value="1" unit="day" inclusive="true"/>
+                                       <low value="1" unit="d" inclusive="true"/>
                                     </pauseQuantity>
                                     <subsetCode code="SECOND"/>
                                     <act classCode="ACT" moodCode="EVN" isCriterionInd="true">
@@ -1794,7 +1802,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SBS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="30" unit="days" inclusive="true"/>
+                                             <high value="30" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <subsetCode code="FIRST"/>
                                           <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->
@@ -1889,7 +1897,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SAS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="14" unit="days" inclusive="true"/>
+                                             <high value="14" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <subsetCode code="FIRST"/>
                                           <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->
@@ -1981,7 +1989,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SBS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="245" unit="days" inclusive="true"/>
+                                             <high value="245" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <id root="31A36E76-2F04-447E-B78A-4E642EC94669"/>
@@ -2048,7 +2056,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SAS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="120" unit="days" inclusive="true"/>
+                                             <high value="120" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <observation classCode="OBS" moodCode="EVN" isCriterionInd="true">
                                              <id root="31A36E76-2F04-447E-B78A-4E642EC94669"/>
@@ -2166,7 +2174,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SBS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="30" unit="days" inclusive="true"/>
+                                             <high value="30" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <subsetCode code="FIRST"/>
                                           <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->
@@ -2261,7 +2269,7 @@ CUMULATIVE MEDICATION DURATION is the total number of days of a medication for a
                                        </sourceOf>
                                        <sourceOf typeCode="SAS">
                                           <pauseQuantity xsi:type="URG_PQ">
-                                             <high value="14" unit="days" inclusive="true"/>
+                                             <high value="14" unit="d" inclusive="true"/>
                                           </pauseQuantity>
                                           <subsetCode code="FIRST"/>
                                           <act classCode="ACT" moodCode="EVN" isCriterionInd="true"><!-- diagnosis active pattern -->

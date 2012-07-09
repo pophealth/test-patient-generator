@@ -126,7 +126,7 @@ There is currently a shortage of leucovorin in the United States.  There are no 
       <localVariableName>measureEndDate</localVariableName>
       <measureAttribute>
          <templateId root="2.16.840.1.113883.3.560.1.75"/>
-         <id root="B4471315-A7C7-42FF-B8C2-FD7726FCFC1B"/>
+         <id root="B3E0EC82-6CC4-4219-8AFF-6D408C1441C6"/>
          <code code="MSRED" displayName="Measurement end date" codeSystem="2.16.840.1.113883.3.560"/>
          <value xsi:type="TS" value="00001231"/>
       </measureAttribute>
