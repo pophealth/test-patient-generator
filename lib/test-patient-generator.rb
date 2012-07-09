@@ -13,5 +13,4 @@ require_relative 'tpg/ext/value'
 
 require_relative 'tpg/generation/generator'
 require_relative 'tpg/generation/randomizer'
-require_relative 'tpg/generation/utilities'
 require_relative 'tpg/generation/exporter'
