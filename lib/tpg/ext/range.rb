@@ -10,8 +10,8 @@ module HQMF
       return range2 if range1.nil?
       
       type = range1.type == "PQ" && range2.type == "PQ" ? "IVL_PQ" : "IVL_TS"
-      low = Value.merge_values(range1.low, range2.low, -1)
-      high = Value.merge_values(range1.high, range2.high, 1)
+      low = Value.merge_values(range1.low, range2.low)
+      high = Value.merge_values(range1.high, range2.high)
       width = nil
       
       Range.new(type, low, high, width)

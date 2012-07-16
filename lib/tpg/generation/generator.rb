@@ -23,11 +23,19 @@ module HQMF
       base_patients = [Generator.create_base_patient]
       generated_patients = []
       
+      #["IPP", "DENOM", "NUMER", "EXCL"]
       ["IPP", "DENOM", "NUMER", "EXCL"].each do |population|
         criteria = Generator.hqmf.population_criteria(population)
-        criteria.generate_match(base_patients) unless criteria.preconditions.empty?
+        
+        # We don't need to do anything for populations with nothing specified
+        if criteria.nil? || criteria.preconditions.empty?
+          next
+        else
+          criteria.generate_match(base_patients)
+        end
         
         base_patients.collect! do |patient|
+          patient.elimination_population = population
           generated_patients.push(Generator.finalize_patient(patient))
           Generator.extend_patient(patient)
         end
@@ -73,6 +81,38 @@ module HQMF
       end
       
       patient
+    end
+    
+    #
+    #
+    # @param [String] type 
+    # @return 
+    def self.classify_entry(type)
+      # The possible matches per patientAPI function can be found in hqmf-parser's README
+      case type
+      when :allProcedures
+        "procedures"
+      when :proceduresPerformed
+        "procedures"
+      when :proceduresResults
+        "procedures"
+      when :laboratoryTests
+        "vital_signs"
+      when :allMedications
+        "medications"
+      when :activeDiagnoses
+        "conditions"
+      when :inactiveDiagnoses
+        "conditions"
+      when :resolvedDiagnoses
+        "conditions"
+      when :allProblems
+        "conditions"
+      when :allDevices
+        "medical_equipment"
+      else
+        type.to_s
+      end
     end
   end
 end

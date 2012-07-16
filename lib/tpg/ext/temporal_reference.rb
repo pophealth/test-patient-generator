@@ -19,19 +19,25 @@ module HQMF
       if reference.id == "MeasurePeriod"
         relative_time = Generator::hqmf.measure_period
       else
+        # First generate patients for the data criteria that this temporal reference points to
         data_criteria = Generator::hqmf.data_criteria(reference.id)
-        relative_time = data_criteria.generate_match(base_patients)
+        base_patients = data_criteria.generate_match(base_patients)
+
+        # Now that the data criteria is defined, we can set our relative time to those generated results
+        relative_time = data_criteria.generation_range.first
       end
+
+      relative_time = Range.merge_ranges(range, relative_time) if range
 
       case type
       when "DURING"
-        matching_times = relative_time.generate_permutations(1, 1)
+        matching_time = relative_time
       when "SBS" # Starts before start
-        matching_times = relative_time.generate_permutations(-1, 1)
+        matching_time = relative_time
       when "SAS" # Starts after start
-        
+        matching_time = relative_time
       when "SBE" # Starts before end
-        
+        matching_time = relative_time
       when "SAE" # Starts after end
         
       when "EBS" # Ends before start
@@ -53,36 +59,15 @@ module HQMF
       when "CONCURRENT"
         
       end
-      
-      matching_times.each do |matching_time|
-        if range
-          acceptable_times << Range.merge_ranges(range, matching_time)
-        else
-          acceptable_times << matching_time
-        end
-      end
 
       # Note we return the possible times to the calling data criteria, not patients
-      return acceptable_times
+      return matching_time.generate_permutations(1, 1)
     end
     
     private
     
     def generate_permutations(base_patients)
-      permutations = []
-      range_permutations = []
-      
-      # Find the reference we're talking about
-      if reference.id == "MeasurePeriod"
-        relative_time = Generator::hqmf.measure_period
-      else
-        data_criteria = Generator::hqmf.data_criteria(reference.id)
-      end
-      
-      binding.pry
-      
 
-      permutations
     end
   end
 end

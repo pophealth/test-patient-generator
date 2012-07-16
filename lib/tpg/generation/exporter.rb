@@ -8,7 +8,7 @@ module TPG
         patients.each_with_index do |patient, i|
           safe_first_name = patient.first.gsub("'", '')
           safe_last_name = patient.last.gsub("'", '')
-          next_entry_path = "#{i}_#{safe_first_name}_#{safe_last_name}"
+          next_entry_path = "#{patient.elimination_population}_#{safe_first_name}_#{safe_last_name}_#{i}"
 
           z.put_next_entry("#{next_entry_path}.xml")
           if format == "c32"

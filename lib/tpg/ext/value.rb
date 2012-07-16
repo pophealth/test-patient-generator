@@ -5,40 +5,33 @@ module HQMF
     end
     
     def self.merge_values(value1, value2, modifier = 1)
-      return nil if value1.nil? && value2.nil?
+      # If only one value in the range is defined, we have no work to do
       return value1 if value2.nil?
       return value2 if value1.nil?
       
       if value1.type == "PQ" && value2.type == "PQ"
-        # I'm assuming the easy case of units are equal
-        value1.value += merging_value.value
-      elsif value1.type == "TS" && value2.type == "TS"
-        # I haven't seen this yet
+        # TODO Combine the value of two PQs. This will be tough if there is a case of time units and no relative TS
         binding.pry
-      else # one PQ and one TS
+      elsif value1.type == "TS" && value2.type == "TS"
+        # TODO Resolve two timestamps
+        Value.negotiate_value(value1, value2)
+        binding.pry
+      else
+        # One PQ and one TS
         pq = value1.type == "PQ" ? value1 : value2
         ts = value1.type == "TS" ? value1 : value2
         
+        # Create a Ruby object to represent the TS
         year = ts.value[0,4]
         month = ts.value[4,2]
         day = ts.value[6,2]
-        
         time = Time.new(year, month, day)
-        case pq.unit
-        when "a"
-          time = time.advance(years: pq.value.to_i * modifier)
-        when "mo"
-          binding.pry
-        when "w"
-          binding.pry
-        when "d"
-          binding.pry
-        when "h"
-          binding.pry
-        when "min"
-          binding.pry
-        end
         
+        # Advance that time forward the amount the PQ specifies. Convert units to symbols for advance function.
+        unit_mapping = {"a" => :years, "mo" => :months, "wk" => :weeks, "d" => :days}
+        time = time.advance({unit_mapping[pq.unit] => pq.value.to_i * modifier})
+        
+        # Form up the modified TS with expected YYYYMMDD formatting (avoid YYYYMD)
         year = time.year
         month = time.month < 10 ? "0#{time.month}" : time.month
         day = time.day < 10 ? "0#{time.day}" : time.day
@@ -52,11 +45,7 @@ module HQMF
       
       permutations = []
 
-      # If the value is in inclusive, be sure to add itself to the permutation list
-      #if inclusive
-      #  permutations << Value.new(type, unit, value, inclusive, derived?, expression)
-      #end
-
+      # TODO Actually generate permutations. We're only generating matches right now.
       if type == "TS"
         permutations << self
       elsif type == "PQ"
@@ -64,19 +53,6 @@ module HQMF
       else
         binding.pry
       end
-
-      #coarsest_granularity = units.rindex(unit)
-      #finest_granularity = units.length
-      #units[coarsest_granularity..finest_granularity].each do |grain|
-        # Values here can be PQ or TS. Either way, we add modifying PQ values. These will be resolved to real dates later.
-        #new_value = Value.new(type, unit, value, inclusive, derived?, expression)
-        #new_value.modifying_values ||= []
-
-        #modifying_value = Value.new("PQ", grain, 1 * modifier, inclusive, derived?, expression)
-        #new_value.modifying_values << modifying_value
-        
-        #permutations << new_value
-      #end
       
       permutations
     end
