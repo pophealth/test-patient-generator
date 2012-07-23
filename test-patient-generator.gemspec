@@ -12,5 +12,5 @@ Gem::Specification.new do |s|
   #s.add_dependency 'nokogiri', '~> 1.5.2'
   #s.add_dependency 'health-data-standards', '~> 1.0.1'
 
-  s.files = Dir.glob('lib/**/*.rb') + ["Gemfile", "README", "Rakefile", "public/cda.xsl"]
+  s.files = Dir.glob('lib/**/*.rb') + ["Gemfile", "Rakefile", "public/cda.xsl"]
 end
