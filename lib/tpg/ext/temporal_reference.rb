@@ -17,48 +17,53 @@ module HQMF
       acceptable_times = []
       
       if reference.id == "MeasurePeriod"
-        relative_time = Generator::hqmf.measure_period
+        matching_time = Generator::hqmf.measure_period
       else
         # First generate patients for the data criteria that this temporal reference points to
         data_criteria = Generator::hqmf.data_criteria(reference.id)
         base_patients = data_criteria.generate_match(base_patients)
 
         # Now that the data criteria is defined, we can set our relative time to those generated results
-        relative_time = data_criteria.generation_range.first
+        matching_time = data_criteria.generation_range.first
       end
+      
+      if range
+        case type
+        when "DURING"
 
-      relative_time = Range.merge_ranges(range, relative_time) if range
+        when "SBS" # Starts before start
 
-      case type
-      when "DURING"
-        matching_time = relative_time
-      when "SBS" # Starts before start
-        matching_time = relative_time
-      when "SAS" # Starts after start
-        matching_time = relative_time
-      when "SBE" # Starts before end
-        matching_time = relative_time
-      when "SAE" # Starts after end
-        
-      when "EBS" # Ends before start
-        
-      when "EAS" # Ends after start
-        
-      when "EBE" # Ends before end
-        
-      when "EAE" # Ends after end
-        
-      when "SDU" # Starts during
-        
-      when "EDU" # Ends during
-        
-      when "ECW" # Ends concurrent with
-        
-      when "SCW" # Starts concurrent with
-        
-      when "CONCURRENT"
-        
+        when "SAS" # Starts after start
+
+        when "SBE" # Starts before end
+          range.low = range.high
+          range.high = nil
+          range.low.value.insert(0, "-")
+          matching_time.low = matching_time.high
+        when "SAE" # Starts after end
+
+        when "EBS" # Ends before start
+
+        when "EAS" # Ends after start
+
+        when "EBE" # Ends before end
+
+        when "EAE" # Ends after end
+
+        when "SDU" # Starts during
+
+        when "EDU" # Ends during
+
+        when "ECW" # Ends concurrent with
+
+        when "SCW" # Starts concurrent with
+
+        when "CONCURRENT"
+
+        end
       end
+      
+      matching_time = Range.merge_ranges(range, matching_time) if range
 
       # Note we return the possible times to the calling data criteria, not patients
       return matching_time.generate_permutations(1, 1)

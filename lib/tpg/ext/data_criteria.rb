@@ -41,6 +41,7 @@ module HQMF
           end
         end
       elsif type == :characteristic && !value.nil? && value.system == "Gender"
+        binding.pry
         base_patients.each do |patient|
           patient.gender = value.code
           patient.first = Randomizer.randomize_first_name(value.code)

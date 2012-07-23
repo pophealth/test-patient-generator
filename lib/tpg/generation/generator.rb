@@ -76,7 +76,8 @@ module HQMF
       
       if patient.gender.nil?
         # Set gender
-        rand(2) == 0 ? patient.gender = "M" : patient.gender = "F"
+        patient.gender = "F"
+        #rand(2) == 0 ? patient.gender = "M" : patient.gender = "F"
         patient.first = Randomizer.randomize_first_name(patient.gender)
       end
       
