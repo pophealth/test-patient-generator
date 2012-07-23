@@ -1,13 +1,12 @@
 module HQMF
   # The generator will create as many patients as possible to exhaustively test the logic of a given clinical quality measure.
   class Generator
-    VISITING_PREFIX = "generate_from"
-
     # TODO - This is a hack and a half. Need a better way to resolve data_criteria from any point in the tree.
     class << self
       attr_accessor :hqmf
       attr_accessor :value_sets
     end
+    attr_accessor :patients
     
     # @param [HQMF::Document] hqmf A model representing the logic of a given HQMF document.
     # @param [Hash] value_sets All of the value sets referenced by this particular HQMF document.
