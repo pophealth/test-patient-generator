@@ -6,7 +6,6 @@ module HQMF
       attr_accessor :hqmf
       attr_accessor :value_sets
     end
-    attr_accessor :patients
     
     # @param [HQMF::Document] hqmf A model representing the logic of a given HQMF document.
     # @param [Hash] value_sets All of the value sets referenced by this particular HQMF document.
@@ -27,7 +26,7 @@ module HQMF
         criteria = Generator.hqmf.population_criteria(population)
         
         # We don't need to do anything for populations with nothing specified
-        if criteria.nil? || criteria.preconditions.empty?
+        if criteria.nil? || !criteria.preconditions.present?
           next
         else
           criteria.generate_match(base_patients)

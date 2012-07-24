@@ -1,5 +1,9 @@
 module HQMF
   class Range
+    def clone
+      Range.new(type.try(:clone), low.try(:clone), high.try(:clone), width.try(:clone))
+    end
+    
     def self.negotiate_ranges(range1, range2)
       
     end

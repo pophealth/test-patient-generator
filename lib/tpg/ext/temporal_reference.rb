@@ -17,28 +17,30 @@ module HQMF
       acceptable_times = []
       
       if reference.id == "MeasurePeriod"
-        matching_time = Generator::hqmf.measure_period
+        matching_time = Generator::hqmf.measure_period.clone
       else
         # First generate patients for the data criteria that this temporal reference points to
         data_criteria = Generator::hqmf.data_criteria(reference.id)
         base_patients = data_criteria.generate_match(base_patients)
 
         # Now that the data criteria is defined, we can set our relative time to those generated results
-        matching_time = data_criteria.generation_range.first
+        matching_time = data_criteria.generation_range.first.clone
       end
+      
+      offset = range.try(:clone)
       
       if range
         case type
         when "DURING"
-
+          
         when "SBS" # Starts before start
-
+          offset.low.value.insert(0, "-")
         when "SAS" # Starts after start
 
         when "SBE" # Starts before end
-          range.low = range.high
-          range.high = nil
-          range.low.value.insert(0, "-")
+          offset.low = offset.high
+          offset.high = nil
+          offset.low.value.insert(0, "-")
           matching_time.low = matching_time.high
         when "SAE" # Starts after end
 
@@ -63,7 +65,7 @@ module HQMF
         end
       end
       
-      matching_time = Range.merge_ranges(range, matching_time) if range
+      matching_time = Range.merge_ranges(offset, matching_time) if range
 
       # Note we return the possible times to the calling data criteria, not patients
       return matching_time.generate_permutations(1, 1)

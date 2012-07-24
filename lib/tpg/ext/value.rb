@@ -1,5 +1,9 @@
 module HQMF
   class Value
+    def clone
+      Value.new(type.try(:clone), unit.try(:clone), value.try(:clone), inclusive?, derived?, expression.try(:clone))
+    end
+    
     def self.negotiate_value(value1, value2)
       
     end

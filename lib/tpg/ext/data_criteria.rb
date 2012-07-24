@@ -33,15 +33,13 @@ module HQMF
       # Derive what kind of coded entry we're looking at
       if type == :characteristic && property == :birthtime
         # We've got a special case on our hands
-        accessor = "birthdate="
         potential_times.each do |potential_time|
           # Modify the patients for this data_criteria
           base_patients.each do |patient|
-            patient.send(accessor, potential_time.low.to_seconds)
+            patient.send("birthdate=", potential_time.low.to_seconds)
           end
         end
       elsif type == :characteristic && !value.nil? && value.system == "Gender"
-        binding.pry
         base_patients.each do |patient|
           patient.gender = value.code
           patient.first = Randomizer.randomize_first_name(value.code)
