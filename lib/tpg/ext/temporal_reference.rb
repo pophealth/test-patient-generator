@@ -1,21 +1,7 @@
 module HQMF
   # Generates a Range to define the timing of a data_criteria
   class TemporalReference
-    def generate(base_patients)
-      
-    end
-    
-    def generate_pass(base_patients)
-      
-    end
-    
-    def generate_fail(base_patients)
-      
-    end
-    
     def generate_match(base_patients)
-      acceptable_times = []
-      
       if reference.id == "MeasurePeriod"
         matching_time = Generator::hqmf.measure_period.clone
       else
@@ -27,23 +13,25 @@ module HQMF
         matching_time = data_criteria.generation_range.first.clone
       end
       
-      offset = range.try(:clone)
-      
+      # TODO add nils where necessary. Ranges should be unbounded, despite the relative time's potential bounds (unless the type specifies)
       if range
+        offset = range.try(:clone)
+        
         case type
         when "DURING"
-          
+          # TODO differentiate between this and CONCURRENT
         when "SBS" # Starts before start
           offset.low.value.insert(0, "-")
         when "SAS" # Starts after start
-
+          offset.low = offset.high
+          offset.high = nil
         when "SBE" # Starts before end
           offset.low = offset.high
           offset.high = nil
           offset.low.value.insert(0, "-")
           matching_time.low = matching_time.high
         when "SAE" # Starts after end
-
+          
         when "EBS" # Ends before start
 
         when "EAS" # Ends after start
@@ -53,7 +41,7 @@ module HQMF
         when "EAE" # Ends after end
 
         when "SDU" # Starts during
-
+          matching_time.high.value = nil
         when "EDU" # Ends during
 
         when "ECW" # Ends concurrent with
@@ -63,12 +51,12 @@ module HQMF
         when "CONCURRENT"
 
         end
+        
+        matching_time = Range.merge_ranges(offset, matching_time)
       end
       
-      matching_time = Range.merge_ranges(offset, matching_time) if range
-
       # Note we return the possible times to the calling data criteria, not patients
-      return matching_time.generate_permutations(1, 1)
+      matching_time.generate_permutations(1, 1)
     end
     
     private

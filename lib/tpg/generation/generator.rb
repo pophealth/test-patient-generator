@@ -21,8 +21,20 @@ module HQMF
       base_patients = [Generator.create_base_patient]
       generated_patients = []
       
-      #["IPP", "DENOM", "NUMER", "EXCL"]
+      # Gather all available populations. Each kind of population (e.g. IPP, DENOM) can have many multiples (e.g. IPP_1, IPP_2)
+      populations = []
       ["IPP", "DENOM", "NUMER", "EXCL"].each do |population|
+        i = 1
+        populations << population
+        while Generator.hqmf.population_criteria("#{population}_#{i}").present? do
+          populations << "#{population}_#{i}"
+          i += 1
+        end
+      end
+      
+      populations = ["NUMER"]
+
+      populations.each do |population|
         criteria = Generator.hqmf.population_criteria(population)
         
         # We don't need to do anything for populations with nothing specified

@@ -4,10 +4,6 @@ module HQMF
       Range.new(type.try(:clone), low.try(:clone), high.try(:clone), width.try(:clone))
     end
     
-    def self.negotiate_ranges(range1, range2)
-      
-    end
-    
     def self.merge_ranges(range1, range2)
       return nil if range1.nil? && range2.nil?
       return range1 if range2.nil?

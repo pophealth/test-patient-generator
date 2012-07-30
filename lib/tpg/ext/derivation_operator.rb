@@ -1,5 +1,5 @@
 module HQMF
-  class SubsetOperator
+  class DerivationOperator
     def generate(base_patients)
 
     end

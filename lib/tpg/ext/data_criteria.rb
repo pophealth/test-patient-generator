@@ -15,28 +15,48 @@ module HQMF
       
     end
     
+    # TODO When referring to elements, we need to check to see if they exist already
+    # 
+    # Order of operations - temporal references, subset operators, derivation operators
     def generate_match(base_patients)
       # Calculate temporal information
-      potential_times = []
+      acceptable_times = []
       
+      # Evaluate all of the temporal restrictions on this data criteria. Times are anded (intersected) together.
       unless temporal_references.nil?
         temporal_references.each do |reference|
-          potential_times.concat(reference.generate_match(base_patients))
+          # This is an array
+          # acceptable_times = reference.generate_match(base_patients)
+          acceptable_times.concat(reference.generate_match(base_patients))
         end
       end
+      
+      # Apply any subset operators (e.g. FIRST)
+      # e.g., if the subset operator is THIRD we need to make at least three entries
+      unless subset_operators.nil?
+        subset_operators.each do |subset_operator|
+          subset_operator.generate_match(base_patients)
+        end
+      end
+      
+      # Apply any derivation operator (e.g. UNION)
+      unless derivation_operator.nil?
+        Range.merge(DerivationOperator.generate_match(base_patients, children_criteria, derivation_operator), acceptable_times)
+      end
+      
       # Set the acceptable ranges for this data criteria so any parents can read it
-      @generation_range = potential_times
+      @generation_range = acceptable_times
 
       # Calculate value information
       potential_values = []
 
-      # Derive what kind of coded entry we're looking at
+      # Figure out what kind of data criteria we're looking at
       if type == :characteristic && property == :birthtime
-        # We've got a special case on our hands
-        potential_times.each do |potential_time|
+        # Special case for handling age
+        acceptable_times.each do |acceptable_time|
           # Modify the patients for this data_criteria
           base_patients.each do |patient|
-            patient.send("birthdate=", potential_time.low.to_seconds)
+            patient.send("birthdate=", acceptable_time.low.to_seconds)
           end
         end
       elsif type == :characteristic && !value.nil? && value.system == "Gender"
@@ -44,15 +64,15 @@ module HQMF
           patient.gender = value.code
           patient.first = Randomizer.randomize_first_name(value.code)
         end
-      else
+      elsif type != :derived
         value_sets = Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == code_list_id}]
         
-        potential_times.each do |potential_time|
+        acceptable_times.each do |acceptable_time|
           entry_type = Generator.classify_entry(patient_api_function)
           entry = entry_type.classify.constantize.new
           entry.description = description
-          entry.start_time = potential_time.low.to_seconds
-          entry.end_time = potential_time.high.to_seconds
+          entry.start_time = acceptable_time.low.to_seconds
+          entry.end_time = acceptable_time.high.to_seconds
           entry.status = status
           
           code_sets = {}

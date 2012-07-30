@@ -4,10 +4,6 @@ module HQMF
       Value.new(type.try(:clone), unit.try(:clone), value.try(:clone), inclusive?, derived?, expression.try(:clone))
     end
     
-    def self.negotiate_value(value1, value2)
-      
-    end
-    
     def self.merge_values(value1, value2, modifier = 1)
       # If only one value in the range is defined, we have no work to do
       return value1 if value2.nil?
@@ -15,11 +11,10 @@ module HQMF
       
       if value1.type == "PQ" && value2.type == "PQ"
         # TODO Combine the value of two PQs. This will be tough if there is a case of time units and no relative TS
-        binding.pry
+        
       elsif value1.type == "TS" && value2.type == "TS"
         # TODO Resolve two timestamps
-        Value.negotiate_value(value1, value2)
-        binding.pry
+
       else
         # One PQ and one TS
         pq = value1.type == "PQ" ? value1 : value2
@@ -32,6 +27,7 @@ module HQMF
         time = Time.new(year, month, day)
         
         # Advance that time forward the amount the PQ specifies. Convert units to symbols for advance function.
+        pq.value += 1 unless pq.inclusive?
         unit_mapping = {"a" => :years, "mo" => :months, "wk" => :weeks, "d" => :days}
         time = time.advance({unit_mapping[pq.unit] => pq.value.to_i * modifier})
         
@@ -59,16 +55,6 @@ module HQMF
       end
       
       permutations
-    end
-
-    # Given a Value that could be PQ or TS and may have one or more modifying values.
-    # We'll convert to a Time object and apply all modifiers so we can use this on a coded entry.
-    def to_seconds
-      year = value[0,4]
-      month = value[4,2]
-      day = value[6,2]
-      
-      Time.new(year, month, day).to_i
     end
   end
 end
