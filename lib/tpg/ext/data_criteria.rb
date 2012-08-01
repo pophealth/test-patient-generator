@@ -1,5 +1,5 @@
 module HQMF
-  # This is the only place where we actually know how t alter a patient record
+  # This is the only place where we actually know how to alter a patient record
   class DataCriteria
     attr_accessor :generation_range
 
@@ -15,7 +15,7 @@ module HQMF
         # Generate for patients based on each reference and merge the potential times together
         temporal_references.each do |reference|
           acceptable_time = reference.generate(base_patients)
-          Range.intersection([acceptable_time], acceptable_times)
+          #Range.intersection([acceptable_time], acceptable_times)
         end
       end
       
@@ -36,47 +36,47 @@ module HQMF
       @generation_range = acceptable_times
 
       # Calculate value information
-      potential_values = []
-
-      # Figure out what kind of data criteria we're looking at
-      if type == :characteristic && property == :birthtime
-        # Special case for handling age
-        acceptable_times.each do |acceptable_time|
-          # Modify the patients for this data_criteria
-          base_patients.each do |patient|
-            patient.send("birthdate=", acceptable_time.low.to_seconds)
-          end
-        end
-      elsif type == :characteristic && !value.nil? && value.system == "Gender"
-        base_patients.each do |patient|
-          patient.gender = value.code
-          patient.first = Randomizer.randomize_first_name(value.code)
-        end
-      elsif type != :derived
-        value_sets = Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == code_list_id}]
-        
-        acceptable_times.each do |acceptable_time|
-          entry_type = Generator.classify_entry(patient_api_function)
-          entry = entry_type.classify.constantize.new
-          entry.description = description
-          entry.start_time = acceptable_time.low.to_seconds
-          entry.end_time = acceptable_time.high.to_seconds
-          entry.status = status
-          
-          code_sets = {}
-          value_sets["code_sets"].each do |value_set|
-            code_sets[value_set["code_set"]] = value_set["codes"]
-          end
-          entry.codes = code_sets
-          
-          base_patients.each do |patient|
-            section = patient.send(entry_type)
-            section.push(entry)
+      acceptable_values = []
+      acceptable_values << value
+      
+      # Walk through all acceptable time/value combinations and alter out patients
+      base_patients.each do |patient|
+        acceptable_times.each do |time|
+          acceptable_values.each do |value|
+            modify_patient(patient, time, value)
           end
         end
       end
-      
-      base_patients
+    end
+    
+    # Record, Range, Value
+    def modify_patient(patient, time, value, value_sets = nil)
+      # Figure out what kind of data criteria we're looking at
+      if type == :characteristic && property == :birthtime
+        patient.birthdate = acceptable_time.low.to_seconds
+      elsif type == :characteristic && !value.nil? && value.system == "Gender"
+        patient.gender = value.code
+        patient.first = Randomizer.randomize_first_name(value.code)
+      elsif type != :derived
+        value_sets ||= Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == code_list_id}]
+        
+        entry_type = Generator.classify_entry(patient_api_function)
+        entry = entry_type.classify.constantize.new
+        entry.description = description
+        entry.start_time = time.low.to_seconds
+        entry.end_time = time.high.to_seconds
+        entry.status = status
+        entry.value = { "scalar" => value.low.value, "unit" => value.low.unit }
+          
+        code_sets = {}
+        value_sets["code_sets"].each do |value_set|
+          code_sets[value_set["code_set"]] = value_set["codes"]
+        end
+        entry.codes = code_sets
+          
+        section = patient.send(entry_type)
+        section.push(entry)
+      end
     end
   end
 end

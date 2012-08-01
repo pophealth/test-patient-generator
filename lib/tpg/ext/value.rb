@@ -45,5 +45,15 @@ module HQMF
         Value.new("TS", value1.unit, "#{year}#{month}#{day}", value1.inclusive? && value2.inclusive?, false, false)
       end
     end
+    
+    # Given a Value that could be PQ or TS and may have one or more modifying values.
+    # We'll convert to a Time object and apply all modifiers so we can use this on a coded entry.
+    def to_seconds
+      year = value[0,4]
+      month = value[4,2]
+      day = value[6,2]
+
+      Time.new(year, month, day).to_i
+    end
   end
 end

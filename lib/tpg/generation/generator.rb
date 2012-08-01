@@ -41,7 +41,7 @@ module HQMF
         if criteria.nil? || !criteria.preconditions.present?
           next
         else
-          criteria.generate_match(base_patients)
+          criteria.generate(base_patients)
         end
         
         base_patients.collect! do |patient|
@@ -57,12 +57,16 @@ module HQMF
     # Create a patient with trivial demographic information and no coded entries.
     #
     # @return A Record with a blank slate
-    def self.create_base_patient
+    def self.create_base_patient(initial_attributes = nil)
       patient = Record.new
       patient.elimination_population = nil
       patient.elimination_reason = nil
       
-      patient = Randomizer.randomize_demographics(patient)
+      if initial_attributes.nil?
+        patient = Randomizer.randomize_demographics(patient)
+      else
+        initial_attributes.each {|attribute, value| patient.send("#{attribute}=", value)}
+      end
     end
     
     # Take an existing patient with some coded entries on them and redefine their trivial demographic information

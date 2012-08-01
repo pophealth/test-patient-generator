@@ -1,13 +1,13 @@
 module HQMF
   # Generates a Range to define the timing of a data_criteria
   class TemporalReference
-    def generate_match(base_patients)
+    def generate(base_patients)
       if reference.id == "MeasurePeriod"
         matching_time = Generator::hqmf.measure_period.clone
       else
         # First generate patients for the data criteria that this temporal reference points to
         data_criteria = Generator::hqmf.data_criteria(reference.id)
-        base_patients = data_criteria.generate_match(base_patients)
+        base_patients = data_criteria.generate(base_patients)
 
         # Now that the data criteria is defined, we can set our relative time to those generated results
         matching_time = data_criteria.generation_range.first.clone
@@ -56,7 +56,7 @@ module HQMF
       end
       
       # Note we return the possible times to the calling data criteria, not patients
-      matching_time.generate_permutations(1, 1)
+      [matching_time]
     end
   end
 end
