@@ -4,7 +4,19 @@ module HQMF
       Range.new(type.try(:clone), low.try(:clone), high.try(:clone), width.try(:clone))
     end
     
-    def self.merge_ranges(range1, range2)
+    def merge(range, operation)
+      
+    end
+    
+    def apply_pq(ivl_pq)
+      
+    end
+    
+    def join(ivl_ts, operation)
+      
+    end
+    
+    def self.merge_ranges(range1, range2, operation)
       return nil if range1.nil? && range2.nil?
       return range1 if range2.nil?
       return range2 if range1.nil?
@@ -15,22 +27,6 @@ module HQMF
       width = nil
       
       Range.new(type, low, high, width)
-    end
-    
-    def generate_permutations(low_modifier, high_modifier)
-      permutations = []
-      
-      # Generate permutations for high and low Values. Default to a list with one nil element if the value itself is nil
-      low_permutations = low ? low.generate_permutations(low_modifier) : [nil]
-      high_permutations = high ? high.generate_permutations(high_modifier) : [nil]
-      
-      low_permutations.each do |low_value|
-        high_permutations.each do |high_value|
-          permutations << Range.new(type, low_value, high_value, width)
-        end
-      end
-      
-      permutations
     end
   end
 end

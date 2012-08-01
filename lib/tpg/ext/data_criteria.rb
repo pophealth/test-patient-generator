@@ -2,32 +2,20 @@ module HQMF
   # This is the only place where we actually know how t alter a patient record
   class DataCriteria
     attr_accessor :generation_range
-    
-    def generate(base_patients)
-      
-    end
-    
-    def generate_pass(base_patients)
-      
-    end
-    
-    def generate_fail(base_patients)
-      
-    end
-    
+
     # TODO When referring to elements, we need to check to see if they exist already
     # 
     # Order of operations - temporal references, subset operators, derivation operators
-    def generate_match(base_patients)
+    def generate(base_patients)
       # Calculate temporal information
       acceptable_times = []
       
-      # Evaluate all of the temporal restrictions on this data criteria. Times are anded (intersected) together.
+      # Evaluate all of the temporal restrictions on this data criteria.
       unless temporal_references.nil?
+        # Generate for patients based on each reference and merge the potential times together
         temporal_references.each do |reference|
-          # This is an array
-          # acceptable_times = reference.generate_match(base_patients)
-          acceptable_times.concat(reference.generate_match(base_patients))
+          acceptable_time = reference.generate(base_patients)
+          Range.intersection([acceptable_time], acceptable_times)
         end
       end
       
@@ -35,13 +23,13 @@ module HQMF
       # e.g., if the subset operator is THIRD we need to make at least three entries
       unless subset_operators.nil?
         subset_operators.each do |subset_operator|
-          subset_operator.generate_match(base_patients)
+          subset_operator.generate(base_patients)
         end
       end
       
       # Apply any derivation operator (e.g. UNION)
       unless derivation_operator.nil?
-        Range.merge(DerivationOperator.generate_match(base_patients, children_criteria, derivation_operator), acceptable_times)
+        Range.merge(DerivationOperator.generate(base_patients, children_criteria, derivation_operator), acceptable_times)
       end
       
       # Set the acceptable ranges for this data criteria so any parents can read it
@@ -89,12 +77,6 @@ module HQMF
       end
       
       base_patients
-    end
-    
-    private
-    
-    def generate_permutations(base_patients)
-      
     end
   end
 end

@@ -58,11 +58,5 @@ module HQMF
       # Note we return the possible times to the calling data criteria, not patients
       matching_time.generate_permutations(1, 1)
     end
-    
-    private
-    
-    def generate_permutations(base_patients)
-
-    end
   end
 end

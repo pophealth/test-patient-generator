@@ -4,7 +4,7 @@ module HQMF
       Value.new(type.try(:clone), unit.try(:clone), value.try(:clone), inclusive?, derived?, expression.try(:clone))
     end
     
-    def self.merge_values(value1, value2, modifier = 1)
+    def self.merge_values(value1, value2, operation, modifier = 1)
       # If only one value in the range is defined, we have no work to do
       return value1 if value2.nil?
       return value2 if value1.nil?
@@ -13,8 +13,14 @@ module HQMF
         # TODO Combine the value of two PQs. This will be tough if there is a case of time units and no relative TS
         
       elsif value1.type == "TS" && value2.type == "TS"
-        # TODO Resolve two timestamps
-
+        # Convert the time strings that we have into actual time objects
+        
+        
+        if operation == "intersection"
+          
+        elsif operation == "union"
+          
+        end
       else
         # One PQ and one TS
         pq = value1.type == "PQ" ? value1 : value2
@@ -38,23 +44,6 @@ module HQMF
         
         Value.new("TS", value1.unit, "#{year}#{month}#{day}", value1.inclusive? && value2.inclusive?, false, false)
       end
-    end
-    
-    def generate_permutations(modifier)
-      return [nil] if value.nil?
-      
-      permutations = []
-
-      # TODO Actually generate permutations. We're only generating matches right now.
-      if type == "TS"
-        permutations << self
-      elsif type == "PQ"
-        permutations << self
-      else
-        binding.pry
-      end
-      
-      permutations
     end
   end
 end
