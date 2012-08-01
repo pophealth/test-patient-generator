@@ -67,6 +67,8 @@ module HQMF
       else
         initial_attributes.each {|attribute, value| patient.send("#{attribute}=", value)}
       end
+      
+      patient
     end
     
     # Take an existing patient with some coded entries on them and redefine their trivial demographic information
