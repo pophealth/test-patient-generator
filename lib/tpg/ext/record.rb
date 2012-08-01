@@ -2,4 +2,5 @@
 class Record
   field :elimination_population, type: String
   field :elimination_reason, type: String
+  field :source_data_criteria, type: Array
 end
