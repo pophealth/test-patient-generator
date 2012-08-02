@@ -1,13 +1,17 @@
 module HQMF
   class DerivationOperator
-    def self.merge(set1, set2, operation)
+    # Perform an intersection between two sets of Ranges (assuming these are timestamps).
+    #
+    # @param [Array] set1 One array of Ranges to be intersected.
+    # @param [Array] set2 The other array of Ranges to be intersected.
+    # @return A new array that contains the shared Ranges between set1 and set2.
+    def self.intersection(set1, set2)
+      # Special cases to account for emptiness
       return [] if set1.empty? && set2.empty?
       return set1 if set2.empty?
       return set2 if set1.empty?
 
       result = []
-      #01/2012 - 12/2012, 03/2012 - 05/2012, 04/2012 - 07/2012
-      #02/2012 - 03/2012
       set1.each do |range1|
         set2.each do |range2|
           intersect = Range.merge_ranges(range1)
@@ -16,6 +20,15 @@ module HQMF
       end
       
       result
+    end
+    
+    def self.union(set1, set2)
+      # Special cases to account for emptiness
+      return [] if set1.empty? && set2.empty?
+      return set1 if set2.empty?
+      return set2 if set1.empty?
+      
+      
     end
   end
 end

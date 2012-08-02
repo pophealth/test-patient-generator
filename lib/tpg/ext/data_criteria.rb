@@ -15,7 +15,7 @@ module HQMF
         # Generate for patients based on each reference and merge the potential times together
         temporal_references.each do |reference|
           acceptable_time = reference.generate(base_patients)
-          #Range.intersection([acceptable_time], acceptable_times)
+          DerivationOperator.intersection([acceptable_time], acceptable_times)
         end
       end
       
@@ -49,7 +49,10 @@ module HQMF
       end
     end
     
-    # Record, Range, Value
+    def permutate(acceptable_times, acceptable_values)
+      
+    end
+    
     def modify_patient(patient, time, value, value_sets = nil)
       # Figure out what kind of data criteria we're looking at
       if type == :characteristic && property == :birthtime

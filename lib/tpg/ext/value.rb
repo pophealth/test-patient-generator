@@ -1,5 +1,10 @@
 module HQMF
   class Value
+    include Comparable
+    
+    # Perform a deep copy of this Value.
+    #
+    # @return A deep copy of this Value.
     def clone
       Value.new(type.try(:clone), unit.try(:clone), value.try(:clone), inclusive?, derived?, expression.try(:clone))
     end
@@ -15,12 +20,6 @@ module HQMF
       elsif value1.type == "TS" && value2.type == "TS"
         # Convert the time strings that we have into actual time objects
         
-        
-        if operation == "intersection"
-          
-        elsif operation == "union"
-          
-        end
       else
         # One PQ and one TS
         pq = value1.type == "PQ" ? value1 : value2
@@ -46,14 +45,32 @@ module HQMF
       end
     end
     
-    # Given a Value that could be PQ or TS and may have one or more modifying values.
-    # We'll convert to a Time object and apply all modifiers so we can use this on a coded entry.
     def to_seconds
+      to_object.to_i
+    end
+    
+    def to_time_object
       year = value[0,4]
       month = value[4,2]
       day = value[6,2]
 
-      Time.new(year, month, day).to_i
+      Time.new(year, month, day)
+    end
+    
+    def <=>(value)
+      # So far there has only been a need to compare TS Values
+      if type == "TS" && value.type == "TS"
+        time = to_time_object
+        other = value.value
+        
+        if time < other
+          -1
+        elsif time > other
+          1
+        else
+          0
+        end
+      end
     end
   end
 end

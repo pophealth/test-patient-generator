@@ -31,8 +31,8 @@ module HQMF
           i += 1
         end
       end
-      
-      populations = ["NUMER"]
+
+      populations = ["IPP"]
 
       populations.each do |population|
         criteria = Generator.hqmf.population_criteria(population)
