@@ -8,8 +8,13 @@ module HQMF
     def clone
       Value.new(type.try(:clone), unit.try(:clone), value.try(:clone), inclusive?, derived?, expression.try(:clone))
     end
-    
-    def self.merge_values(value1, value2, operation, modifier = 1)
+
+    # 
+    #
+    # @param [Value] value1
+    # @param [Value] value2
+    # @return 
+    def self.merge_values(value1, value2)
       # If only one value in the range is defined, we have no work to do
       return value1 if value2.nil?
       return value2 if value1.nil?
@@ -34,7 +39,7 @@ module HQMF
         # Advance that time forward the amount the PQ specifies. Convert units to symbols for advance function.
         pq.value += 1 unless pq.inclusive?
         unit_mapping = {"a" => :years, "mo" => :months, "wk" => :weeks, "d" => :days}
-        time = time.advance({unit_mapping[pq.unit] => pq.value.to_i * modifier})
+        time = time.advance({unit_mapping[pq.unit] => pq.value.to_i})
         
         # Form up the modified TS with expected YYYYMMDD formatting (avoid YYYYMD)
         year = time.year
@@ -45,10 +50,16 @@ module HQMF
       end
     end
     
+    #
+    #
+    # @return
     def to_seconds
       to_object.to_i
     end
     
+    # 
+    #
+    # @return 
     def to_time_object
       year = value[0,4]
       month = value[4,2]

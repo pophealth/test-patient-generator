@@ -41,15 +41,28 @@ module HQMF
       Range.new("TS", later_start.low.clone, earlier_end.high.clone, nil)
     end
     
+    # 
+    #
+    # @param [Range] range 
+    # @return
     def union(range)
       
     end
     
+    # 
+    #
+    # @param [Range] ivl_pq
+    # @return
     def apply_pq(ivl_pq)
       
     end
     
-    def self.merge_ranges(range1, range2, operation)
+    # 
+    #
+    # @param [Range] range1 
+    # @param [Range] range2 
+    # @return 
+    def self.merge_ranges(range1, range2)
       return nil if range1.nil? && range2.nil?
       return range1 if range2.nil?
       return range2 if range1.nil?

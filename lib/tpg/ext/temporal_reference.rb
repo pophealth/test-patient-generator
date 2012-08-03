@@ -1,6 +1,10 @@
 module HQMF
   # Generates a Range to define the timing of a data_criteria
   class TemporalReference
+    # 
+    #
+    # @param [Array] base_patients
+    # @return 
     def generate(base_patients)
       if reference.id == "MeasurePeriod"
         matching_time = Generator::hqmf.measure_period.clone

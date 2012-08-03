@@ -11,17 +11,23 @@ module HQMF
       return set1 if set2.empty?
       return set2 if set1.empty?
 
+      # Merge each element of the two sets together
       result = []
       set1.each do |range1|
         set2.each do |range2|
-          intersect = Range.merge_ranges(range1)
+          intersect = Range.intersection(range1)
+          result << intersect unless intersect.nil?
         end
-        result << intersect unless intersect.nil?
       end
       
       result
     end
     
+    # 
+    #
+    # @param [Array] set1
+    # @param [Array] set2
+    # @return 
     def self.union(set1, set2)
       # Special cases to account for emptiness
       return [] if set1.empty? && set2.empty?

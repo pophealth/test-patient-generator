@@ -1,7 +1,9 @@
 module HQMF
-  # Take a population
-  # Return a population
   class Precondition
+    # 
+    #
+    # @param [Array] base_patients
+    # @return 
     def generate(base_patients)
       if conjunction?
         # Include the matching module to override our generation functions

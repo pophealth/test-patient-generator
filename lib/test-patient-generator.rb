@@ -3,6 +3,7 @@ require 'health-data-standards'
 
 require_relative 'tpg/ext/conjunction'
 require_relative 'tpg/ext/data_criteria'
+require_relative 'tpg/ext/derivation_operator'
 require_relative 'tpg/ext/population_criteria'
 require_relative 'tpg/ext/precondition'
 require_relative 'tpg/ext/range'

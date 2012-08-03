@@ -1,23 +1,23 @@
 module HQMF
-  # This is the only place where we actually know how to alter a patient record
   class DataCriteria
     attr_accessor :generation_range
 
-    # TODO When referring to elements, we need to check to see if they exist already
-    # 
     # Order of operations - temporal references, subset operators, derivation operators
+    # 
+    # @param [Array] base_patients
     def generate(base_patients)
-      # Calculate temporal information
       acceptable_times = []
       
       # Evaluate all of the temporal restrictions on this data criteria.
       unless temporal_references.nil?
-        # Generate for patients based on each reference and merge the potential times together
+        # Generate for patients based on each reference and merge the potential times together.
         temporal_references.each do |reference|
           acceptable_time = reference.generate(base_patients)
-          DerivationOperator.intersection([acceptable_time], acceptable_times)
+          acceptable_times = DerivationOperator.intersection(acceptable_time, acceptable_times)
         end
       end
+      
+      binding.pry
       
       # Apply any subset operators (e.g. FIRST)
       # e.g., if the subset operator is THIRD we need to make at least three entries
@@ -49,10 +49,20 @@ module HQMF
       end
     end
     
+    #
+    #
+    # @param [Array] acceptable_times
+    # @param [Array] acceptable_values
     def permutate(acceptable_times, acceptable_values)
       
     end
     
+    #
+    #
+    # @param [Record] patient
+    # @param [Range] time
+    # @param [Range] value
+    # @param [Hash] value_sets
     def modify_patient(patient, time, value, value_sets = nil)
       # Figure out what kind of data criteria we're looking at
       if type == :characteristic && property == :birthtime
