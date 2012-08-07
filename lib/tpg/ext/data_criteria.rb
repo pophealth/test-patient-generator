@@ -8,6 +8,8 @@ module HQMF
     def generate(base_patients)
       acceptable_times = []
       
+      binding.pry
+
       # Evaluate all of the temporal restrictions on this data criteria.
       unless temporal_references.nil?
         # Generate for patients based on each reference and merge the potential times together.
@@ -16,8 +18,6 @@ module HQMF
           acceptable_times = DerivationOperator.intersection(acceptable_time, acceptable_times)
         end
       end
-      
-      binding.pry
       
       # Apply any subset operators (e.g. FIRST)
       # e.g., if the subset operator is THIRD we need to make at least three entries
@@ -62,8 +62,9 @@ module HQMF
     # @param [Record] patient
     # @param [Range] time
     # @param [Range] value
-    # @param [Hash] value_sets
-    def modify_patient(patient, time, value, value_sets = nil)
+    # @param [Hash] value_sets Optionally, 
+    # @param [Hash] negation_value_sets Optionally, 
+    def modify_patient(patient, time, value, value_sets = nil, negation_value_sets = nil)
       # Figure out what kind of data criteria we're looking at
       if type == :characteristic && property == :birthtime
         patient.birthdate = acceptable_time.low.to_seconds
@@ -71,22 +72,36 @@ module HQMF
         patient.gender = value.code
         patient.first = Randomizer.randomize_first_name(value.code)
       elsif type != :derived
+        # Select one code for each possible code set on this entry
         value_sets ||= Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == code_list_id}]
+        negation_value_sets ||= Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == negation_code_list_id}] if negation
+        #negation_ind, negation_reason
         
+        # Define all of the aspects of this coded entry
         entry_type = Generator.classify_entry(patient_api_function)
         entry = entry_type.classify.constantize.new
         entry.description = description
         entry.start_time = time.low.to_seconds
         entry.end_time = time.high.to_seconds
         entry.status = status
-        entry.value = { "scalar" => value.low.value, "unit" => value.low.unit }
-          
+        entry.value = { "scalar" => value.low.value, "unit" => value.low.unit } if value
+        
+        # Choose a code from each relevant code vocabulary for this entry
         code_sets = {}
         value_sets["code_sets"].each do |value_set|
-          code_sets[value_set["code_set"]] = value_set["codes"]
+          code_sets[value_set["code_set"]] = value_set["codes"].sample
         end
         entry.codes = code_sets
-          
+        # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated
+        if negation
+          negation_code_sets = {}
+          negation_value_sets["code_sets"].each do |value_set|
+            negation_code_sets[negation_value_set["code_set"]] = negation_value_set["codes"].sample
+          end
+          entry.negation_ind = true
+          entry.negation_reason = negation_code_sets
+        end
+         
         section = patient.send(entry_type)
         section.push(entry)
       end

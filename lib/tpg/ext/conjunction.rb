@@ -5,7 +5,7 @@ module Conjunction
     # @param [Array] base_patients
     # @return 
     def generate(base_patients)
-      self.preconditions.each do |precondition|
+      preconditions.each do |precondition|
         precondition.generate(base_patients)
       end
     end
@@ -17,7 +17,7 @@ module Conjunction
   # @return 
   module AtLeastOneTrue
     def generate(base_patients)
-      self.preconditions.sample.generate(base_patients)
+      preconditions.sample.generate(base_patients)
     end
   end
 end

@@ -15,7 +15,7 @@ module HQMF
       result = []
       set1.each do |range1|
         set2.each do |range2|
-          intersect = Range.intersection(range1)
+          intersect = range1.intersection(range2)
           result << intersect unless intersect.nil?
         end
       end

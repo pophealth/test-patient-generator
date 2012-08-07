@@ -23,7 +23,7 @@ module HQMF
       
       # Gather all available populations. Each kind of population (e.g. IPP, DENOM) can have many multiples (e.g. IPP_1, IPP_2)
       populations = []
-      ["IPP", "DENOM", "NUMER", "EXCL"].each do |population|
+      ["IPP", "DENOM", "NUMER", "EXCL", "DENEXCEP"].each do |population|
         i = 1
         populations << population
         while Generator.hqmf.population_criteria("#{population}_#{i}").present? do
@@ -32,7 +32,7 @@ module HQMF
         end
       end
 
-      populations = ["IPP"]
+      populations = ["NUMER"]
 
       populations.each do |population|
         criteria = Generator.hqmf.population_criteria(population)

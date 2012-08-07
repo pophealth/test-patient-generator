@@ -54,7 +54,7 @@ module HQMF
     #
     # @return
     def to_seconds
-      to_object.to_i
+      to_time_object.to_i
     end
     
     # 
