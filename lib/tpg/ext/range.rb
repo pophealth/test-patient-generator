@@ -41,12 +41,44 @@ module HQMF
       Range.new("TS", later_start.low.clone, earlier_end.high.clone, nil)
     end
     
-    # 
+    # Perform a union between this Range and the passed in Range.
+    # There are three potential situations that can happen: disjoint, equivalent, or overlapping.
     #
-    # @param [Range] range 
-    # @return
+    # @param [Range] range The other Range unioning this.
+    # @return An array of Ranges. One element if the two ranges are overlapping and can be expressed as one new Range
+    #   or two Ranges if the times are disjoint.
     def union(range)
+      # Return self if nil (nothing new to add) or if it matches the other range (they are equivalent)
+      return self.clone if range.nil?
+      return self.clone if eql?(range)
+
+      # Figure out which range starts earlier (to capture the most time)
+      if low <= range.low
+        earlier_start = self
+        later_start = range
+      else
+        earlier_start = range
+        later_start = self
+      end
       
+      # Figure out which ranges ends earlier (the more restrictive one)
+      if high >= range.high
+        earlier_end = self
+        later_end = range
+      else
+        earlier_end = range
+        later_end = self
+      end
+      
+      result = []
+      # We have continuous Ranges so we can return one Range to encapsulate both
+      if earlier_start.contains?(later_start.low)
+        result << Range.new("TS", earlier_start.low.clone, later_end.high.clone, nil)
+      else
+        # The Ranges are disjoint, so we'll need to return two arrays to capture all of the potential times
+        result << Range.new("TS", earlier_start.low.clone, earlier_start.high.clone, nil)
+        result << Range.new("TS", later_start.low.clone, later_start.high.clone, nil)
+      end
     end
     
     # 
