@@ -32,7 +32,7 @@ module HQMF
         end
       end
 
-      populations = ["NUMER"]
+      populations = ["EXCL_1"]
 
       populations.each do |population|
         criteria = Generator.hqmf.population_criteria(population)
