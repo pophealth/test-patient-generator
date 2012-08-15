@@ -85,12 +85,12 @@ module HQMF
         entry.start_time = time.low.to_seconds
         entry.end_time = time.high.to_seconds
         entry.status = status
-        entry.codes = CodedEntry.select_codes(code_list_id, value_sets)
+        entry.codes = Coded.select_codes(code_list_id, value_sets)
 
-        # If the value itself has a code, it will be a CodedEntry type. Otherwise, it's just a regular value with a unit.
+        # If the value itself has a code, it will be a Coded type. Otherwise, it's just a regular value with a unit.
         if value.present?
           if value.type == "CD"
-            entry.value = CodedEntry.select_codes(value.code_list_id, value_sets)
+            entry.value = Coded.select_codes(value.code_list_id, value_sets)
           else
             entry.value = { "scalar" => value.low.value, "unit" => value.low.unit } if value.low
             entry.value = { "scalar" => value.high.value, "unit" => value.high.unit } if value.high
@@ -100,7 +100,7 @@ module HQMF
         # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated and referenced.
         if negation && negation_code_list_id.present?
           entry.negation_ind = true
-          entry.negation_reason = CodedEntry.select_codes(negation_code_list_id, value_sets)
+          entry.negation_reason = Coded.select_codes(negation_code_list_id, value_sets)
         end
         
         # Additional fields (e.g. ordinality, severity, etc) are defined with codes. Fill them on this entry.

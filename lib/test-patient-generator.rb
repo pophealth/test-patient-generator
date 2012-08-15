@@ -1,7 +1,7 @@
 require 'hqmf-parser'
 require 'health-data-standards'
 
-require_relative 'tpg/ext/coded_entry'
+require_relative 'tpg/ext/coded'
 require_relative 'tpg/ext/conjunction'
 require_relative 'tpg/ext/data_criteria'
 require_relative 'tpg/ext/derivation_operator'
