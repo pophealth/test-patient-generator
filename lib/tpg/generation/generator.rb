@@ -15,6 +15,36 @@ module HQMF
       Generator.value_sets = value_sets
     end
     
+    # Generate patients from lists of DataCriteria. This is originally created for QRDA Category 1 validation testing,
+    # i.e. a single patient will be generated per measure with an entry for every data criteria involved in the measure.
+    # 
+    # @param [Hash] measure_needs A hash of measure IDs mapped to a list of all their data criteria.
+    # @param [Hash] measure_value_sets A hash of measure IDs mapped to hashes of value sets used by the DataCriteria in measure_needs.
+    # @return [Hash] A hash of measure IDs mapped to a Record that includes all the given data criteria (values and times are arbitrary).
+    def self.generate_qrda_patients(measure_needs, measure_value_sets)
+      return {} if measure_needs.nil?
+      
+      measure_patients = {}
+      measure_needs.each do |measure, all_data_criteria|
+        patient = Generator.create_base_patient
+        all_data_criteria.each do |data_criteria|
+          # Ignore data criteria that are really just containers.
+          next if data_criteria.derivation_operator.present?
+          
+          # Produce dummy values for acceptable time. Value is already on the data criteria (or not if that's the case).
+          start_time = Value.new("TS", nil, "19990401", true, false, false)
+          end_time = Value.new("TS", nil, "19991225", true, false, false)
+          time = Range.new("IVL_TS", start_time, end_time, 1)
+          
+          # Find the applicable value set for this data criteria and modify the patient.
+          data_criteria.modify_patient(patient, time, measure_value_sets[measure])
+        end
+        measure_patients[measure] = Generator.finalize_patient(patient)
+      end
+      
+      measure_patients
+    end
+    
     # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
     # paths through the logic of this particular clinical quality measure.
     def generate_patients
@@ -38,12 +68,10 @@ module HQMF
         criteria = Generator.hqmf.population_criteria(population)
         
         # We don't need to do anything for populations with nothing specified
-        if criteria.nil? || !criteria.preconditions.present?
-          next
-        else
-          criteria.generate(base_patients)
-        end
+        next if criteria.nil? || !criteria.preconditions.present?
+        criteria.generate(base_patients)  
         
+        # Mark the patient we just created with its expected population. Then extend the Record to be augmented by the next population.
         base_patients.collect! do |patient|
           patient.elimination_population = population
           generated_patients.push(Generator.finalize_patient(patient))
@@ -111,7 +139,7 @@ module HQMF
         "procedures"
       when :proceduresPerformed
         "procedures"
-      when :proceduresResults
+      when :procedureResults
         "procedures"
       when :laboratoryTests
         "vital_signs"

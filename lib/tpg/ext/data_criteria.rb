@@ -9,8 +9,6 @@ module HQMF
     # @return The updated list of patients. The array will be modified by reference already so this is just for potential convenience.
     def generate(base_patients)
       acceptable_times = []
-      
-      binding.pry
 
       # Evaluate all of the temporal restrictions on this data criteria.
       unless temporal_references.nil?
@@ -45,7 +43,7 @@ module HQMF
       base_patients.each do |patient|
         acceptable_times.each do |time|
           acceptable_values.each do |value|
-            modify_patient(patient, time, value)
+            modify_patient(patient, time, Generator.value_sets)
           end
         end
       end
@@ -65,51 +63,51 @@ module HQMF
     #
     # @param [Record] patient The Record that is being modified. 
     # @param [Range] time An acceptable range of times for the coded entry being put on this patient.
-    # @param [Range] value An acceptable range of values for the coded entry being put on the patient.
-    # @param [Hash] value_sets Optionally, the value sets that this data criteria references. If HQMF::Generator::hqmf is defined, this parameter is not necessary.
+    # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified patient. The passed in patient object will be modified by reference already so this is just for potential convenience.
-    def modify_patient(patient, time, value, value_sets = nil, negation_value_sets = nil)
+    def modify_patient(patient, time, value_sets)
       # Figure out what kind of data criteria we're looking at
-      if type == :characteristic && property == :birthtime
-        patient.birthdate = acceptable_time.low.to_seconds
-      elsif type == :characteristic && !value.nil? && value.system == "Gender"
-        patient.gender = value.code
-        patient.first = Randomizer.randomize_first_name(value.code)
-      elsif type != :derived
-        # Define all of the top level information for this coded entry
+      if type == :characteristic
+        # We have a special case on our hands.
+        if property == :birthtime
+          patient.birthdate = time.low.to_seconds
+        elsif value.present? && value.system == "Gender"
+          patient.gender = value.code
+          patient.first = Randomizer.randomize_first_name(value.code)
+        elsif property == :clinicalTrialParticipant
+          patient.clinicalTrialParticipant = true
+        end
+      else
+        # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
         entry_type = Generator.classify_entry(patient_api_function)
         entry = entry_type.classify.constantize.new
         entry.description = description
         entry.start_time = time.low.to_seconds
         entry.end_time = time.high.to_seconds
         entry.status = status
-        entry.value = { "scalar" => value.low.value, "unit" => value.low.unit } if value
+        entry.codes = CodedEntry.select_codes(code_list_id, value_sets)
+
+        # If the value itself has a code, it will be a CodedEntry type. Otherwise, it's just a regular value with a unit.
+        if value.present?
+          if value.type == "CD"
+            entry.value = CodedEntry.select_codes(value.code_list_id, value_sets)
+          else
+            entry.value = { "scalar" => value.low.value, "unit" => value.low.unit } if value.low
+            entry.value = { "scalar" => value.high.value, "unit" => value.high.unit } if value.high
+          end
+        end
+        
+        # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated and referenced.
+        if negation && negation_code_list_id.present?
+          entry.negation_ind = true
+          entry.negation_reason = CodedEntry.select_codes(negation_code_list_id, value_sets)
+        end
         
         # Additional fields (e.g. ordinality, severity, etc) are defined with codes. Fill them on this entry.
-        field_values.each do |field, coded_entry|
-          codes = coded_entry.generate_codes
-          entry.send("#{field.downcase}=", codes)
-        end
-        
-        # Select one code for each possible code set on this entry
-        value_sets ||= Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == code_list_id}]
-        negation_value_sets ||= Generator::value_sets[Generator::value_sets.index{|value_set| value_set["oid"] == negation_code_list_id}] if negation
-        
-        # Choose a code from each relevant code vocabulary for this entry
-        code_sets = {}
-        value_sets["code_sets"].each do |value_set|
-          code_sets[value_set["code_set"]] = value_set["codes"].sample
-        end
-        entry.codes = code_sets
-        # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated
-        if negation
-          negation_code_sets = {}
-          negation_value_sets["code_sets"].each do |value_set|
-            negation_code_sets[negation_value_set["code_set"]] = negation_value_set["codes"].sample
-          end
-          entry.negation_ind = true
-          entry.negation_reason = negation_code_sets
-        end
+        #field_values.each do |field, coded_entry|
+        #  codes = coded_entry.generate_codes
+        #  entry.send("#{field.downcase}=", codes)
+        #end
          
         # Add the updated section to this patient
         section = patient.send(entry_type)

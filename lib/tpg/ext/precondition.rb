@@ -5,7 +5,6 @@ module HQMF
     # @param [Array] base_patients
     # @return 
     def generate(base_patients)
-      binding.pry
       # d = HQMF::Generator.hqmf.data_criteria(preconditions[2].preconditions[1].preconditions.first.reference.id)
       
       if conjunction?
