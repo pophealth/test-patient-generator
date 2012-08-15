@@ -13,7 +13,7 @@ module HQMF
       
       code_sets = {}
       value_sets["code_sets"].each do |value_set|
-        code_sets[value_set["code_set"]] = [value_set["codes"].sample]
+        code_sets[value_set["code_set"]] = [value_set["codes"].first]
       end
       code_sets
     end
