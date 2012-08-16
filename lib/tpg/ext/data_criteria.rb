@@ -92,8 +92,7 @@ module HQMF
           if value.type == "CD"
             entry.value = Coded.select_codes(value.code_list_id, value_sets)
           else
-            entry.value = { "scalar" => value.low.value, "unit" => value.low.unit } if value.low
-            entry.value = { "scalar" => value.high.value, "unit" => value.high.unit } if value.high
+            entry.value = value.format
           end
         end
         
@@ -103,11 +102,38 @@ module HQMF
           entry.negation_reason = Coded.select_codes(negation_code_list_id, value_sets)
         end
         
-        # Additional fields (e.g. ordinality, severity, etc) are defined with codes. Fill them on this entry.
-        #field_values.each do |field, coded_entry|
-        #  codes = coded_entry.generate_codes
-        #  entry.send("#{field.downcase}=", codes)
-        #end
+        # Additional fields (e.g. ordinality, severity, etc) seem to all be special cases. Capture them here.
+        if field_values.present?
+          field_values.each do |name, field|
+            # These fields are sometimes Coded and sometimes Values.
+            if field.type == "CD"
+              codes = Coded.select_codes(field.code_list_id, value_sets)
+            elsif field.type == "IVL_PQ"
+              value = field.format
+            else
+              binding.pry
+            end
+            
+            case name
+            when "ORDINAL"
+              entry.ordinality = codes
+            when "FACILITY_LOCATION"
+              entry.facility = Facility.new("name" => field.title, "codes" => codes)
+            when "CUMULATIVE_MEDICATION_DURATION"
+              entry.cumulative_medication_duration = value
+            when "SOURCE"
+              
+            when "SEVERITY"
+              entry.severity = codes
+            when "REASON"
+              
+            when "SOURCE"
+              
+            else
+              binding.pry
+            end
+          end
+        end
          
         # Add the updated section to this patient
         section = patient.send(entry_type)

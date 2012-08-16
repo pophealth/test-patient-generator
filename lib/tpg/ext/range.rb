@@ -7,6 +7,17 @@ module HQMF
       Range.new(type.try(:clone), low.try(:clone), high.try(:clone), width.try(:clone))
     end
     
+    #
+    def format
+      if low
+        low.format
+      elsif high
+        high.format
+      else
+        {}
+      end
+    end
+    
     # Perform an intersection between this Range and the passed in Range.
     # There are three potential situations that can happen: disjoint, equivalent, or overlapping.
     #

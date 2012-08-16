@@ -9,6 +9,15 @@ module HQMF
       Value.new(type.try(:clone), unit.try(:clone), value.try(:clone), inclusive?, derived?, expression.try(:clone))
     end
 
+    #
+    def format      
+      unit_mapping = {"a" => "years", "mo" => "months", "wk" => "weeks", "d" => "days"}
+      pretty_unit = unit_mapping[unit] if unit
+      pretty_unit ||= unit
+      
+      { "scalar" => value, "unit" => pretty_unit }
+    end
+
     # 
     #
     # @param [Value] value1

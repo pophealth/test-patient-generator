@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pophealth/hqmf-parser.git
-  revision: 73b6ac2f2c0dd6b0dfb02389bb1c9fc367e99268
+  revision: 956b4feb48a89be4c12f2bc1dd8b3fae764ab261
   branch: develop
   specs:
     hqmf-parser (0.0.1)
@@ -59,7 +59,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    faraday (0.8.2)
+    faraday (0.8.4)
       multipart-post (~> 1.1)
     google-spreadsheet-ruby (0.1.8)
       nokogiri (>= 1.4.3.1)
