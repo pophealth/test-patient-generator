@@ -26,17 +26,23 @@ module HQMF
       
       measure_patients = {}
       measure_needs.each do |measure, all_data_criteria|
-        patient = Generator.create_base_patient
+        # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
+        # so to minimize time we only want to include each kind of data once.
+        unique_data_criteria = []
         all_data_criteria.each do |data_criteria|
+          index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
+          unique_data_criteria << data_criteria if index.nil?
+        end
+        binding.pry
+        
+        # Create a patient that includes an entry for every data criteria included in this measure.
+        patient = Generator.create_base_patient
+        unique_data_criteria.each do |data_criteria|
           # Ignore data criteria that are really just containers.
           next if data_criteria.derivation_operator.present?
           
-          # Produce dummy values for acceptable time. Value is already on the data criteria (or not if that's the case).
-          start_time = Value.new("TS", nil, "19990401", true, false, false)
-          end_time = Value.new("TS", nil, "19991225", true, false, false)
-          time = Range.new("IVL_TS", start_time, end_time, 1)
-          
-          # Find the applicable value set for this data criteria and modify the patient.
+          # Generate a random time for this data criteria and apply it to the patient.
+          time = Randomizer.randomize_range(patient.birthdate, nil)
           data_criteria.modify_patient(patient, time, measure_value_sets[measure])
         end
         measure_patients[measure] = Generator.finalize_patient(patient)
@@ -140,7 +146,7 @@ module HQMF
       when :proceduresPerformed
         "procedures"
       when :procedureResults
-        "procedures"
+        "lab_results"
       when :laboratoryTests
         "vital_signs"
       when :allMedications

@@ -196,6 +196,25 @@ module HQMF
     def self.randomize_birthdate(patient)
       Time.now
     end
+    
+    # Randomly generate a Range object that is within a lower and upper bounds. It is guaranteed that the high of the
+    # returned range will be no earlier than the low time.
+    #
+    # @param [Time] earliest_time The lowest possible value for the low in this Range. nil implies unbounded.
+    # @param [Time] latest_time The highest possible value for the high in this Range. nil implies unbounded.
+    # @return A Range that represents a start time and end time within the acceptable bounds supplied.
+    def self.randomize_range(earliest_time, latest_time)
+      earliest_time ||= Time.now.advance(years: -18)
+      latest_time ||= Time.now.to_i
+      
+      low = Time.at(Randomizer.between(earliest_time.to_i, latest_time.to_i))
+      high = Time.at(Randomizer.between(low, latest_time.to_i))
+      
+      low = Value.new("TS", nil, Value.time_to_ts(low), true, false, false)
+      high = Value.new("TS", nil, Value.time_to_ts(high), true, false, false)
+      
+      time = Range.new("IVL_TS", low, high, 1)
+    end
 
     # Return a set of randomly selected numbers between two bounds
     #

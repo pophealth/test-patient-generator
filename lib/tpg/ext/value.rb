@@ -59,6 +59,14 @@ module HQMF
       end
     end
     
+    def self.time_to_ts(time)
+      year = time.year
+      month = time.month < 10 ? "0#{time.month}" : time.month
+      day = time.day < 10 ? "0#{time.day}" : time.day
+      
+      "#{year}#{month}#{day}"
+    end
+    
     #
     #
     # @return
