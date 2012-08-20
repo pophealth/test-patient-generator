@@ -27,8 +27,10 @@ GIT
   specs:
     hquery-patient-api (0.1.0)
 
-PATH
-  remote: ../../shared/health-data-standards
+GIT
+  remote: https://github.com/projectcypress/health-data-standards.git
+  revision: 3fec40fbf1c550d1a9c7a4299d6d3ff311b54d26
+  branch: develop
   specs:
     health-data-standards (1.0.1)
       builder (~> 3.0.0)
