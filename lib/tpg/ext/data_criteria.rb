@@ -105,13 +105,13 @@ module HQMF
         # Additional fields (e.g. ordinality, severity, etc) seem to all be special cases. Capture them here.
         if field_values.present?
           field_values.each do |name, field|
+            next if field.nil?
+            
             # These fields are sometimes Coded and sometimes Values.
             if field.type == "CD"
               codes = Coded.select_codes(field.code_list_id, value_sets)
             elsif field.type == "IVL_PQ"
               value = field.format
-            else
-              binding.pry
             end
             
             case name
@@ -120,23 +120,23 @@ module HQMF
             when "FACILITY_LOCATION"
               entry.facility = Facility.new("name" => field.title, "codes" => codes)
             when "CUMULATIVE_MEDICATION_DURATION"
-              entry.cumulative_medication_duration = value
-            when "SOURCE"
-              
+              entry.cumulative_medication_duration = value              
             when "SEVERITY"
               entry.severity = codes
             when "REASON"
               
             when "SOURCE"
-              
-            else
-              binding.pry
+
             end
           end
         end
          
-        # Add the updated section to this patient
-        section = patient.send(entry_type)
+        # Figure out which section this entry will be added to. Some entry names don't map prettily to section names.
+        section_map = { "lab_results" => "results" }
+        section_name = section_map[entry_type]
+        section_name ||= entry_type
+        # Add the updated section to this patient.
+        section = patient.send(section_name)
         section.push(entry)
         
         patient

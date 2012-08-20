@@ -33,7 +33,6 @@ module HQMF
           index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
           unique_data_criteria << data_criteria if index.nil?
         end
-        binding.pry
         
         # Create a patient that includes an entry for every data criteria included in this measure.
         patient = Generator.create_base_patient

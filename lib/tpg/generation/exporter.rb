@@ -1,6 +1,6 @@
 module TPG
   class Exporter
-    # Export a list of patients to a zip file.
+    # Export a list of patients to a zip file. Contains nothing but patient records.
     #
     # @param [Array] patients All of the patients that will be exported.
     # @param [String] format The desired format for the patients to be in.
@@ -23,17 +23,10 @@ module TPG
             z << HealthDataStandards::Export::CCR.export(patient)
           elsif format == "html"
             z.put_next_entry("#{next_entry_path}.html")
-            
-            # Export the patient as C32 XML so we can build the HTML file.
-            doc = Nokogiri::XML::Document.parse(HealthDataStandards::Export::C32.export(patient)) 
-            xml = xslt.apply_to(doc)
-            html = HealthDataStandards::Export::HTML.export(patient)
-            
-            # Not sure why this portion is necessary but I copied this section from Cypress
-            transformed = Nokogiri::HTML::Document.parse(xml)
-            transformed.at_css('ul').after(html)
-             
-            z << transformed.to_html
+            z << html_contents(patient)
+          elsif format == "json"
+            z.put_next_entry("#{next_entry_path}.json")
+            z << JSON.pretty_generate(JSON.parse(patient.to_json))
           end
         end
       end
@@ -56,23 +49,76 @@ module TPG
           safe_first_name = patient.first.gsub("'", "")
           safe_last_name = patient.last.gsub("'", "")
           
-          # Export the patient as C32 XML so we can build the HTML file.
-          doc = Nokogiri::XML::Document.parse(HealthDataStandards::Export::C32.export(patient)) 
-          xml = xslt.apply_to(doc)
-          html = HealthDataStandards::Export::HTML.export(patient)
-          
-          # Not sure why this portion is necessary but I copied this section from Cypress
-          transformed = Nokogiri::HTML::Document.parse(xml)
-          transformed.at_css('ul').after(html)
-          
           # Create a directory for this measure and insert the HTML for this patient.
           zip.put_next_entry(File.join(measure, "#{safe_first_name}_#{safe_last_name}.html"))
-          zip << transformed.to_html
+          zip << html_contents(patient)
         end
       end
       
       file.close
       file
+    end
+    
+    # Export a list of patients to a zip file. Contains the proper formatting of a patient bundle for Cypress,
+    # i.e. a bundle JSON file with four subdirectories for c32, ccr, html, and JSON formatting for patients.
+    #
+    # @param [Array] patients All of the patients that will be exported.
+    # @param [String] version The version to mark the bundle.json file of this archive.
+    # @return A bundle containing all of the QRDA Category 1 patients that were passed in.
+    def self.zip_bundle(patients, name, version)
+      file = Tempfile.new("patients-#{Time.now.to_i}")
+      
+      Zip::ZipOutputStream.open(file.path) do |zip|
+        # Generate the bundle file
+        zip.put_next_entry("bundle.json")
+        zip << {name: name, version: version}.to_json
+        
+        xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
+        patients.each_with_index do |patient, index|
+          # Escape punctuation from names that may corrupt the zip file.
+          safe_first_name = patient.first.gsub("'", "")
+          safe_last_name = patient.last.gsub("'", "")
+          filename = "#{index}_#{safe_first_name}_#{safe_last_name}"
+          
+          # Define path names
+          c32_path = File.join("patients", "c32", "#{filename}.xml")
+          ccr_path = File.join("patients", "ccr", "#{filename}.xml")
+          html_path = File.join("patients", "html", "#{filename}.html")
+          json_path = File.join("patients", "json", "#{filename}.json")
+          
+          # For each patient add a C32, CCR, HTML, and JSON file.
+          zip.put_next_entry(c32_path)
+          zip << HealthDataStandards::Export::C32.export(patient)
+          zip.put_next_entry(ccr_path)
+          zip << HealthDataStandards::Export::CCR.export(patient)
+          zip.put_next_entry(html_path)
+          zip << html_contents(patient)
+          zip.put_next_entry(json_path)
+          zip << JSON.pretty_generate(JSON.parse(patient.to_json))
+        end
+      end
+      
+      file.close
+      file
+    end
+    
+    # Generate the HTML output for a Record from Health Data Standards.
+    #
+    # @param [Record] patient The Record for which we're generating HTML content.
+    # @return HTML content to be exported for a Record.
+    def self.html_contents(patient)
+      xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
+      
+      # Export the patient as C32 XML so we can build the HTML file.
+      doc = Nokogiri::XML::Document.parse(HealthDataStandards::Export::C32.export(patient)) 
+      xml = xslt.apply_to(doc)
+      html = HealthDataStandards::Export::HTML.export(patient)
+      
+      # Not sure why this portion is necessary but I copied this section from Cypress
+      transformed = Nokogiri::HTML::Document.parse(xml)
+      transformed.at_css('ul').after(html)
+      
+      transformed.to_html
     end
   end
 end
