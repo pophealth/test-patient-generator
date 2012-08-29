@@ -81,8 +81,16 @@ module HQMF
       year = value[0,4]
       month = value[4,2]
       day = value[6,2]
-
-      Time.new(year, month, day)
+      hour = 0
+      minute = 0
+      second = 0
+      if (value.length > 8)
+        hour = value[8,2]
+        minute = value[10,2]
+        second = value[12,2]
+      end
+      
+      Time.new(year, month, day, hour, minute, second)
     end
     
     def <=>(value)
