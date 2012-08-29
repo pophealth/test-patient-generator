@@ -89,10 +89,11 @@ module HQMF
 
         # If the value itself has a code, it will be a Coded type. Otherwise, it's just a regular value with a unit.
         if value.present?
+          entry.values ||= []
           if value.type == "CD"
-            entry.value = Coded.select_codes(value.code_list_id, value_sets)
+            entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
           else
-            entry.value = value.format
+            entry.values << ResultValue.new(value.format)
           end
         end
         
