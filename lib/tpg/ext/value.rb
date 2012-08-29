@@ -78,16 +78,16 @@ module HQMF
     #
     # @return 
     def to_time_object
-      year = value[0,4]
-      month = value[4,2]
-      day = value[6,2]
+      year = value[0,4].to_i
+      month = value[4,2].to_i
+      day = value[6,2].to_i
       hour = 0
       minute = 0
       second = 0
       if (value.length > 8)
-        hour = value[8,2]
-        minute = value[10,2]
-        second = value[12,2]
+        hour = value[8,2].to_i
+        minute = value[10,2].to_i
+        second = value[12,2].to_i
       end
       
       Time.new(year, month, day, hour, minute, second)
