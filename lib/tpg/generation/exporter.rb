@@ -39,8 +39,9 @@ module TPG
     #
     # @param [Hash] measure_patients Measures mapped to the patient that was generated for it.
     # @return A zip file containing all of the QRDA Category 1 patients that were passed in.
-    def self.zip_qrda_patients(measure_patients)
+    def self.zip_qrda_patients(measure_patients, out_path = nil)
       file = Tempfile.new("patients-#{Time.now.to_i}")
+      file = new File.new(out_path) if out_path
       
       Zip::ZipOutputStream.open(file.path) do |zip|
         xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
@@ -65,8 +66,9 @@ module TPG
     # @param [Array] patients All of the patients that will be exported.
     # @param [String] version The version to mark the bundle.json file of this archive.
     # @return A bundle containing all of the QRDA Category 1 patients that were passed in.
-    def self.zip_bundle(patients, name, version)
+    def self.zip_bundle(patients, name, version, out_path = nil)
       file = Tempfile.new("patients-#{Time.now.to_i}")
+      file = File.open(out_path, 'w') if out_path
       
       Zip::ZipOutputStream.open(file.path) do |zip|
         # Generate the bundle file

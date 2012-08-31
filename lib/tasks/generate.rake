@@ -55,7 +55,7 @@ namespace :generate do
   # @param [String] out_path The location where we will store a zip of all generated patients. Default is project_root/tmp.
   desc "Generate a zip file of QRDA Category 1 patients for all measures."
   task :qrda_patients, [:measures_dir, :format, :name, :version, :out_path] do |t, args|
-    args.with_defaults(:measures_dir => "./test/fixtures/measure-defs", :format => "bundle", :name => "Meaningful Use Stage 1 Test Deck", :version => "1.0.x", :out_path => "tmp/patients.zip")
+    args.with_defaults(:measures_dir => "./test/fixtures/measure-defs", :format => "bundle", :name => "Meaningful Use Stage 1 Test Deck", :version => "1.0.x", :out_path => "./tmp/patients.zip")
     
     # Pull all of our variables out of args
     measures_dir = args[:measures_dir]
@@ -90,11 +90,13 @@ namespace :generate do
     
     # Generate the patients and export them in the requested format to the out_path
     patients = HQMF::Generator.generate_qrda_patients(measure_needs, measure_value_sets)
+    zip = nil
+    out_path = File.expand_path(out_path)
     if format == "bundle"
-      zip = TPG::Exporter.zip_bundle(patients.values, name, version)
+      zip = TPG::Exporter.zip_bundle(patients.values, name, version, out_path)
     elsif format == "qrda"
-      zip = TPG::Exporter.zip_qrda_patients(patients)
+      zip = TPG::Exporter.zip_qrda_patients(patients, out_path)
     end
-    FileUtils.mv(zip.path, out_path)
+    puts "wrote patients zip file to #{out_path}"
   end
 end
