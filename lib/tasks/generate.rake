@@ -13,7 +13,7 @@ namespace :generate do
   # @param [String] out_path The location where we will store a zip of all generated patients. Default is project_root/tmp.
   desc "Generate a zip file of test patients that cover all logical paths through a set of clinical quality measures."
   task :patients, [:measures_dir, :name, :version, :out_path] do |t, args|
-    args.with_defaults(:measures_dir => "./test/fixtures/measure-defs", :name => "Meaningful Use Stage 1 Test Deck", :version => "1.0.x", :out_path => "tmp/patients.zip")
+    args.with_defaults(:measures_dir => "./test/fixtures/measure-defs", :name => "Meaningful Use Stage 1 Test Deck", :version => "1.0.x", :out_path => "./tmp/patients.zip")
     
     # Pull all of our variables out of args
     measures_dir = args[:measures_dir]
@@ -45,6 +45,7 @@ namespace :generate do
     
     # Zip the patients up into the requested format to the out_path
     zip = TPG::Exporter.zip_bundle(patients, name, version)
+    FileUtils.mkdir_p out_path
     FileUtils.mv(zip.path, out_path)
   end
   
@@ -55,7 +56,7 @@ namespace :generate do
   # @param [String] out_path The location where we will store a zip of all generated patients. Default is project_root/tmp.
   desc "Generate a zip file of QRDA Category 1 patients for all measures."
   task :qrda_patients, [:measures_dir, :format, :name, :version, :out_path] do |t, args|
-    args.with_defaults(:measures_dir => "./test/fixtures/measure-defs", :format => "bundle", :name => "Meaningful Use Stage 1 Test Deck", :version => "1.0.x", :out_path => "tmp/patients.zip")
+    args.with_defaults(:measures_dir => "./test/fixtures/measure-defs", :format => "bundle", :name => "Meaningful Use Stage 1 Test Deck", :version => "1.0.x", :out_path => "./tmp/patients.zip")
     
     # Pull all of our variables out of args
     measures_dir = args[:measures_dir]
@@ -95,6 +96,9 @@ namespace :generate do
     elsif format == "qrda"
       zip = TPG::Exporter.zip_qrda_patients(patients)
     end
+    
+    # Create the outpath if it doesn't already exist and then write out the generated zip file.
+    FileUtils.mkdir_p out_path
     FileUtils.mv(zip.path, out_path)
   end
 end
