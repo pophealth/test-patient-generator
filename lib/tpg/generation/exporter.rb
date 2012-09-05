@@ -11,9 +11,7 @@ module TPG
       Zip::ZipOutputStream.open(file.path) do |z|
         xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
         patients.each do |patient|
-          safe_first_name = patient.first.gsub("'", '')
-          safe_last_name = patient.last.gsub("'", '')
-          next_entry_path = "#{safe_first_name}_#{safe_last_name}"
+          next_entry_path = patient_filename(patient)
 
           if format == "c32"
             z.put_next_entry("#{next_entry_path}.xml")
@@ -45,12 +43,8 @@ module TPG
       Zip::ZipOutputStream.open(file.path) do |zip|
         xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
         measure_patients.each do |measure, patient|
-          # Escape punctuation from names that may corrupt the zip file.
-          safe_first_name = patient.first.gsub("'", "")
-          safe_last_name = patient.last.gsub("'", "")
-          
           # Create a directory for this measure and insert the HTML for this patient.
-          zip.put_next_entry(File.join(measure, "#{safe_first_name}_#{safe_last_name}.html"))
+          zip.put_next_entry(File.join(measure, "#{patient_filename(patient)}.html"))
           zip << html_contents(patient)
         end
       end
@@ -75,10 +69,7 @@ module TPG
         
         xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
         patients.each_with_index do |patient, index|
-          # Escape punctuation from names that may corrupt the zip file.
-          safe_first_name = patient.first.gsub("'", "")
-          safe_last_name = patient.last.gsub("'", "")
-          filename = "#{index}_#{safe_first_name}_#{safe_last_name}"
+          filename = "#{index}_#{patient_filename(patient)}"
           
           # Define path names
           c32_path = File.join("patients", "c32", "#{filename}.xml")
@@ -119,6 +110,17 @@ module TPG
       transformed.at_css('ul').after(html)
       
       transformed.to_html
+    end
+    
+    # Join the first and last name with an underscore and replace any other punctuation that might interfere with file names.
+    #
+    # @param [Record] patient The patient for whom we're generating a filename.
+    # @return A string that can be used safely as a filename.
+    def self.patient_filename(patient)
+      safe_first_name = patient.first.gsub("'", "")
+      safe_last_name = patient.last.gsub("'", "")
+      
+      "#{safe_first_name}_#{safe_last_name}"
     end
   end
 end
