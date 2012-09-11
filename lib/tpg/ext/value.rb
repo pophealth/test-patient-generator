@@ -15,7 +15,7 @@ module HQMF
       pretty_unit = unit_mapping[unit] if unit
       pretty_unit ||= unit
       
-      { "scalar" => value, "unit" => pretty_unit }
+      { "scalar" => value, "units" => pretty_unit }
     end
 
     # 
