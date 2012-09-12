@@ -19,6 +19,9 @@ module TPG
           elsif format == "ccr"
             z.put_next_entry("#{next_entry_path}.xml")
             z << HealthDataStandards::Export::CCR.export(patient)
+          elsif format == "ccda"
+            z.put_next_entry("#{next_entry_path}.xml")
+            z << HealthDataStandards::Export::CCDA.export(patient)
           elsif format == "html"
             z.put_next_entry("#{next_entry_path}.html")
             z << html_contents(patient)
