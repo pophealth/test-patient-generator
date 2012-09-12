@@ -1,6 +1,6 @@
 module HQMF
   class DataCriteria
-    attr_accessor :generation_range
+    attr_accessor :generation_range, :values
 
     # Generate all acceptable ranges of values and times for this data criteria. These ranges will then be updated by the permutate function 
     # and passed to modify_patient to actually augment the base_patients Records.
@@ -82,8 +82,8 @@ module HQMF
         entry_type = Generator.classify_entry(patient_api_function)
         entry = entry_type.classify.constantize.new
         entry.description = description
-        entry.start_time = time.low.to_seconds
-        entry.end_time = time.high.to_seconds
+        entry.start_time = time.low.to_seconds if time.low
+        entry.end_time = time.high.to_seconds if time.high
         entry.status = status
         entry.codes = Coded.select_codes(code_list_id, value_sets)
 
@@ -96,6 +96,18 @@ module HQMF
             entry.values << PhysicalQuantityResultValue.new(value.format)
           end
         end
+        
+        if values.present?
+           entry.values ||= []
+           values.each do |value|
+             if value.type == "CD"
+               entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
+             else
+               entry.values << PhysicalQuantityResultValue.new(value.format)
+             end
+           end
+        end
+        
         
         # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated and referenced.
         if negation && negation_code_list_id.present?
