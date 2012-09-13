@@ -14,3 +14,5 @@ end
 task :test => [:test_unit] do
   system("open coverage/index.html")
 end
+
+task :default => [:test]
