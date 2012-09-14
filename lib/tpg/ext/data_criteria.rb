@@ -88,7 +88,7 @@ module HQMF
         entry.codes = Coded.select_codes(code_list_id, value_sets)
 
         # If the value itself has a code, it will be a Coded type. Otherwise, it's just a regular value with a unit.
-        if value.present?
+        if value.present? && !value.is_a?(AnyValue)
           entry.values ||= []
           if value.type == "CD"
             entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
@@ -107,7 +107,6 @@ module HQMF
              end
            end
         end
-        
         
         # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated and referenced.
         if negation && negation_code_list_id.present?
