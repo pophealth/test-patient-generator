@@ -78,7 +78,6 @@ module HQMF
         
         # Mark the patient we just created with its expected population. Then extend the Record to be augmented by the next population.
         base_patients.collect! do |patient|
-          patient.elimination_population = population
           generated_patients.push(Generator.finalize_patient(patient))
           Generator.extend_patient(patient)
         end
@@ -92,8 +91,6 @@ module HQMF
     # @return A Record with a blank slate
     def self.create_base_patient(initial_attributes = nil)
       patient = Record.new
-      patient.elimination_population = nil
-      patient.elimination_reason = nil
       
       if initial_attributes.nil?
         patient = Randomizer.randomize_demographics(patient)
