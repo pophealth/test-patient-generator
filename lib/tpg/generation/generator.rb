@@ -44,6 +44,8 @@ module HQMF
           time = Randomizer.randomize_range(patient.birthdate, nil)
           data_criteria.modify_patient(patient, time, measure_value_sets[measure])
         end
+        patient.measure_ids ||= []
+        patient.measure_ids << measure
         measure_patients[measure] = Generator.finalize_patient(patient)
       end
       
