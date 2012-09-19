@@ -46,6 +46,7 @@ module HQMF
         end
         patient.measure_ids ||= []
         patient.measure_ids << measure
+        patient.type = "qrda"
         measure_patients[measure] = Generator.finalize_patient(patient)
       end
       
