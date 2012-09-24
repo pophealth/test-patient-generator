@@ -129,7 +129,7 @@ module HQMF
             
             case name
             when "ORDINAL"
-              entry.ordinality = codes
+              entry.ordinality_code = codes
             when "FACILITY_LOCATION"
               entry.facility = Facility.new("name" => field.title, "codes" => codes)
             when "CUMULATIVE_MEDICATION_DURATION"
