@@ -101,18 +101,7 @@ module TPG
     # @param [Record] patient The Record for which we're generating HTML content.
     # @return HTML content to be exported for a Record.
     def self.html_contents(patient)
-      xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
-      
-      # Export the patient as C32 XML so we can build the HTML file.
-      doc = Nokogiri::XML::Document.parse(HealthDataStandards::Export::C32.export(patient)) 
-      xml = xslt.apply_to(doc)
-      html = HealthDataStandards::Export::HTML.export(patient)
-      
-      # Not sure why this portion is necessary but I copied this section from Cypress
-      transformed = Nokogiri::HTML::Document.parse(xml)
-      transformed.at_css('ul').after(html)
-      
-      transformed.to_html
+      HealthDataStandards::Export::HTML.export(patient)
     end
     
     # Join the first and last name with an underscore and replace any other punctuation that might interfere with file names.
