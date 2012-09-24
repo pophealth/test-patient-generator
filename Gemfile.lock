@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://github.com/projectcypress/health-data-standards.git
-  revision: 7b3d8b0442ef2aa440a6e1ac581f522712bb3a4a
+  revision: 9172d170099524a04e0070133223c8f735b5a84d
   branch: develop
   specs:
     health-data-standards (1.0.1)
@@ -51,7 +51,7 @@ GEM
     bson (1.6.4)
     bson_ext (1.6.2)
       bson (~> 1.6.2)
-    builder (3.0.0)
+    builder (3.0.3)
     choice (0.1.6)
     coderay (1.0.6)
     coffee-script (2.2.0)
