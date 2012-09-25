@@ -14,8 +14,8 @@ module HQMF
     #         race/ethnicity, language, last name
     def self.randomize_demographics(patient)
       race_and_ethnicity = randomize_race_and_ethnicity
-      patient.race = race_and_ethnicity[:race]
-      patient.ethnicity = race_and_ethnicity[:ethnicity]
+      patient.race = {"code" => race_and_ethnicity[:race], "code_set" => "CDC-RE"}
+      patient.ethnicity = {"code" => race_and_ethnicity[:ethnicity], "code_set" => "CDC-RE"}
       
       patient.languages = []
       patient.languages << randomize_language
