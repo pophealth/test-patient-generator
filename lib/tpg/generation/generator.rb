@@ -100,6 +100,7 @@ module HQMF
       else
         initial_attributes.each {|attribute, value| patient.send("#{attribute}=", value)}
       end
+      patient.medical_record_number = "#{patient.first} #{patient.last}".hash.abs
       
       patient
     end

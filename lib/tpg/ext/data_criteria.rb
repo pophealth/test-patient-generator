@@ -86,6 +86,7 @@ module HQMF
         entry.end_time = time.high.to_seconds if time.high
         entry.status = status
         entry.codes = Coded.select_codes(code_list_id, value_sets)
+        entry.oid = HQMF::DataCriteria.template_id_for_definition(definition, status, negation)
 
         # If the value itself has a code, it will be a Coded type. Otherwise, it's just a regular value with a unit.
         if value.present? && !value.is_a?(AnyValue)
@@ -128,7 +129,7 @@ module HQMF
             
             case name
             when "ORDINAL"
-              entry.ordinality = codes
+              entry.ordinality_code = codes
             when "FACILITY_LOCATION"
               entry.facility = Facility.new("name" => field.title, "codes" => codes)
             when "CUMULATIVE_MEDICATION_DURATION"
