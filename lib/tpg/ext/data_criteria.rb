@@ -67,7 +67,7 @@ module HQMF
     # @return The modified patient. The passed in patient object will be modified by reference already so this is just for potential convenience.
     def modify_patient(patient, time, value_sets)
       # Figure out what kind of data criteria we're looking at
-      if type == :characteristic and property != nil and patient_api_function != nil
+      if type == :characteristic and property != nil and patient_api_function == nil
         # We have a special case on our hands.
         if property == :birthtime
           patient.birthdate = time.low.to_seconds
@@ -81,6 +81,7 @@ module HQMF
         # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
         entry_type = Generator.classify_entry(patient_api_function)
         entry = entry_type.classify.constantize.new
+        binding.pry
         entry.description = "#{description} (Code List: #{code_list_id})"
         entry.start_time = time.low.to_seconds if time.low
         entry.end_time = time.high.to_seconds if time.high
