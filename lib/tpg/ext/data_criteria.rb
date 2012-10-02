@@ -81,7 +81,6 @@ module HQMF
         # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
         entry_type = Generator.classify_entry(patient_api_function)
         entry = entry_type.classify.constantize.new
-        binding.pry
         entry.description = "#{description} (Code List: #{code_list_id})"
         entry.start_time = time.low.to_seconds if time.low
         entry.end_time = time.high.to_seconds if time.high
