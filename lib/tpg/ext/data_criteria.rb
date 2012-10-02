@@ -67,7 +67,7 @@ module HQMF
     # @return The modified patient. The passed in patient object will be modified by reference already so this is just for potential convenience.
     def modify_patient(patient, time, value_sets)
       # Figure out what kind of data criteria we're looking at
-      if type == :characteristic
+      if type == :characteristic and property != nil and patient_api_function != nil
         # We have a special case on our hands.
         if property == :birthtime
           patient.birthdate = time.low.to_seconds
