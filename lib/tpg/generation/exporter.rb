@@ -5,7 +5,7 @@ module TPG
     # @param [Array] patients All of the patients that will be exported.
     # @param [String] format The desired format for the patients to be in.
     # @return A zip file containing all given patients in the requested format.
-    def self.zip(patients, format)
+    def self.zip(patients, format, concept_map=nil)
       file = Tempfile.new("patients-#{Time.now.to_i}")
       
       Zip::ZipOutputStream.open(file.path) do |z|
@@ -24,7 +24,7 @@ module TPG
             z << HealthDataStandards::Export::CCDA.export(patient)
           elsif format == "html"
             z.put_next_entry("#{next_entry_path}.html")
-            z << html_contents(patient)
+            z << html_contents(patient, concept_map)
           elsif format == "json"
             z.put_next_entry("#{next_entry_path}.json")
             z << JSON.pretty_generate(JSON.parse(patient.to_json))
@@ -100,8 +100,8 @@ module TPG
     #
     # @param [Record] patient The Record for which we're generating HTML content.
     # @return HTML content to be exported for a Record.
-    def self.html_contents(patient)
-      HealthDataStandards::Export::HTML.export(patient)
+    def self.html_contents(patient, concept_map=nil)
+      HealthDataStandards::Export::HTML.export(patient, concept_map)
     end
     
     # Join the first and last name with an underscore and replace any other punctuation that might interfere with file names.
