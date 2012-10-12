@@ -17,5 +17,20 @@ module HQMF
       end
       code_sets
     end
+
+    # Select the relevant value set that matches the given OID and generate a hash that can be stored on a Record.
+    # The hash will be of this format: { "codeSystem" => "code_set_identified", "code" => code }
+    #
+    # @param [String] oid The target value set.
+    # @param [Hash] value_sets Value sets that might contain the OID for which we're searching.
+    # @return A Hash including a code and code system containing one randomly selected code.
+    def self.select_code(oid, value_sets)
+      codes = select_codes(oid, value_sets)
+      codeSystem = codes.keys()[0]
+      {
+        'codeSystem' => codeSystem,
+        'code' => codes[codeSystem][0]
+      }
+    end
   end
 end

@@ -112,7 +112,7 @@ module HQMF
         # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated and referenced.
         if negation && negation_code_list_id.present?
           entry.negation_ind = true
-          entry.negation_reason = Coded.select_codes(negation_code_list_id, value_sets)
+          entry.negation_reason = Coded.select_code(negation_code_list_id, value_sets)
         end
         
         # Additional fields (e.g. ordinality, severity, etc) seem to all be special cases. Capture them here.
