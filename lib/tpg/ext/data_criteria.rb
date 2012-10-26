@@ -102,7 +102,7 @@ module HQMF
            entry.values ||= []
            values.each do |value|
              if value.type == "CD"
-               entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
+               entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets), description: Coded.select_value_sets(value.code_list_id, value_sets)['description']})
              else
                entry.values << PhysicalQuantityResultValue.new(value.format)
              end
