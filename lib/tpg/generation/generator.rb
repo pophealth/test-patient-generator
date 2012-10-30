@@ -1,18 +1,9 @@
 module HQMF
-  # The generator will create as many patients as possible to exhaustively test the logic of a given clinical quality measure.
   class Generator
     # TODO - This is a hack and a half. Need a better way to resolve data_criteria from any point in the tree.
     class << self
       attr_accessor :hqmf
       attr_accessor :value_sets
-    end
-    
-    # @param [HQMF::Document] hqmf A model representing the logic of a given HQMF document.
-    # @param [Hash] value_sets All of the value sets referenced by this particular HQMF document.
-    def initialize(hqmf, value_sets)
-      @patients = []
-      Generator.hqmf = hqmf
-      Generator.value_sets = value_sets
     end
     
     # Generate patients from lists of DataCriteria. This is originally created for QRDA Category 1 validation testing,
@@ -51,42 +42,6 @@ module HQMF
       end
       
       measure_patients
-    end
-    
-    # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
-    # paths through the logic of this particular clinical quality measure.
-    def generate_patients
-      base_patients = [Generator.create_base_patient]
-      generated_patients = []
-      
-      # Gather all available populations. Each kind of population (e.g. IPP, DENOM) can have many multiples (e.g. IPP_1, IPP_2)
-      populations = []
-      ["IPP", "DENOM", "NUMER", "EXCL", "DENEXCEP"].each do |population|
-        i = 1
-        populations << population
-        while Generator.hqmf.population_criteria("#{population}_#{i}").present? do
-          populations << "#{population}_#{i}"
-          i += 1
-        end
-      end
-
-      populations = ["EXCL_1"]
-
-      populations.each do |population|
-        criteria = Generator.hqmf.population_criteria(population)
-        
-        # We don't need to do anything for populations with nothing specified
-        next if criteria.nil? || !criteria.preconditions.present?
-        criteria.generate(base_patients)  
-        
-        # Mark the patient we just created with its expected population. Then extend the Record to be augmented by the next population.
-        base_patients.collect! do |patient|
-          generated_patients.push(Generator.finalize_patient(patient))
-          Generator.extend_patient(patient)
-        end
-      end
-      
-      generated_patients
     end
     
     # Create a patient with trivial demographic information and no coded entries.
@@ -134,10 +89,10 @@ module HQMF
       patient
     end
     
+    # Map all patient api coded entry types from HQMF data criteria to Record sections.
     #
-    #
-    # @param [String] type 
-    # @return 
+    # @param [String] type The type of the coded entry requried by a data criteria.
+    # @return The section type for the given patient api function type
     def self.classify_entry(type)
       # The possible matches per patientAPI function can be found in hqmf-parser's README
       case type
