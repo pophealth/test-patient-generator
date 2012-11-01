@@ -1,10 +1,9 @@
 source "http://rubygems.org"
 
-gem 'hqmf-parser', :git => 'https://github.com/pophealth/hqmf-parser.git', :branch => 'develop'
-gem 'hquery-patient-api', :git => 'https://github.com/pophealth/patientapi.git', :branch => 'develop'
-gem 'hqmf2js', :git => 'https://github.com/pophealth/hqmf2js.git', :branch => 'develop'
-gem 'health-data-standards', :git => 'https://github.com/projectcypress/health-data-standards.git', :branch => 'develop'
-#gem 'health-data-standards', :path => '../../shared/health-data-standards'
+gem 'hqmf-parser', '~> 1.0.2'
+gem 'hquery-patient-api', '~> 0.3.0'
+gem 'hqmf2js', '~> 1.0.0'
+gem 'health-data-standards', '~> 2.1.2'
 
 gem 'rake'
 gem 'pry'
