@@ -123,7 +123,7 @@ module HQMF
             # These fields are sometimes Coded and sometimes Values.
             if field.type == "CD"
               codes = Coded.select_codes(field.code_list_id, value_sets)
-            elsif field.type == "IVL_PQ"
+            elsif field.type == "IVL_PQ" || field.type =='PQ'
               value = field.format
             end
             

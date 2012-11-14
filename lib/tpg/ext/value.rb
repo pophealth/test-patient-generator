@@ -11,11 +11,11 @@ module HQMF
 
     #
     def format      
-      unit_mapping = {"a" => "years", "mo" => "months", "wk" => "weeks", "d" => "days"}
-      pretty_unit = unit_mapping[unit] if unit
-      pretty_unit ||= unit
+#      unit_mapping = {"a" => "years", "mo" => "months", "wk" => "weeks", "d" => "days"}
+#      pretty_unit = unit_mapping[unit] if unit
+#      pretty_unit ||= unit
       
-      { "scalar" => value, "units" => pretty_unit }
+      { "scalar" => value, "units" => unit }
     end
 
     # 
