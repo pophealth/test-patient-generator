@@ -23,7 +23,11 @@ module HQMF
       else
         # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
         entry_type = Generator.classify_entry(patient_api_function)
+        
+        # HACK -- this is here to deal with types that have not been mapped yet and blow things up
+        return patient if entry_type.nil? || entry_type == ""
         entry = entry_type.classify.constantize.new
+
         entry.description = "#{description} (Code List: #{code_list_id})"
         entry.start_time = time.low.to_seconds if time.low
         entry.end_time = time.high.to_seconds if time.high
@@ -66,7 +70,7 @@ module HQMF
             # These fields are sometimes Coded and sometimes Values.
             if field.type == "CD"
               codes = Coded.select_codes(field.code_list_id, value_sets)
-            elsif field.type == "IVL_PQ"
+            elsif field.type == "IVL_PQ" || field.type =='PQ'
               value = field.format
             end
             
