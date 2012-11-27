@@ -79,12 +79,9 @@ module HQMF
         end
       else
         # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
+        binding.pry if patient_api_function.nil?
         entry_type = Generator.classify_entry(patient_api_function)
-        
-        # HACK -- this is here to deal with types that have not been mapped yet and blow things up
-        return patient if entry_type.nil? || entry_type == ""
         entry = entry_type.classify.constantize.new
-
         entry.description = "#{description} (Code List: #{code_list_id})"
         entry.start_time = time.low.to_seconds if time.low
         entry.end_time = time.high.to_seconds if time.high
@@ -112,13 +109,13 @@ module HQMF
              end
            end
         end
-        
+
         # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated and referenced.
         if negation && negation_code_list_id.present?
           entry.negation_ind = true
           entry.negation_reason = Coded.select_code(negation_code_list_id, value_sets)
         end
-        
+
         # Additional fields (e.g. ordinality, severity, etc) seem to all be special cases. Capture them here.
         if field_values.present?
           field_values.each do |name, field|
@@ -141,9 +138,36 @@ module HQMF
             when "SEVERITY"
               entry.severity = codes
             when "REASON"
-              
+              # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (it's chickenpox pneumonia.)
+              entry.reason = codes || {"SNOMED-CT" => ["195911009"]}
             when "SOURCE"
-
+              entry.source = codes
+            when "DISCHARGE_STATUS"
+              entry.discharge_disposition = codes
+            when "DISCHARGE_DATETIME"
+              entry.discharge_time = time.high
+            when "ADMISSION_DATETIME"
+              entry.admit_time = time.low
+            when "LENGTH_OF_STAY"
+              # This is resolved in the patient API with discharge and admission datetimes.
+            when "ROUTE"
+              entry.route = codes
+            when "START_DATETIME"
+              entry.start_time = time.low
+            when "STOP_DATETIME"
+              entry.end_time = time.high
+            when "ANATOMICAL_STRUCTURE"
+              entry.anatomical_structure = codes
+            when "REMOVAL_DATETIME"
+              entry.end_time = time.high
+            when "INCISION_DATETIME"
+              entry.incision_date_time = time.low
+            when "TRANSFER_TO"
+              entry.transfer_to = codes
+            when "TRANSFER_FROM"
+              entry.transfer_from = codes
+            else
+              
             end
           end
         end
