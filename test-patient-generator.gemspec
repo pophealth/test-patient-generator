@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.email = "talk@projectpophealth.org"
   s.homepage = "https://github.com/pophealth/test-patient-generator"
   s.authors = ["Adam Goldstein"]
-  s.version = '0.1.0'
+  s.version = '1.0.2'
 
   #s.add_dependency 'nokogiri', '~> 1.5.2'
   #s.add_dependency 'health-data-standards', '~> 1.0.1'

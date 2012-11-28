@@ -85,6 +85,7 @@ namespace :generate do
       hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
       
       # Add this measure and its value sets to our mapping
+      puts "Parsed #{hqmf.id}"
       measure_needs[hqmf.id] = hqmf.referenced_data_criteria
       measure_value_sets[hqmf.id] = value_sets
     end
