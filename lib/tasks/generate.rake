@@ -6,6 +6,10 @@ require 'fileutils'
 
 require_relative '../test-patient-generator'
 
+Mongoid.configure do |config|
+  config.sessions = { default: { hosts: [ "localhost:27017" ], database: 'cypress_development' }}
+end
+
 namespace :generate do
   # @param [String] measures_dir The directory that contains all the measures for which we're generating patients.
   # @param [String] name The name of the test deck that will be generated.
@@ -68,6 +72,7 @@ namespace :generate do
     # Make a mapping of each measure found in measure_dir to its data criteria and value sets
     measure_needs = {}
     measure_value_sets = {}
+    measure_defs = {}
     Dir.foreach(measures_dir) do |entry|
       next if entry.starts_with? '.'
       measure_dir = File.join(measures_dir,entry)
@@ -88,14 +93,18 @@ namespace :generate do
       puts "Parsed #{hqmf.id}"
       measure_needs[hqmf.id] = hqmf.referenced_data_criteria
       measure_value_sets[hqmf.id] = value_sets
+      measure_defs[hqmf.id] = hqmf
     end
     
     # Generate the patients and export them in the requested format to the out_path
     patients = HQMF::Generator.generate_qrda_patients(measure_needs, measure_value_sets)
-    if format == "bundle"
+    case format 
+    when "bundle"
       zip = TPG::Exporter.zip_bundle(patients.values, name, version)
-    elsif format == "qrda"
+    when "qrda"
       zip = TPG::Exporter.zip_qrda_patients(patients)
+    when "qrda_cat_1"
+      zip = TPG::Exporter.zip_qrda_cat_1_patients(patients, measure_defs)
     end
     
     # Create the outpath if it doesn't already exist and then write out the generated zip file.

@@ -12,11 +12,11 @@ gem 'hqmf2js', git: 'http://github.com/pophealth/hqmf2js.git', branch: 'develop'
 #gem 'health-data-standards', '~> 2.1.4'
 #gem 'health-data-standards', path: '../../shared/health-data-standards'
 gem 'health-data-standards', :git => 'http://github.com/projectcypress/health-data-standards.git', :branch => 'develop'
+gem 'qrda_generator', :path => '../qrda_generator'
 
 gem 'rake'
 gem 'pry'
 gem 'pry-nav'
-gem 'bson_ext'
 
 group :test do
   gem 'simplecov'

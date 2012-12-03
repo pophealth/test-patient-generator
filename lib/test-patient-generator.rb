@@ -1,5 +1,6 @@
 require 'hqmf-parser'
 require 'health-data-standards'
+require 'qrda_generator'
 
 require_relative 'tpg/ext/coded'
 require_relative 'tpg/ext/conjunction'
