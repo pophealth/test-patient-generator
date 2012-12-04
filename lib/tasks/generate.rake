@@ -3,7 +3,6 @@ require 'bundler/setup'
 require 'hqmf-parser'
 require 'hqmf2js'
 require 'fileutils'
-require 'ruby-prof'
 require 'digest/sha1'
 
 require_relative '../test-patient-generator'
