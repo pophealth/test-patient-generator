@@ -3,6 +3,8 @@ require 'bundler/setup'
 require 'hqmf-parser'
 require 'hqmf2js'
 require 'fileutils'
+require 'ruby-prof'
+require 'digest/sha1'
 
 require_relative '../test-patient-generator'
 
@@ -30,7 +32,6 @@ namespace :generate do
       next if entry.starts_with? '.'
       measure_dir = File.join(measures_dir,entry)
       hqmf_path = Dir.glob(File.join(measure_dir,'*.xml')).first
-      value_set_path = Dir.glob(File.join(measure_dir,'*.xls')).first
       
       # Parse all of the value sets
       value_set_parser = HQMF::ValueSet::Parser.new()
@@ -73,24 +74,41 @@ namespace :generate do
     measure_needs = {}
     measure_value_sets = {}
     measure_defs = {}
+    Dir.mkdir('cache') unless Dir.exists?('cache')
     Dir.foreach(measures_dir) do |entry|
       next if entry.starts_with? '.'
-      measure_dir = File.join(measures_dir,entry)
-      hqmf_path = Dir.glob(File.join(measure_dir,'*.xml')).first
-      value_set_path = Dir.glob(File.join(measure_dir,'*.xls')).first
-      
-      # Parse all of the value sets
-      value_set_parser = HQMF::ValueSet::Parser.new()
-      value_set_format ||= HQMF::ValueSet::Parser.get_format(value_set_path)
-      value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
+      entry_name_digest = Digest::SHA1.hexdigest(entry)
+      hqmf = nil
+      value_sets = nil
+      if File.exists?("cache/#{entry_name_digest}")
+        hqmf = Marshal.load(File.new("cache/#{entry_name_digest}", 'r'))
+        value_sets = Marshal.load(File.new("cache/#{entry_name_digest}_value_sets", 'r'))
+        puts "Read from file #{hqmf.id}"
+      else
+        measure_dir = File.join(measures_dir,entry)
+        hqmf_path = Dir.glob(File.join(measure_dir,'*.xml')).first
+        value_set_path = Dir.glob(File.join(measure_dir,'*.xls')).first
+        
+        # Parse all of the value sets
+        value_set_parser = HQMF::ValueSet::Parser.new()
+        value_set_format ||= HQMF::ValueSet::Parser.get_format(value_set_path)
+        value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
 
-      # Parsed the HQMF file into a model
-      codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets) if (value_sets) 
-      hqmf_contents = Nokogiri::XML(File.new hqmf_path).to_s
-      hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
+        # Parsed the HQMF file into a model
+        codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets) if (value_sets) 
+        hqmf_contents = Nokogiri::XML(File.new hqmf_path).to_s
+        hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
+        puts "Parsed #{hqmf.id}"
+        File.open("cache/#{entry_name_digest}", 'w+') do |f|
+          Marshal.dump(hqmf, f)
+        end
+        File.open("cache/#{entry_name_digest}_value_sets", 'w+') do |f|
+          Marshal.dump(value_sets, f)
+        end
+      end
       
       # Add this measure and its value sets to our mapping
-      puts "Parsed #{hqmf.id}"
+      
       measure_needs[hqmf.id] = hqmf.referenced_data_criteria
       measure_value_sets[hqmf.id] = value_sets
       measure_defs[hqmf.id] = hqmf
