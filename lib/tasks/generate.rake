@@ -3,8 +3,13 @@ require 'bundler/setup'
 require 'hqmf-parser'
 require 'hqmf2js'
 require 'fileutils'
+require 'digest/sha1'
 
 require_relative '../test-patient-generator'
+
+Mongoid.configure do |config|
+  config.sessions = { default: { hosts: [ "localhost:27017" ], database: 'cypress_development' }}
+end
 
 namespace :generate do
   # @param [String] measures_dir The directory that contains all the measures for which we're generating patients.
@@ -26,7 +31,6 @@ namespace :generate do
       next if entry.starts_with? '.'
       measure_dir = File.join(measures_dir,entry)
       hqmf_path = Dir.glob(File.join(measure_dir,'*.xml')).first
-      value_set_path = Dir.glob(File.join(measure_dir,'*.xls')).first
       
       # Parse all of the value sets
       value_set_parser = HQMF::ValueSet::Parser.new()
@@ -68,33 +72,56 @@ namespace :generate do
     # Make a mapping of each measure found in measure_dir to its data criteria and value sets
     measure_needs = {}
     measure_value_sets = {}
+    measure_defs = {}
+    Dir.mkdir('cache') unless Dir.exists?('cache')
     Dir.foreach(measures_dir) do |entry|
       next if entry.starts_with? '.'
-      measure_dir = File.join(measures_dir,entry)
-      hqmf_path = Dir.glob(File.join(measure_dir,'*.xml')).first
-      value_set_path = Dir.glob(File.join(measure_dir,'*.xls')).first
-      
-      # Parse all of the value sets
-      value_set_parser = HQMF::ValueSet::Parser.new()
-      value_set_format ||= HQMF::ValueSet::Parser.get_format(value_set_path)
-      value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
+      entry_name_digest = Digest::SHA1.hexdigest(entry)
+      hqmf = nil
+      value_sets = nil
+      if File.exists?("cache/#{entry_name_digest}")
+        hqmf = Marshal.load(File.new("cache/#{entry_name_digest}", 'r'))
+        value_sets = Marshal.load(File.new("cache/#{entry_name_digest}_value_sets", 'r'))
+        puts "Read from file #{hqmf.id}"
+      else
+        measure_dir = File.join(measures_dir,entry)
+        hqmf_path = Dir.glob(File.join(measure_dir,'*.xml')).first
+        value_set_path = Dir.glob(File.join(measure_dir,'*.xls')).first
+        
+        # Parse all of the value sets
+        value_set_parser = HQMF::ValueSet::Parser.new()
+        value_set_format ||= HQMF::ValueSet::Parser.get_format(value_set_path)
+        value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
 
-      # Parsed the HQMF file into a model
-      codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets) if (value_sets) 
-      hqmf_contents = Nokogiri::XML(File.new hqmf_path).to_s
-      hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
+        # Parsed the HQMF file into a model
+        codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets) if (value_sets) 
+        hqmf_contents = Nokogiri::XML(File.new hqmf_path).to_s
+        hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
+        puts "Parsed #{hqmf.id}"
+        File.open("cache/#{entry_name_digest}", 'w+') do |f|
+          Marshal.dump(hqmf, f)
+        end
+        File.open("cache/#{entry_name_digest}_value_sets", 'w+') do |f|
+          Marshal.dump(value_sets, f)
+        end
+      end
       
       # Add this measure and its value sets to our mapping
+      
       measure_needs[hqmf.id] = hqmf.referenced_data_criteria
       measure_value_sets[hqmf.id] = value_sets
+      measure_defs[hqmf.id] = hqmf
     end
     
     # Generate the patients and export them in the requested format to the out_path
     patients = HQMF::Generator.generate_qrda_patients(measure_needs, measure_value_sets)
-    if format == "bundle"
+    case format 
+    when "bundle"
       zip = TPG::Exporter.zip_bundle(patients.values, name, version)
-    elsif format == "qrda"
+    when "qrda"
       zip = TPG::Exporter.zip_qrda_patients(patients)
+    when "qrda_cat_1"
+      zip = TPG::Exporter.zip_qrda_cat_1_patients(patients, measure_defs)
     end
     
     # Create the outpath if it doesn't already exist and then write out the generated zip file.

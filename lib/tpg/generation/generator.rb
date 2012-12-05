@@ -17,6 +17,8 @@ module HQMF
       
       measure_patients = {}
       measure_needs.each do |measure, all_data_criteria|
+        #puts "Generating for #{measure}"
+
         # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
         # so to minimize time we only want to include each kind of data once.
         unique_data_criteria = []

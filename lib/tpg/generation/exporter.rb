@@ -55,6 +55,27 @@ module TPG
       file.close
       file
     end
+
+    # Export QRDA Category 1 patients to a zip file. Contents are organized with a directory for each measure containing one patient for validation.
+    #
+    # @param [Hash] measure_patients Measures mapped to the patient that was generated for it.
+    # @return A zip file containing all of the QRDA Category 1 patients that were passed in.
+    def self.zip_qrda_cat_1_patients(measure_patients, measure_defs)
+      file = Tempfile.new("patients-#{Time.now.to_i}")
+      
+      Zip::ZipOutputStream.open(file.path) do |zip|
+        measure_patients.each do |measure, patient|
+
+          # Create a directory for this measure and insert the HTML for this patient.
+          zip.put_next_entry(File.join(measure, "#{patient_filename(patient)}.html"))
+          puts "Generating patient for measure #{measure}"
+          zip << QrdaGenerator::Export::Cat1.export(patient, [measure_defs[measure]], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
+        end
+      end
+      
+      file.close
+      file
+    end
     
     # Export a list of patients to a zip file. Contains the proper formatting of a patient bundle for Cypress,
     # i.e. a bundle JSON file with four subdirectories for c32, ccr, html, and JSON formatting for patients.

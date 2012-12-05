@@ -1,3 +1,4 @@
 tmp/
 coverage/
+cache/
 .DS_Store
