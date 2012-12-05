@@ -79,7 +79,6 @@ module HQMF
         end
       else
         # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
-        binding.pry if patient_api_function.nil?
         entry_type = Generator.classify_entry(patient_api_function)
         entry = entry_type.classify.constantize.new
         entry.description = "#{description} (Code List: #{code_list_id})"
@@ -145,9 +144,9 @@ module HQMF
             when "DISCHARGE_STATUS"
               entry.discharge_disposition = codes
             when "DISCHARGE_DATETIME"
-              entry.discharge_time = time.high
+              entry.discharge_time = field_values[name].to_time_object.to_i
             when "ADMISSION_DATETIME"
-              entry.admit_time = time.low
+              entry.admit_time = field_values[name].to_time_object.to_i
             when "LENGTH_OF_STAY"
               # This is resolved in the patient API with discharge and admission datetimes.
             when "ROUTE"
