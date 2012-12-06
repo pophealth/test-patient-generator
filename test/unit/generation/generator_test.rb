@@ -10,20 +10,26 @@ class GeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_create_base_patient
-    base_patient = HQMF::Generator.create_base_patient
+    patient = HQMF::Generator.create_base_patient
     expected_fields = [:race, :ethnicity, :languages, :last, :medical_record_number]
     expected_fields.each do |field|
-      refute_nil base_patient.send(field)
+      refute_nil patient.send(field)
     end
 
     initial_attributes = {first: "Custom", last: "Name"}
-    base_patient = HQMF::Generator.create_base_patient(initial_attributes)
-    assert_equal "Custom", base_patient.first
-    assert_equal "Name", base_patient.last
+    patient = HQMF::Generator.create_base_patient(initial_attributes)
+    assert_equal "Custom", patient.first
+    assert_equal "Name", patient.last
   end
 
   def test_finalize_patient
+    patient = HQMF::Generator.create_base_patient
+    assert_nil patient.first
+    assert_nil patient.birthdate
 
+    HQMF::Generator.finalize_patient(patient)
+    refute_nil patient.first
+    refute_nil patient.birthdate
   end
 
   def classify_entry
