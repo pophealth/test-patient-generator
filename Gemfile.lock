@@ -1,15 +1,4 @@
 GIT
-  remote: http://github.com/eedrummer/qrda_generator.git
-  revision: dc672f4a9d151ccbdf778040ce48d55be62e6dc7
-  specs:
-    qrda_generator (0.1.0)
-      health-data-standards (~> 2.1.4)
-      hqmf-parser (~> 1.0.6)
-      mongoid (~> 3.0.6)
-      nokogiri (~> 1.5.5)
-      uuid (~> 2.3.5)
-
-GIT
   remote: http://github.com/hquery/patientapi.git
   revision: 55a54ba17dd7cf591626fc297bcd584e2f3d6f6b
   branch: develop
@@ -50,6 +39,16 @@ GIT
       mongoid (~> 3.0.14)
       nokogiri (~> 1.5.5)
       rest-client (~> 1.6.7)
+      uuid (~> 2.3.5)
+
+PATH
+  remote: ../qrda_generator
+  specs:
+    qrda_generator (0.1.0)
+      health-data-standards (~> 2.1.4)
+      hqmf-parser (~> 1.0.6)
+      mongoid (~> 3.0.6)
+      nokogiri (~> 1.5.5)
       uuid (~> 2.3.5)
 
 GEM

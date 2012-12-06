@@ -1,7 +1,5 @@
 module HQMF
   class DataCriteria
-    attr_accessor :generation_range, :values
-    
     # Modify a Record with this data criteria. Acceptable times and values are defined prior to this function.
     #
     # @param [Record] patient The Record that is being modified. 
@@ -40,17 +38,6 @@ module HQMF
           else
             entry.values << PhysicalQuantityResultValue.new(value.format)
           end
-        end
-        
-        if values.present?
-           entry.values ||= []
-           values.each do |value|
-             if value.type == "CD"
-               entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets), description: Coded.select_value_sets(value.code_list_id, value_sets)['description']})
-             else
-               entry.values << PhysicalQuantityResultValue.new(value.format)
-             end
-           end
         end
 
         # Choose a code from each relevant code vocabulary for this entry's negation, if it is negated and referenced.
@@ -119,6 +106,7 @@ module HQMF
         section_map = { "lab_results" => "results" }
         section_name = section_map[entry_type]
         section_name ||= entry_type
+
         # Add the updated section to this patient.
         section = patient.send(section_name)
         section.push(entry)

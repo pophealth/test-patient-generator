@@ -36,7 +36,8 @@ module TPG
       file
     end
     
-    # Export QRDA Category 1 patients to a zip file. Contents are organized with a directory for each measure containing one patient for validation.
+    # Export QRDA Category 1 patients to a zip file.
+    # Contents are organized with a directory for each measure containing one patient for validation.
     #
     # @param [Hash] measure_patients Measures mapped to the patient that was generated for it.
     # @return A zip file containing all of the QRDA Category 1 patients that were passed in.
@@ -56,7 +57,8 @@ module TPG
       file
     end
 
-    # Export QRDA Category 1 patients to a zip file. Contents are organized with a directory for each measure containing one patient for validation.
+    # Export QRDA Category 1 patients to a zip file.
+    # Contents are organized with a directory for each measure containing one patient for validation.
     #
     # @param [Hash] measure_patients Measures mapped to the patient that was generated for it.
     # @return A zip file containing all of the QRDA Category 1 patients that were passed in.
@@ -65,51 +67,10 @@ module TPG
       
       Zip::ZipOutputStream.open(file.path) do |zip|
         measure_patients.each do |measure, patient|
-
           # Create a directory for this measure and insert the HTML for this patient.
           zip.put_next_entry(File.join(measure, "#{patient_filename(patient)}.html"))
           puts "Generating patient for measure #{measure}"
           zip << QrdaGenerator::Export::Cat1.export(patient, [measure_defs[measure]], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
-        end
-      end
-      
-      file.close
-      file
-    end
-    
-    # Export a list of patients to a zip file. Contains the proper formatting of a patient bundle for Cypress,
-    # i.e. a bundle JSON file with four subdirectories for c32, ccr, html, and JSON formatting for patients.
-    #
-    # @param [Array] patients All of the patients that will be exported.
-    # @param [String] version The version to mark the bundle.json file of this archive.
-    # @return A bundle containing all of the QRDA Category 1 patients that were passed in.
-    def self.zip_bundle(patients, name, version)
-      file = Tempfile.new("patients-#{Time.now.to_i}")
-      
-      Zip::ZipOutputStream.open(file.path) do |zip|
-        # Generate the bundle file
-        zip.put_next_entry("bundle.json")
-        zip << {name: name, version: version}.to_json
-        
-        xslt = Nokogiri::XSLT(File.read("public/cda.xsl"))
-        patients.each_with_index do |patient, index|
-          filename = "#{index}_#{patient_filename(patient)}"
-          
-          # Define path names
-          c32_path = File.join("patients", "c32", "#{filename}.xml")
-          ccr_path = File.join("patients", "ccr", "#{filename}.xml")
-          html_path = File.join("patients", "html", "#{filename}.html")
-          json_path = File.join("patients", "json", "#{filename}.json")
-          
-          # For each patient add a C32, CCR, HTML, and JSON file.
-          zip.put_next_entry(c32_path)
-          zip << HealthDataStandards::Export::C32.export(patient)
-          zip.put_next_entry(ccr_path)
-          zip << HealthDataStandards::Export::CCR.export(patient)
-          zip.put_next_entry(html_path)
-          zip << html_contents(patient)
-          zip.put_next_entry(json_path)
-          zip << JSON.pretty_generate(JSON.parse(patient.to_json))
         end
       end
       

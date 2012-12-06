@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class DataCriteriaTest < MiniTest::Unit::TestCase
-
   def setup
     measure_dir = File.join('test', 'fixtures', 'measure-defs', '0043')
     hqmf_path = File.join(measure_dir, '0043.xml')
