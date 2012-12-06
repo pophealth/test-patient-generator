@@ -15,6 +15,11 @@ module HQMF
       code_sets
     end
     
+    # Filter through a list of value sets and choose only the ones marked with a given OID.
+    #
+    # @param [String] oid The OID being used for filtering.
+    # @param [Array] value_sets A pool of available value sets
+    # @return The value set from the list with the requested OID.
     def self.select_value_sets(oid, value_sets)
       # Pick the value set for this DataCriteria. If it can't be found, it is an error from the value set source. We'll add the entry without codes for now.
       index = value_sets.index{|value_set| value_set["oid"] == oid}
