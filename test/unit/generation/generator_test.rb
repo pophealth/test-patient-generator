@@ -6,7 +6,7 @@ class GeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_generate_qrda_patients
-
+    
   end
 
   def test_create_base_patient

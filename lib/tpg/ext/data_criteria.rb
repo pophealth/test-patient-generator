@@ -53,6 +53,7 @@ module HQMF
             if field.type == "CD"
               field_value = Coded.select_codes(field.code_list_id, value_sets)
             else
+              binding.pry if field.is_a? HQMF::AnyValue
               field_value = field.format
             end
 
@@ -65,14 +66,16 @@ module HQMF
               # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (it's chickenpox pneumonia.)
               field_value ||= {"SNOMED-CT" => ["195911009"]}
             elsif name == "FACILITY_LOCATION"
-              field_value = Facility.new("name" => field.title, "codes" => field_value)
+              codes = Coded.select_codes(field.code_list_id, value_sets)
+              field_value = Facility.new("name" => field.title, "codes" => codes)
             end
 
             begin
               field_accessor = HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
               entry.send("#{field_accessor}=", value)
             rescue
-              puts "Unknown field #{name} was unable to be added to the patient"
+              field_accessor = HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
+              puts "Unknown field #{name} was unable to be added via #{field_accessor} to the patient"
             end
           end
         end

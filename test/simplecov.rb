@@ -2,7 +2,7 @@ require 'simplecov'
 
 SimpleCov.command_name 'Unit Tests'
 SimpleCov.start do
-  add_filter "test/unit/"
+  add_filter "test/"
   add_group "Extensions", "lib/tpg/ext"
   add_group "Generation", "lib/tpg/generation"
 end
