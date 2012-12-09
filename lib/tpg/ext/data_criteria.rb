@@ -20,7 +20,6 @@ module HQMF
         end
       else
         # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
-        binding.pry if patient_api_function.nil?
         entry_type = Generator.classify_entry(patient_api_function)
         entry = entry_type.classify.constantize.new
         entry.description = "#{description} (Code List: #{code_list_id})"
@@ -53,6 +52,7 @@ module HQMF
             
             # These fields are sometimes Coded and sometimes Values.
             if field.type == "CD"
+              code = Coded.select_code(field.code_list_id, value_sets)
               codes = Coded.select_codes(field.code_list_id, value_sets)
             elsif field.type == "IVL_PQ" || field.type =='PQ'
               value = field.format
@@ -60,42 +60,42 @@ module HQMF
             
             case name
             when "ORDINAL"
-              entry.ordinality_code = codes
+              entry.ordinality_code = code
             when "FACILITY_LOCATION"
               entry.facility = Facility.new("name" => field.title, "codes" => codes)
             when "CUMULATIVE_MEDICATION_DURATION"
               entry.cumulative_medication_duration = value              
             when "SEVERITY"
-              entry.severity = codes
+              entry.severity = code
             when "REASON"
               # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (it's chickenpox pneumonia.)
-              entry.reason = codes || {"SNOMED-CT" => ["195911009"]}
+              entry.reason = code || {"codeSystem" => "SNOMED-CT", "code" => "195911009"}
             when "SOURCE"
-              entry.source = codes
+              entry.source = code
             when "DISCHARGE_STATUS"
-              entry.discharge_disposition = codes
+              entry.discharge_disposition = code
             when "DISCHARGE_DATETIME"
-              entry.discharge_time = time.high
+              entry.discharge_time = field_values[name].to_time_object.to_i
             when "ADMISSION_DATETIME"
-              entry.admit_time = time.low
+              entry.admit_time = field_values[name].to_time_object.to_i
             when "LENGTH_OF_STAY"
               # This is resolved in the patient API with discharge and admission datetimes.
             when "ROUTE"
-              entry.route = codes
-            when "START_DATETIME"
-              entry.start_time = time.low
-            when "STOP_DATETIME"
-              entry.end_time = time.high
+              entry.route = code
+            # when "START_DATETIME"
+            #   entry.start_time = time.low
+            # when "STOP_DATETIME"
+            #   entry.end_time = time.high
             when "ANATOMICAL_STRUCTURE"
-              entry.anatomical_structure = codes
+              entry.anatomical_structure = code
             when "REMOVAL_DATETIME"
-              entry.end_time = time.high
+              entry.removal_time = field_values[name].to_time_object.to_i
             when "INCISION_DATETIME"
-              entry.incision_date_time = time.low
+              entry.incision_time = field_values[name].to_time_object.to_i
             when "TRANSFER_TO"
-              entry.transfer_to = codes
+              entry.transfer_to = code
             when "TRANSFER_FROM"
-              entry.transfer_from = codes
+              entry.transfer_from = code
             else
               
             end
