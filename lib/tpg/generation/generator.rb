@@ -141,6 +141,7 @@ module HQMF
     # @param [String] type 
     # @return 
     def self.classify_entry(type)
+      
       # The possible matches per patientAPI function can be found in hqmf-parser's README
       case type
       when :allProcedures
@@ -148,7 +149,7 @@ module HQMF
       when :proceduresPerformed
         "procedures"
       when :procedureResults
-        "lab_results"
+        "procedures"
       when :laboratoryTests
         "vital_signs"
       when :allMedications
