@@ -177,7 +177,7 @@ module HQMF
     # @param A patient with coded entries that dictate potential birthdates
     # @return A realistic birthdate for the given patient
     def self.randomize_birthdate(patient)
-      Time.now
+      Time.now.to_i
     end
     
     # Randomly generate a Range object that is within a lower and upper bounds. It is guaranteed that the high of the

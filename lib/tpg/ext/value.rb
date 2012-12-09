@@ -4,11 +4,7 @@ module HQMF
     #
     # @return An HL7 timestamp string (YYYYMMDD) equivalent to time.
     def self.time_to_ts(time)
-      year = time.year
-      month = time.month < 10 ? "0#{time.month}" : time.month
-      day = time.day < 10 ? "0#{time.day}" : time.day
-      
-      "#{year}#{month}#{day}"
+      time.strftime("%Y%m%d%H%M%S")
     end
 
     # Translate an HQMF Value object into a shape that HealthDataStandards understands.
@@ -26,6 +22,8 @@ module HQMF
     #
     # @return Epoch seconds equivalent to the time stored in this Value.
     def to_seconds
+      return nil unless type == "TS"
+
       to_time_object.to_i
     end
     
@@ -33,6 +31,8 @@ module HQMF
     #
     # @return A Ruby time object equivalent to the time represented by this Value.
     def to_time_object
+      return nil unless type == "TS"
+
       year = value[0,4].to_i
       month = value[4,2].to_i
       day = value[6,2].to_i

@@ -8,19 +8,18 @@ class ValueTest < MiniTest::Unit::TestCase
   end
 
   def test_time_to_ts
-    assert_equal "20090213", HQMF::Value.time_to_ts(@now)
+    assert_equal "20090213183130", HQMF::Value.time_to_ts(@now)
   end
 
   def test_format
-    formatted_pq = { "scalar" => '10', "units" => 'a' }
+    formatted_pq = {"scalar" => 10, "units" => "a"}
     assert_equal formatted_pq, @pq.format
-    binding.pry
     assert_equal 1234567890, @ts.format
   end
 
   def test_to_seconds
     assert_equal 1234567890, @ts.to_seconds
-    assert_nil pq.to_seconds
+    assert_nil @pq.to_seconds
   end
 
   def test_to_time_object

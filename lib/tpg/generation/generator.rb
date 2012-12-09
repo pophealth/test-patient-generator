@@ -18,15 +18,40 @@ module HQMF
           index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
           unique_data_criteria << data_criteria if index.nil?
         end
+
+        # TODO DELETE THIS - Just makin' some fixtures
+        file = File.open("/Users/agoldstein/Desktop/#{measure}.json", 'w')
+        unique_data_criteria.each do |dc|
+          file.write(dc.as_json.to_json)
+        end
+        file.close
         
         # Create a patient that includes an entry for every data criteria included in this measure.
         patient = Generator.create_base_patient
         unique_data_criteria.each do |data_criteria|
           # Ignore data criteria that are really just containers.
           next if data_criteria.derivation_operator.present?
-          
-          # Generate a random time for this data criteria and apply it to the patient.
+
+          # Generate a random time for this data criteria.
           time = Randomizer.randomize_range(patient.birthdate, nil)
+
+          # Some fields come in with no value or marked as AnyValue (i.e. any value is acceptable, there just must be one). If that's the case, we pick a default here.
+          if data_criteria.field_values.present?
+            data_criteria.field_values.each do |name, field|
+              if field.is_a? HQMF::AnyValue
+                if ["ADMISSION_DATETIME", "START_DATETIME", "INCISION_DATETIME"].include? name
+                  data_criteria.field_values[name] = time.low
+                elsif ["DISCHARGE_DATETIME", "STOP_DATETIME", "REMOVAL_DATETIME"].include? name
+                  data_criteria.field_values[name] = time.high
+                elsif name == "REASON"
+                  # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (birth)
+                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.70", "birth")
+                end
+              end
+            end
+          end
+          
+          
           data_criteria.modify_patient(patient, time, measure_value_sets[measure])
         end
         patient.measure_ids ||= []

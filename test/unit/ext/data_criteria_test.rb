@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'hqmf2js'
 
 class DataCriteriaTest < MiniTest::Unit::TestCase
   def setup
@@ -34,5 +35,4 @@ class DataCriteriaTest < MiniTest::Unit::TestCase
     assert @patient.encounters[0].description.include?('2.16.840.1.113883.3.464.0001.49')
     assert @patient.procedures[0].description.include?('2.16.840.1.113883.3.464.0001.143')
   end
-
 end

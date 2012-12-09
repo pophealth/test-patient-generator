@@ -49,55 +49,33 @@ module HQMF
         if field_values.present?
           field_values.each do |name, field|
             next if field.nil?
-            
-            # These fields are sometimes Coded and sometimes Values.
+
             if field.type == "CD"
-              code = Coded.select_code(field.code_list_id, value_sets)
-              codes = Coded.select_codes(field.code_list_id, value_sets)
-            elsif field.type == "IVL_PQ" || field.type =='PQ'
-              value = field.format
-            end
-            
-            case name
-            when "ORDINAL"
-              entry.ordinality_code = code
-            when "FACILITY_LOCATION"
-              entry.facility = Facility.new("name" => field.title, "codes" => codes)
-            when "CUMULATIVE_MEDICATION_DURATION"
-              entry.cumulative_medication_duration = value              
-            when "SEVERITY"
-              entry.severity = code
-            when "REASON"
-              # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (it's chickenpox pneumonia.)
-              entry.reason = code || {"codeSystem" => "SNOMED-CT", "code" => "195911009"}
-            when "SOURCE"
-              entry.source = code
-            when "DISCHARGE_STATUS"
-              entry.discharge_disposition = code
-            when "DISCHARGE_DATETIME"
-              entry.discharge_time = field_values[name].to_time_object.to_i
-            when "ADMISSION_DATETIME"
-              entry.admit_time = field_values[name].to_time_object.to_i
-            when "LENGTH_OF_STAY"
-              # This is resolved in the patient API with discharge and admission datetimes.
-            when "ROUTE"
-              entry.route = code
-            # when "START_DATETIME"
-            #   entry.start_time = time.low
-            # when "STOP_DATETIME"
-            #   entry.end_time = time.high
-            when "ANATOMICAL_STRUCTURE"
-              entry.anatomical_structure = code
-            when "REMOVAL_DATETIME"
-              entry.removal_time = field_values[name].to_time_object.to_i
-            when "INCISION_DATETIME"
-              entry.incision_time = field_values[name].to_time_object.to_i
-            when "TRANSFER_TO"
-              entry.transfer_to = code
-            when "TRANSFER_FROM"
-              entry.transfer_from = code
+              field_value = Coded.select_codes(field.code_list_id, value_sets)
             else
-              
+              binding.pry if field.is_a? HQMF::AnyValue
+              field_value = field.format
+            end
+
+            # We have a few special cases. The most common problem is that the field doesn't fit neatly into a C32 so we default to preexisting fields. Other special cases are explained inline below.
+            if ["ADMISSION_DATETIME", "START_DATETIME", "INCISION_DATETIME"].include? name
+              field_value = time.low
+            elsif ["DISCHARGE_DATETIME", "STOP_DATETIME", "REMOVAL_DATETIME"].include? name
+              field_value = time.high
+            elsif name == "REASON"
+              # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (it's chickenpox pneumonia.)
+              field_value ||= {"SNOMED-CT" => ["195911009"]}
+            elsif name == "FACILITY_LOCATION"
+              codes = Coded.select_codes(field.code_list_id, value_sets)
+              field_value = Facility.new("name" => field.title, "codes" => codes)
+            end
+
+            begin
+              field_accessor = HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
+              entry.send("#{field_accessor}=", value)
+            rescue
+              field_accessor = HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
+              puts "Unknown field #{name} was unable to be added via #{field_accessor} to the patient"
             end
           end
         end

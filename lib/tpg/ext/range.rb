@@ -8,8 +8,6 @@ module HQMF
         low.format
       elsif high
         high.format
-      else
-        {}
       end
     end
   end
