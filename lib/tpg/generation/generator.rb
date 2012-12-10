@@ -1,20 +1,5 @@
 module HQMF
-  # The generator will create as many patients as possible to exhaustively test the logic of a given clinical quality measure.
   class Generator
-    # TODO - This is a hack and a half. Need a better way to resolve data_criteria from any point in the tree.
-    class << self
-      attr_accessor :hqmf
-      attr_accessor :value_sets
-    end
-    
-    # @param [HQMF::Document] hqmf A model representing the logic of a given HQMF document.
-    # @param [Hash] value_sets All of the value sets referenced by this particular HQMF document.
-    def initialize(hqmf, value_sets)
-      @patients = []
-      Generator.hqmf = hqmf
-      Generator.value_sets = value_sets
-    end
-    
     # Generate patients from lists of DataCriteria. This is originally created for QRDA Category 1 validation testing,
     # i.e. a single patient will be generated per measure with an entry for every data criteria involved in the measure.
     # 
@@ -26,7 +11,7 @@ module HQMF
       
       measure_patients = {}
       measure_needs.each do |measure, all_data_criteria|
-        #puts "Generating for #{measure}"
+        puts "generating for #{measure}"
 
         # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
         # so to minimize time we only want to include each kind of data once.
@@ -35,15 +20,46 @@ module HQMF
           index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
           unique_data_criteria << data_criteria if index.nil?
         end
+
+        # TODO DELETE THIS - Just makin' some fixtures
+        # file = File.open("/Users/agoldstein/Desktop/#{measure}.json", 'w')
+        # unique_data_criteria.each do |dc|
+        #   file.write(dc.as_json.to_json)
+        # end
+        # file.close
         
         # Create a patient that includes an entry for every data criteria included in this measure.
         patient = Generator.create_base_patient
         unique_data_criteria.each do |data_criteria|
           # Ignore data criteria that are really just containers.
           next if data_criteria.derivation_operator.present?
-          
-          # Generate a random time for this data criteria and apply it to the patient.
+
+          # Generate a random time for this data criteria.
           time = Randomizer.randomize_range(patient.birthdate, nil)
+
+          # Some fields come in with no value or marked as AnyValue (i.e. any value is acceptable, there just must be one). If that's the case, we pick a default here.
+          if data_criteria.field_values.present?
+            data_criteria.field_values.each do |name, field|
+              if field.is_a? HQMF::AnyValue
+                if ["ADMISSION_DATETIME", "START_DATETIME", "INCISION_DATETIME"].include? name
+                  data_criteria.field_values[name] = time.low
+                elsif ["DISCHARGE_DATETIME", "STOP_DATETIME", "REMOVAL_DATETIME"].include? name
+                  data_criteria.field_values[name] = time.high
+                elsif name.include? "FACILITY"
+                  # TODO
+                  codes = Coded.select_codes(field.code_list_id, measure_value_sets)
+                  field_value = Facility.new("name" => field.title, "codes" => codes)
+                elsif name == "REASON"
+                  # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (birth)
+                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.70", "birth")
+                elsif name == "ORDINAL"
+                  # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign it to be not principle
+                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.265", "birth")
+                end
+              end
+            end
+          end
+          
           data_criteria.modify_patient(patient, time, measure_value_sets[measure])
         end
         patient.measure_ids ||= []
@@ -55,45 +71,9 @@ module HQMF
       measure_patients
     end
     
-    # Generate patients from an HQMF file and its matching value sets file. These patients are designed to test all
-    # paths through the logic of this particular clinical quality measure.
-    def generate_patients
-      base_patients = [Generator.create_base_patient]
-      generated_patients = []
-      
-      # Gather all available populations. Each kind of population (e.g. IPP, DENOM) can have many multiples (e.g. IPP_1, IPP_2)
-      populations = []
-      ["IPP", "DENOM", "NUMER", "EXCL", "DENEXCEP"].each do |population|
-        i = 1
-        populations << population
-        while Generator.hqmf.population_criteria("#{population}_#{i}").present? do
-          populations << "#{population}_#{i}"
-          i += 1
-        end
-      end
-
-      populations = ["EXCL_1"]
-
-      populations.each do |population|
-        criteria = Generator.hqmf.population_criteria(population)
-        
-        # We don't need to do anything for populations with nothing specified
-        next if criteria.nil? || !criteria.preconditions.present?
-        criteria.generate(base_patients)  
-        
-        # Mark the patient we just created with its expected population. Then extend the Record to be augmented by the next population.
-        base_patients.collect! do |patient|
-          generated_patients.push(Generator.finalize_patient(patient))
-          Generator.extend_patient(patient)
-        end
-      end
-      
-      generated_patients
-    end
-    
     # Create a patient with trivial demographic information and no coded entries.
     #
-    # @return A Record with a blank slate
+    # @return A Record with a blank slate.
     def self.create_base_patient(initial_attributes = nil)
       patient = Record.new
       
@@ -102,20 +82,10 @@ module HQMF
       else
         initial_attributes.each {|attribute, value| patient.send("#{attribute}=", value)}
       end
-      patient.medical_record_number = Digest::MD5.hexdigest("#{patient.first} #{patient.last}")
       
       patient
     end
-    
-    # Take an existing patient with some coded entries on them and redefine their trivial demographic information
-    #
-    # @param [Record] base_patient The patient that we're using as a base to create a new one
-    # @return A new Record with an identical medical history to the given patient but new trivial demographic information
-    def self.extend_patient(base_patient)
-      patient = base_patient.clone()
-      Randomizer.randomize_demographics(patient)
-    end
-    
+        
     # Fill in any missing details that should be filled in on a patient. These include: age, gender, and first name.
     #
     # @param [Record] patient The patient for whom we are about to fill in remaining demographic information.
@@ -127,19 +97,17 @@ module HQMF
       end
       
       if patient.gender.nil?
-        # Set gender
         patient.gender = "F"
-        #rand(2) == 0 ? patient.gender = "M" : patient.gender = "F"
         patient.first = Randomizer.randomize_first_name(patient.gender)
       end
       
       patient
     end
     
+    # Map all patient api coded entry types from HQMF data criteria to Record sections.
     #
-    #
-    # @param [String] type 
-    # @return 
+    # @param [String] type The type of the coded entry requried by a data criteria.
+    # @return The section type for the given patient api function type
     def self.classify_entry(type)
       
       # The possible matches per patientAPI function can be found in hqmf-parser's README

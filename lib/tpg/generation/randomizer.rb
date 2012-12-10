@@ -1,11 +1,5 @@
-require 'set'
-
 module HQMF
-  # Contains functions that can be used to randomly generate fields for patients.
-  # Also includes utility functions for randomly generating numbers and dates or choosing options within a range.
   class Randomizer
-    UNIQUE_PATIENT_IDS = Set.new # Used to make sure we don't duplicate randomly generated patient IDs
-    
     # Add trivial demographics info to a Record. Trivial fields are ones that identify a patient as unique to a human eye
     # but have no impact on CQM, e.g. address. This is essentially an upsert, so any preexisting info will be wiped.
     #
@@ -21,7 +15,7 @@ module HQMF
       patient.languages << randomize_language
       patient.first = randomize_first_name(patient.gender) if patient.gender
       patient.last = randomize_last_name
-      patient.medical_record_number = randomize_patient_id
+      patient.medical_record_number = Digest::MD5.hexdigest("#{patient.first} #{patient.last}")
       
       patient
     end
@@ -175,17 +169,6 @@ module HQMF
         'postalCode' => zip
       }.to_json
     end
-
-    # Randomize patient IDs for a given patients. We ensure that this ID is unique.
-    #
-    # @return The same patient with a random, non-duplicate ID assigned.
-    def self.randomize_patient_id
-      # Keep trying to add a new ID to the set. Return the ID when we find one that's unique.
-      loop do
-        id = (0...10).map{ ('0'..'9').to_a[rand(10)] }.join.to_s
-        break id if UNIQUE_PATIENT_IDS.size < UNIQUE_PATIENT_IDS.add(id).size
-      end
-    end
     
     # More accurately, randomize a believable birthdate. Given a patient, find all coded entries that
     # have age-related implications and make sure the patient is at least that old. Since that is complicated,
@@ -194,7 +177,7 @@ module HQMF
     # @param A patient with coded entries that dictate potential birthdates
     # @return A realistic birthdate for the given patient
     def self.randomize_birthdate(patient)
-      Time.now
+      Time.now.to_i
     end
     
     # Randomly generate a Range object that is within a lower and upper bounds. It is guaranteed that the high of the
