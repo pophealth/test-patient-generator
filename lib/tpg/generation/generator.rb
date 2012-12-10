@@ -20,11 +20,11 @@ module HQMF
         end
 
         # TODO DELETE THIS - Just makin' some fixtures
-        file = File.open("/Users/agoldstein/Desktop/#{measure}.json", 'w')
-        unique_data_criteria.each do |dc|
-          file.write(dc.as_json.to_json)
-        end
-        file.close
+        # file = File.open("/Users/agoldstein/Desktop/#{measure}.json", 'w')
+        # unique_data_criteria.each do |dc|
+        #   file.write(dc.as_json.to_json)
+        # end
+        # file.close
         
         # Create a patient that includes an entry for every data criteria included in this measure.
         patient = Generator.create_base_patient
