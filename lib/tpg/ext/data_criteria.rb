@@ -66,7 +66,6 @@ module HQMF
             field_accessor = nil
             # Facilities are a special case where we store a whole object on the entry in Record. Create or augment the existing facility with this piece of data.
             if name.include? "FACILITY"
-              field_value = Coded.select_codes(field.code_list_id, value_sets) if field.type == "CD"
               facility = entry.facility
               facility ||= Facility.new
               facility_map = {"FACILITY_LOCATION" => :code, "FACILITY_LOCATION_ARRIVAL_DATETIME" => :start_time, "FACILITY_LOCATION_DEPARTURE_DATETIME" => :end_time}
