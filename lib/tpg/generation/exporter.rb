@@ -67,7 +67,7 @@ module TPG
         measure_patients.each do |measure, patient|
 
           # Create a directory for this measure and insert the HTML for this patient.
-          zip.put_next_entry(File.join(measure, "#{patient_filename(patient)}.html"))
+          zip.put_next_entry(File.join(measure_defs[measure].hqmf_id, "#{patient_filename(patient)}.xml"))
           puts "Generating patient for measure #{measure}"
           zip << QrdaGenerator::Export::Cat1.export(patient, [measure_defs[measure]], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
         end
