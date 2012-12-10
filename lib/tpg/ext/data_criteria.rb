@@ -58,7 +58,8 @@ module HQMF
             else
               field_value = field.format
             end
-
+            
+            field_accessor = nil
             # Facilities are a special case where we store a whole object on the entry in Record. Create or augment the existing facility with this piece of data.
             if name.include? "FACILITY"
               facility = entry.facility
@@ -68,12 +69,13 @@ module HQMF
               facility.name = field.title if type == "CD"
               facility_accessor = facility_map[name]
               facility.send("#{facility_accessor}=", field_value)
-
+              
+              field_accessor = :facility
               field_value = facility
             end
 
             begin
-              field_accessor = HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
+              field_accessor ||= HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
               entry.send("#{field_accessor}=", field_value)
             rescue
               # Give some feedback if we hit an unexpected error. Some fields have no action expected, so we'll suppress those messages.
