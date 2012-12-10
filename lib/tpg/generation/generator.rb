@@ -11,6 +11,8 @@ module HQMF
       
       measure_patients = {}
       measure_needs.each do |measure, all_data_criteria|
+        puts "generating for #{measure}"
+
         # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
         # so to minimize time we only want to include each kind of data once.
         unique_data_criteria = []
@@ -43,14 +45,20 @@ module HQMF
                   data_criteria.field_values[name] = time.low
                 elsif ["DISCHARGE_DATETIME", "STOP_DATETIME", "REMOVAL_DATETIME"].include? name
                   data_criteria.field_values[name] = time.high
+                elsif name.include? "FACILITY"
+                  # TODO
+                  codes = Coded.select_codes(field.code_list_id, measure_value_sets)
+                  field_value = Facility.new("name" => field.title, "codes" => codes)
                 elsif name == "REASON"
                   # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (birth)
                   data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.70", "birth")
+                elsif name == "ORDINAL"
+                  # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign it to be not principle
+                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.265", "birth")
                 end
               end
             end
           end
-          
           
           data_criteria.modify_patient(patient, time, measure_value_sets[measure])
         end

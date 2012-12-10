@@ -4,7 +4,7 @@ gem 'hqmf-parser', git: 'http://github.com/pophealth/hqmf-parser.git', branch: '
 gem 'hquery-patient-api', git: 'http://github.com/hquery/patientapi.git', branch: 'develop'
 gem 'hqmf2js', git: 'http://github.com/pophealth/hqmf2js.git', branch: 'develop'
 gem 'health-data-standards', git: 'http://github.com/projectcypress/health-data-standards.git', branch: 'develop'
-gem 'qrda_generator', path: '../qrda_generator'
+gem 'qrda_generator', git: 'http://github.com/eedrummer/qrda_generator', branch: 'master'
 
 gem 'rake'
 gem 'pry'
