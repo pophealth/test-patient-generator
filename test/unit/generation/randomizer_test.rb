@@ -4,7 +4,13 @@ require 'test_helper'
 # Largely these unit tests will verify that we are getting at least some information, but does not exhaustively test that the random values are appropriate.
 class RandomizerTest < MiniTest::Unit::TestCase
   def test_randomize_demographics
+    patient = Record.new
+    HQMF::Randomizer.randomize_demographics(patient)
 
+    expected_fields = [:race, :ethnicity, :languages, :last, :medical_record_number]
+    expected_fields.each do |field|
+      refute_nil patient.send(field)
+    end
   end
 
   def test_randomize_race_and_ethnicity

@@ -29,7 +29,7 @@ module HQMF
     # Hispanic 16.3%
     # White 63.7%
     def self.randomize_race_and_ethnicity(percent = nil)
-      percent = rand(999)
+      percent ||= rand(999)
       
       case percent
       when 0..1
