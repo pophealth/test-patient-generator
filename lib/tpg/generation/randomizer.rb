@@ -28,10 +28,10 @@ module HQMF
     # Black persons 12.6%
     # Hispanic 16.3%
     # White 63.7%
-    def self.randomize_race_and_ethnicity
-      race_percent = rand(999)
+    def self.randomize_race_and_ethnicity(percent = nil)
+      percent = rand(999)
       
-      case race_percent
+      case percent
       when 0..1
         {race: '2076-8', ethnicity: '2186-5'} # pacific islander
       when 2..10
@@ -67,11 +67,11 @@ module HQMF
     # 00.1% persian
     # 00.1% us sign
     # 03.0% other
-    def self.randomize_language
-      language_percent = rand(999)
+    def self.randomize_language(percent = nil)
+      percent ||= rand(999)
       
-      case language_percent
-      when 0..802 
+      case percent
+      when 0..802
         'en-US' # english
       when 802..925
         'es-US' # spanish
@@ -177,7 +177,7 @@ module HQMF
     # @param A patient with coded entries that dictate potential birthdates
     # @return A realistic birthdate for the given patient
     def self.randomize_birthdate(patient)
-      Time.now.to_i
+      Time.now.advance(years: -45).to_i
     end
     
     # Randomly generate a Range object that is within a lower and upper bounds. It is guaranteed that the high of the

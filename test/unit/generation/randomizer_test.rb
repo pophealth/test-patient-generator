@@ -8,11 +8,32 @@ class RandomizerTest < MiniTest::Unit::TestCase
   end
 
   def test_randomize_race_and_ethnicity
-
+    assert_equal '2076-8', HQMF::Randomizer.randomize_race_and_ethnicity(0)[:race]
+    assert_equal '1002-5', HQMF::Randomizer.randomize_race_and_ethnicity(2)[:race]
+    assert_equal '2028-9', HQMF::Randomizer.randomize_race_and_ethnicity(11)[:race]
+    assert_equal '2054-5', HQMF::Randomizer.randomize_race_and_ethnicity(59)[:race]
+    assert_equal '2106-3', HQMF::Randomizer.randomize_race_and_ethnicity(185)[:race]
+    assert_equal '2106-3', HQMF::Randomizer.randomize_race_and_ethnicity(348)[:race]
+    assert_equal '2131-1', HQMF::Randomizer.randomize_race_and_ethnicity(985)[:race]
   end
 
   def test_randomize_language
-
+    assert_equal 'en-US', HQMF::Randomizer.randomize_language(0)
+    assert_equal 'es-US', HQMF::Randomizer.randomize_language(803)
+    assert_equal 'fr-US', HQMF::Randomizer.randomize_language(926)
+    assert_equal 'it-US', HQMF::Randomizer.randomize_language(933)
+    assert_equal 'pt-US', HQMF::Randomizer.randomize_language(936)
+    assert_equal 'de-US', HQMF::Randomizer.randomize_language(939)
+    assert_equal 'el-US', HQMF::Randomizer.randomize_language(943)
+    assert_equal 'ru-US', HQMF::Randomizer.randomize_language(944)
+    assert_equal 'pl-US', HQMF::Randomizer.randomize_language(947)
+    assert_equal 'fa-US', HQMF::Randomizer.randomize_language(949)
+    assert_equal 'zh-US', HQMF::Randomizer.randomize_language(950)
+    assert_equal 'ja-US', HQMF::Randomizer.randomize_language(959)
+    assert_equal 'ko-US', HQMF::Randomizer.randomize_language(961)
+    assert_equal 'vi-US', HQMF::Randomizer.randomize_language(965)
+    assert_equal 'sgn-US', HQMF::Randomizer.randomize_language(969)
+    assert HQMF::Randomizer.randomize_language(970).include? "-US"
   end
 
   def test_randomize_first_name
@@ -26,33 +47,31 @@ class RandomizerTest < MiniTest::Unit::TestCase
 
   def test_randomize_address
     address = HQMF::Randomizer.randomize_address
+    address = JSON.parse(address)
     expected = ["street", "city", "state", "postalCode"]
 
-    # assert_equal address.size, expected.size
-    # address.each do |key, value|
-    #   assert expected.include? key
-    #   refute_nil value
-    # end
+    assert_equal address.size, expected.size
+    address.each do |key, value|
+      assert expected.include? key
+      refute_nil value
+    end
   end
 
   def test_randomize_birthdate
-    
+    refute_nil HQMF::Randomizer.randomize_birthdate(Record.new)
   end
 
   def test_randomize_range
-    # range = HQMF::Randomizer.randomize_range(nil, nil)
-    # binding.pry
+    range = HQMF::Randomizer.randomize_range(nil, nil)
+    refute_nil range.low
+    refute_nil range.high
 
-    # low = Value.new()
-    # range = HQMF::Randomizer.randomize_range(low, nil)
-    # binding.pry
-
-    # high = Value.new
-    # range = HQMF::Randomizer.randomize_range(nil, high)
-    # binding.pry
-
-    # range = HQMF::Randomizer.randomize_range(low, high)
-    # binding.pry    
+    now = Time.at(1234567890)
+    later = now + (60 * 60 * 24 * 7)
+    range = HQMF::Randomizer.randomize_range(now, later)
+    
+    assert now.to_i <= range.low.to_seconds
+    assert later.to_i >= range.high.to_seconds
   end
 
   def test_n_between
