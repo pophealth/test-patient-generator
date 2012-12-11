@@ -8,10 +8,6 @@ require 'digest/sha1'
 
 require_relative '../test-patient-generator'
 
-Mongoid.configure do |config|
-  config.sessions = { default: { hosts: [ "localhost:27017" ], database: 'cypress_development' }}
-end
-
 namespace :generate do
   # @param [String] measures_dir The directory that contains all the measures for which we're generating patients.
   # @param [String] format The type of zip that will be generated. Possible values are "bundle" for a Cypress test deck bundle or "qrda" for patients organized by measure.
