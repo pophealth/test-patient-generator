@@ -1,16 +1,14 @@
 production:
   database: cypress_production
   hosts:
-    - localhost: 27017
+    - "localhost: 27017"
 
 development:
   database: cypress_development
   hosts:
-    - localhost: 27017
+    - "localhost: 27017"
 
 test:
-  options:
-  consistency: :strong
   database: cypress_test
   hosts:
-    - <%= ENV['TEST_DB_HOST'] || 'localhost' %>:27017
+    - "localhost: 27017"

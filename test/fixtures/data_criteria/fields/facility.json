@@ -1,0 +1,16 @@
+{
+  "id" : "OccurrenceAEmergencyDepartmentVisit21",
+  "start_date" : 1262322000000,
+  "end_date" : 1262322000000,
+  "value" : [],
+  "negation" : "",
+  "negation_code_list_id" : null,
+  "field_values" : {
+    "FACILITY_LOCATION" : {
+      "type" : "CD",
+      "code_list_id" : "2.16.840.1.113883.3.666.5.1083",
+      "title" : "hospital_measures_icu_locations (508936bd044a113754000001)"
+    }
+  },
+  "oid" : "2.16.840.1.113883.3.117.1.7.1.292"
+}

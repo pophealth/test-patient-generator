@@ -1,0 +1,17 @@
+{ // Admission Datetime
+  "id": "EncounterPerformedHospitalMeasuresEncounterInpatient",
+  "start_date": 1272657600000,
+  "end_date": 1273118400000,
+  "value": [
+
+  ],
+  "negation": "",
+  "negation_code_list_id": null,
+  "field_values": {
+    "ADMISSION_DATETIME": {
+      "type": "TS",
+      "value": "19740112193600"
+    }
+  },
+  "oid": "2.16.840.1.113883.3.666.5.625"
+}

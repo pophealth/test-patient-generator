@@ -1,6 +1,16 @@
 require_relative "./simplecov"
 require_relative '../lib/test-patient-generator'
 
+Mongoid.configure do |config|
+  config.sessions = {
+    default: {
+      hosts: ["localhost: 27017"],
+      database: "test-patient-generator-test"
+    }
+  }
+end
+MONGO_DB = Mongoid.default_session
+
 require 'pry'
 require 'minitest/autorun'
 
@@ -12,7 +22,7 @@ class MiniTest::Unit::TestCase
   # @param [Array] id_attributes A splat of fields on documents in the collection that need to be converted.
   def collection_fixtures(collection, *id_attributes)
     Mongoid.session(:default)[collection].drop
-    Dir.glob(File.join(Rails.root, 'test', 'fixtures', collection, '*.json')).each do |json_fixture_file|
+    Dir.glob(File.join('test', 'fixtures', collection, '*/**.json')).each do |json_fixture_file|
       fixture_json = JSON.parse(File.read(json_fixture_file), max_nesting: 250)
       id_attributes.each do |attr|
         next if fixture_json[attr].nil?

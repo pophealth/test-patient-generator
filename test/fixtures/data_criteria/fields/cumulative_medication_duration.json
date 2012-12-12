@@ -1,0 +1,16 @@
+{
+  "id" : "MedicationDischargeAnticoagulantTherapy",
+  "start_date" : 1262322000000,
+  "end_date" : 1262322000000,
+  "value" : [],
+  "negation" : "",
+  "negation_code_list_id" : null,
+  "field_values" : {
+    "CUMULATIVE_MEDICATION_DURATION" : {
+      "type" : "PQ",
+      "value" : "7",
+      "unit" : "d" 
+    }
+  },
+  "oid" : "2.16.840.1.113883.3.117.1.7.1.200"
+}

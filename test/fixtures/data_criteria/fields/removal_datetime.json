@@ -1,0 +1,21 @@
+{
+  "id": "DeviceAppliedHospitalMeasuresIndwellingUrinaryCatheter",
+  "start_date": 1267529400000,
+  "end_date": 1267678800000,
+  "value": [
+    {
+      "type": "CD",
+      "code_list_id": "2.16.840.1.113883.3.666.5.1130",
+      "title": "hospital_measures_urethra (8A4D92B2-3A58-B777-013A-670AB6932A3B)"
+    }
+  ],
+  "negation": "",
+  "negation_code_list_id": null,
+  "field_values": {
+    "REMOVAL_DATETIME": {
+      "type": "TS",
+      "value": "19740107011800"
+    }
+  },
+  "oid": "2.16.840.1.113883.3.666.5.820"
+}

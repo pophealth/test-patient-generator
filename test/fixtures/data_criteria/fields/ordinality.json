@@ -1,0 +1,16 @@
+{
+  "id" : "DiagnosisInactiveAtrialFibrillationFlutter",
+  "start_date" : 1262322000000,
+  "end_date" : 1262322000000,
+  "value" : [],
+  "negation" : "",
+  "negation_code_list_id" : null,
+  "field_values" : {
+    "ORDINAL" : {
+      "type" : "CD",
+      "code_list_id" : "2.16.840.1.113883.3.117.2.7.1.14",
+      "title" : "principal_diagnosis (5089380b044a11375400087b)"
+    }
+  },
+  "oid" : "2.16.840.1.113883.3.117.1.7.1.202"
+}
