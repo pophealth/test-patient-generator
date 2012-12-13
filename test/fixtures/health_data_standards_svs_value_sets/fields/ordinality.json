@@ -1,0 +1,11 @@
+{ "_id" : "50c761b27093574a0b001470",
+  "oid" : "2.16.840.1.113883.3.117.2.7.1.14",
+  "display_name" : "Principal Diagnosis",
+  "version" : "20121025",
+  "concepts" : [ 
+    { "_id" : "50c761b27093574a0b001471",
+      "code" : "123abc",
+      "code_system_name" : "SNOMED-CT",
+      "code_system_version" : null,
+      "display_name" : "Principal (qualifier value)",
+      "code_system" : null } ] }

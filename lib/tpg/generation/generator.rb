@@ -3,15 +3,17 @@ module HQMF
     # Generate patients from lists of DataCriteria. This is originally created for QRDA Category 1 validation testing,
     # i.e. a single patient will be generated per measure with an entry for every data criteria involved in the measure.
     # 
-    # @param [Hash] measure_needs A hash of measure IDs mapped to a list of all their data criteria.
-    # @param [Hash] measure_value_sets A hash of measure IDs mapped to hashes of value sets used by the DataCriteria in measure_needs.
+    # @param [Hash] measure_needs A hash of measure IDs mapped to a list of all their data criteria in JSON.
     # @return [Hash] A hash of measure IDs mapped to a Record that includes all the given data criteria (values and times are arbitrary).
-    def self.generate_qrda_patients(measure_needs, measure_value_sets)
+    def self.generate_qrda_patients(measure_needs)
       return {} if measure_needs.nil?
       
       measure_patients = {}
       measure_needs.each do |measure, all_data_criteria|
-        puts "generating for #{measure}"
+        all_data_criteria.map! {|data_criteria| HQMF::DataCriteria.from_json(data_criteria["id"], data_criteria)}
+
+        all_data_criteria.flatten!
+        all_data_criteria.uniq!
 
         # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
         # so to minimize time we only want to include each kind of data once.
@@ -21,12 +23,20 @@ module HQMF
           unique_data_criteria << data_criteria if index.nil?
         end
 
-        # TODO DELETE THIS - Just makin' some fixtures
-        # file = File.open("/Users/agoldstein/Desktop/#{measure}.json", 'w')
-        # unique_data_criteria.each do |dc|
-        #   file.write(dc.as_json.to_json)
-        # end
-        # file.close
+        oids = []
+        unique_data_criteria.each do |dc|
+          oids << dc.code_list_id if dc.code_list_id.present?
+          oids << dc.negation_code_list_id if dc.negation_code_list_id.present?
+          oids << dc.value.code_list_id if dc.value.present? && dc.value.type == "CD"
+        end
+        oids.flatten!
+        oids.uniq!
+        
+        value_sets = []
+        HealthDataStandards::SVS::ValueSet.any_in(oid: oids).each do |value_set|
+          code_sets = value_set.concepts.map {|concept| {"code_set" => concept.code_system_name, "codes" => [concept.code]}}
+          value_sets << {"code_sets" => code_sets, "oid" => value_set.oid}
+        end
         
         # Create a patient that includes an entry for every data criteria included in this measure.
         patient = Generator.create_base_patient
@@ -46,21 +56,20 @@ module HQMF
                 elsif ["DISCHARGE_DATETIME", "STOP_DATETIME", "REMOVAL_DATETIME"].include? name
                   data_criteria.field_values[name] = time.high
                 elsif name.include? "FACILITY"
-                  # TODO
-                  codes = Coded.select_codes(field.code_list_id, measure_value_sets)
+                  codes = Coded.select_codes(field.code_list_id, value_sets)
                   field_value = Facility.new("name" => field.title, "codes" => codes)
                 elsif name == "REASON"
                   # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (birth)
                   data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.70", "birth")
                 elsif name == "ORDINAL"
                   # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign it to be not principle
-                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.265", "birth")
+                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.265", "not principle")
                 end
               end
             end
           end
           
-          data_criteria.modify_patient(patient, time, measure_value_sets[measure])
+          data_criteria.modify_patient(patient, time, value_sets)
         end
         patient.measure_ids ||= []
         patient.measure_ids << measure

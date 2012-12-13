@@ -1,0 +1,27 @@
+{
+  "id": "ProcedurePerformedHospitalMeasuresCabg",
+  "description" : "Procedure, Performed: Hospital measures-CABG",
+  "standard_category" : "procedure",
+  "qds_data_type" : "procedure_performed",
+  "type" : "procedures",
+  "definition" : "procedure",
+  "status" : "performed",
+  "hard_status" : false,
+  "start_date": 1267527600000,
+  "end_date": 1267549200000,
+  "value": {
+    "type": "CD",
+    "code_list_id": "2.16.840.1.113883.3.526.2.8001",
+    "title": "hospital_measures_principal (5069c0e5044a11f31c00070c)"
+  },
+  "negation": "",
+  "negation_code_list_id": null,
+  "field_values": {
+    "INCISION_DATETIME": {
+      "type": "TS",
+      "value": "19740106210600"
+    }
+  },
+  "oid": "2.16.840.1.113883.3.666.5.694",
+  "code_list_id": "2.16.840.1.113883.3.666.5.694"
+}

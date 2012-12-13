@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: http://github.com/pophealth/hqmf-parser.git
-  revision: 4a32295108768bfac4dab477d1075dc4c18f705c
+  revision: f201412aa2f7acac392c2e8f6088284569ce1162
   branch: develop
   specs:
     hqmf-parser (1.0.6)
@@ -62,6 +62,7 @@ GEM
     activesupport (3.2.9)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    binding_of_caller (0.6.8)
     builder (3.0.4)
     choice (0.1.6)
     coderay (1.0.8)
@@ -117,6 +118,8 @@ GEM
       spoon (~> 0.0)
     pry-nav (0.2.2)
       pry (~> 0.9.10)
+    pry-stack_explorer (0.4.7)
+      binding_of_caller (~> 0.6.8)
     rack (1.4.1)
     rake (10.0.2)
     rest-client (1.6.7)
@@ -162,6 +165,7 @@ DEPENDENCIES
   hquery-patient-api!
   pry
   pry-nav
+  pry-stack_explorer
   qrda_generator!
   rake
   simplecov

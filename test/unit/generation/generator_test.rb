@@ -6,7 +6,14 @@ class GeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_generate_qrda_patients
-    
+    collection_fixtures("data_criteria", "_id")
+    collection_fixtures("health_data_standards_svs_value_sets", "_id")
+
+    all_data_criteria = MONGO_DB["data_criteria"].find({}).to_a
+    measure_needs = {"123" => all_data_criteria}
+    patients = HQMF::Generator.generate_qrda_patients(measure_needs)
+
+    skip "We need to assert somethin' er other"
   end
 
   def test_create_base_patient
@@ -32,11 +39,11 @@ class GeneratorTest < MiniTest::Unit::TestCase
     refute_nil patient.birthdate
   end
 
-  def classify_entry
+  def test_classify_entry
     types = [:allProcedures, :proceduresPerformed, :procedureResults, :laboratoryTests, :allMedications, :activeDiagnoses, :inactiveDiagnoses, :resolvedDiagnoses, :allProblems, :allDevices]
     types.each do |type|
-      entry_type = HQMF::Generator.classify_entry
-      assert_not_nil entry_type.classify.constantize.new
+      entry_type = HQMF::Generator.classify_entry(type)
+      refute_nil entry_type.classify.constantize.new
     end
   end
 end

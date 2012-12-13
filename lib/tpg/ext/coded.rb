@@ -35,10 +35,11 @@ module HQMF
     # @return A Hash including a code and code system containing one randomly selected code.
     def self.select_code(oid, value_sets)
       codes = select_codes(oid, value_sets)
-      codeSystem = codes.keys()[0]
+      code_system = codes.keys()[0]
+      return nil if code_system.nil?
       {
-        'codeSystem' => codeSystem,
-        'code' => codes[codeSystem][0]
+        'codeSystem' => code_system,
+        'code' => codes[code_system][0]
       }
     end
   end

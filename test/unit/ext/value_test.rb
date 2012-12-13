@@ -2,13 +2,13 @@ require 'test_helper'
 
 class ValueTest < MiniTest::Unit::TestCase
   def setup
-    @now = Time.at(1234567890)
+    @now = Time.at(1234567890).utc
     @ts = HQMF::Value.new("TS", nil, HQMF::Value.time_to_ts(@now), true, false, false)
     @pq = HQMF::Value.new("PQ", 'a', 10, true, false, false)
   end
 
   def test_time_to_ts
-    assert_equal "20090213183130", HQMF::Value.time_to_ts(@now)
+    assert_equal "20090213233130", HQMF::Value.time_to_ts(@now)
   end
 
   def test_format
@@ -23,6 +23,6 @@ class ValueTest < MiniTest::Unit::TestCase
   end
 
   def test_to_time_object
-    assert_equal @now, @ts.to_time_object
+    assert_equal @now.utc, @ts.to_time_object
   end
 end
