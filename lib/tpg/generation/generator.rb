@@ -45,7 +45,7 @@ module HQMF
           next if data_criteria.derivation_operator.present?
 
           # Generate a random time for this data criteria.
-          time = Randomizer.randomize_range(patient.birthdate, nil)
+          time = Randomizer.randomize_range(patient.birthdate, patient.deathdate)
 
           # Some fields come in with no value or marked as AnyValue (i.e. any value is acceptable, there just must be one). If that's the case, we pick a default here.
           if data_criteria.field_values.present?

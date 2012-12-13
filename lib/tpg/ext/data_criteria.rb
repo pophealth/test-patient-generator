@@ -14,11 +14,14 @@ module HQMF
         # We have a special case on our hands.
         if property == :birthtime
           patient.birthdate = time.low.to_seconds
-        elsif value.present? && value.system == "Gender"
+        elsif property == :gender
           patient.gender = value.code
           patient.first = Randomizer.randomize_first_name(value.code)
         elsif property == :clinicalTrialParticipant
           patient.clinicalTrialParticipant = true
+        elsif property == :expired
+          # TODO should bound other data criteria
+          patient.expired = true
         end
       else
         # Otherwise this is a regular coded entry. Start by choosing the correct type and assigning basic metadata.
