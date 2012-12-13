@@ -3,14 +3,6 @@ require 'hqmf2js'
 
 class DataCriteriaTest < MiniTest::Unit::TestCase
   def setup
-    collection_fixtures("data_criteria", "_id")
-    collection_fixtures("health_data_standards_svs_value_sets", "_id")
-
-    dc = MONGO_DB["data_criteria"].find({}).first
-    dcm = HQMF::DataCriteria.from_json(dc["id"], dc)
-
-    binding.pry
-
     # Generate the patients and export them in the requested format to the out_path
     # patients = HQMF::Generator.generate_qrda_patients(
     #   {hqmf.id => hqmf.referenced_data_criteria},

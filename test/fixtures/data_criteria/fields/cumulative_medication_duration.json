@@ -1,8 +1,13 @@
 {
   "id" : "MedicationDischargeAnticoagulantTherapy",
+  "description" : "Medication, Discharge: Anticoagulant Therapy",
+  "standard_category" : "medication",
+  "qds_data_type" : "medication_discharge",
+  "type" : "medications",
+  "definition" : "medication_discharge",
   "start_date" : 1262322000000,
   "end_date" : 1262322000000,
-  "value" : [],
+  "value" : null,
   "negation" : "",
   "negation_code_list_id" : null,
   "field_values" : {
@@ -12,5 +17,6 @@
       "unit" : "d" 
     }
   },
-  "oid" : "2.16.840.1.113883.3.117.1.7.1.200"
+  "oid" : "2.16.840.1.113883.3.117.1.7.1.200",
+  "code_list_id" : "2.16.840.1.113883.3.117.1.7.1.200"
 }

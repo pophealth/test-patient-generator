@@ -1,14 +1,19 @@
 {
   "id": "DeviceAppliedHospitalMeasuresIndwellingUrinaryCatheter",
+  "description" : "Device, Applied: Hospital Measures-Indwelling urinary catheter",
+  "standard_category" : "device",
+  "qds_data_type" : "device_applied",
+  "type" : "devices",
+  "definition" : "device",
+  "status" : "applied",
+  "hard_status" : true,
   "start_date": 1267529400000,
   "end_date": 1267678800000,
-  "value": [
-    {
-      "type": "CD",
-      "code_list_id": "2.16.840.1.113883.3.666.5.1130",
-      "title": "hospital_measures_urethra (8A4D92B2-3A58-B777-013A-670AB6932A3B)"
-    }
-  ],
+  "value": {
+    "type": "CD",
+    "code_list_id": "2.16.840.1.113883.3.666.5.1130",
+    "title": "hospital_measures_urethra (8A4D92B2-3A58-B777-013A-670AB6932A3B)"
+  },
   "negation": "",
   "negation_code_list_id": null,
   "field_values": {
@@ -17,5 +22,6 @@
       "value": "19740107011800"
     }
   },
-  "oid": "2.16.840.1.113883.3.666.5.820"
+  "oid": "2.16.840.1.113883.3.666.5.820",
+  "code_list_id": "2.16.840.1.113883.3.666.5.820"
 }

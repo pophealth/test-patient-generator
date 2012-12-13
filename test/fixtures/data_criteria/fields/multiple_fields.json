@@ -1,10 +1,15 @@
 {
   "id": "EncounterPerformedInpatientEncounter",
+  "description" : "Encounter, Performed: Inpatient Encounter",
+  "standard_category" : "encounter",
+  "qds_data_type" : "encounter",
+  "type" : "encounters",
+  "definition" : "encounter",
+  "status" : "performed",
+  "hard_status" : false,
   "start_date": 1262408400000,
   "end_date": 1263013200000,
-  "value": [
-
-  ],
+  "value": null,
   "negation": "",
   "negation_code_list_id": null,
   "field_values": {
@@ -18,5 +23,6 @@
       "value": "19740101144200"
     }
   },
-  "oid": "2.16.840.1.113883.3.117.1.7.1.23"
+  "oid": "2.16.840.1.113883.3.117.1.7.1.23",
+  "code_list_id": "2.16.840.1.113883.3.117.1.7.1.23"
 }

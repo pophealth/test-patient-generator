@@ -1,12 +1,17 @@
 {
   "id": "MedicationAdministeredUnfractionatedHeparin",
+  "description" : "Medication, Administered: Unfractionated Heparin",
+  "standard_category" : "medication",
+  "qds_data_type" : "medication_administered",
+  "type" : "medications",
+  "definition" : "medication",
+  "status" : "administered",
+  "hard_status" : true,
+  "negation" : true,
+  "negation_code_list_id" : "2.16.840.1.113883.3.117.1.7.1.473",
   "start_date": 1270101600000,
   "end_date": 1270105200000,
-  "value": [
-
-  ],
-  "negation": "",
-  "negation_code_list_id": null,
+  "value": null,
   "field_values": {
     "ROUTE": {
       "type": "CD",
@@ -14,5 +19,6 @@
       "title": "intravenous_route (8A4D92B2-3887-5DF3-0139-01959FB76498)"
     }
   },
-  "oid": "2.16.840.1.113883.3.117.1.7.1.218"
+  "oid": "2.16.840.1.113883.3.117.1.7.1.218",
+  "code_list_id": "2.16.840.1.113883.3.117.1.7.1.218"
 }

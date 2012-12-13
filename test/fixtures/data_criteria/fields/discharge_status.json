@@ -1,10 +1,14 @@
 {
   "id": "EncounterPerformedInpatientEncounter",
+  "description" : "Encounter, Performed: Inpatient Encounter",
+  "standard_category" : "encounter",
+  "qds_data_type" : "encounter",
+  "type" : "encounters",
+  "definition" : "encounter",
+  "status" : "performed",
   "start_date": 1275451200000,
   "end_date": 1275796800000,
-  "value": [
-
-  ],
+  "value": null,
   "negation": "",
   "negation_code_list_id": null,
   "field_values": {
@@ -14,5 +18,6 @@
       "title": "discharge_to_home_or_police_custody (8A4D92B2-37BF-6F1B-0137-CCD612A40D0E)"
     }
   },
-  "oid": "2.16.840.1.113883.3.117.1.7.1.23"
+  "oid": "2.16.840.1.113883.3.117.1.7.1.23",
+  "code_list_id": "2.16.840.1.113883.3.117.1.7.1.23"
 }

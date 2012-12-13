@@ -1,8 +1,15 @@
 {
   "id" : "OccurrenceAEmergencyDepartmentVisit21",
+  "description" : "Encounter, Performed: Emergency Department Visit",
+  "standard_category" : "encounter",
+  "qds_data_type" : "encounter",
+  "type" : "encounters",
+  "definition" : "encounter",
+  "status" : "performed",
+  "hard_status" : false,
   "start_date" : 1262322000000,
   "end_date" : 1262322000000,
-  "value" : [],
+  "value" : null,
   "negation" : "",
   "negation_code_list_id" : null,
   "field_values" : {
@@ -12,5 +19,6 @@
       "title" : "hospital_measures_icu_locations (508936bd044a113754000001)"
     }
   },
-  "oid" : "2.16.840.1.113883.3.117.1.7.1.292"
+  "oid" : "2.16.840.1.113883.3.117.1.7.1.292",
+  "code_list_id" : "2.16.840.1.113883.3.117.1.7.1.292"
 }

@@ -1,10 +1,14 @@
-{ // Admission Datetime
+{
   "id": "EncounterPerformedHospitalMeasuresEncounterInpatient",
+  "standard_category" : "encounter",
+  "qds_data_type" : "encounter",
+  "type" : "encounters",
+  "definition" : "encounter",
+  "status" : "performed",
+  "hard_status" : false,
   "start_date": 1272657600000,
   "end_date": 1273118400000,
-  "value": [
-
-  ],
+  "value": null,
   "negation": "",
   "negation_code_list_id": null,
   "field_values": {
@@ -13,5 +17,6 @@
       "value": "19740112193600"
     }
   },
-  "oid": "2.16.840.1.113883.3.666.5.625"
+  "oid": "2.16.840.1.113883.3.666.5.625",
+  "code_list_id": "2.16.840.1.113883.3.666.5.625"
 }
