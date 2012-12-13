@@ -24,7 +24,7 @@ module HQMF
     def to_seconds
       return nil unless type == "TS"
 
-      to_time_object.to_i
+      to_time_object.utc.to_i
     end
     
     # Translate the time represented by this Value into a Ruby time object.
@@ -45,7 +45,7 @@ module HQMF
         second = value[12,2].to_i
       end
       
-      Time.new(year, month, day, hour, minute, second)
+      Time.gm(year, month, day, hour, minute, second)
     end
   end
 end
