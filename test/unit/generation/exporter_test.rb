@@ -6,8 +6,8 @@ class ExporterTest < MiniTest::Unit::TestCase
     collection_fixtures("health_data_standards_svs_value_sets", "_id")
 
     all_data_criteria = MONGO_DB["data_criteria"].find({}).to_a
-    measure_needs = {"123" => all_data_criteria}
-    @patients = HQMF::Generator.generate_qrda_patients(measure_needs)
+    @measure_needs = {"123" => all_data_criteria}
+    @patients = HQMF::Generator.generate_qrda_patients(@measure_needs)
   end
 
   def test_zip
@@ -32,7 +32,7 @@ class ExporterTest < MiniTest::Unit::TestCase
   end
 
   def test_zip_qrda_patients
-    zip = TPG::Exporter.zip_qrda_patients(@patients)
+    zip = TPG::Exporter.zip_qrda_patients(@patients, @measure_needs)
 
     entries = []
     Zip::ZipFile.open(zip.path) do |zip|
