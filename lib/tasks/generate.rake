@@ -33,9 +33,17 @@ namespace :generate do
     Dir.foreach(measures_dir) do |entry|
       next if entry.starts_with? '.'
       
-      # Read and parse the measure file
+      # Read and parse the measure file.
       measure_path = File.join(measures_dir, entry)
       measure_json = JSON.parse(File.open(measure_path).read, max_nesting: 500)
+
+      # Measures are expected in the format exported by Bonnie, which includes an array of data criteria. HQMF Parser expects just a hash of ID => data_criteria, so translate to that format here.
+      translated_data_criteria = {}
+      measure_json["data_criteria"].each { |data_criteria| translated_data_criteria[data_criteria.keys.first] = data_criteria.values.first }
+      measure_json["data_criteria"] = translated_data_criteria
+      measure_json["source_data_criteria"] = []
+      measure_json["id"] = measure_json["nqf_id"]
+
       measure = HQMF::Document.from_json(measure_json)
       measures << measure
     end

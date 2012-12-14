@@ -116,7 +116,7 @@ module HQMF
     def self.determine_measure_needs(measures)
       measure_needs = {}
       measures.each do |measure|
-        measure_needs[measure.nqf_id] = measure.all_data_criteria
+        measure_needs[measure.id] = measure.all_data_criteria
       end
       measure_needs
     end

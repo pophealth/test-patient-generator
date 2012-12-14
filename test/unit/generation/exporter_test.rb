@@ -50,21 +50,5 @@ class ExporterTest < MiniTest::Unit::TestCase
 
   def test_zip_qrda_cat_1_patients
     skip "QRDA Cat 1 generation still requires value sets to be cached in the db."
-    # measure_defs = {@hqmf.id => @hqmf}
-    # zip = TPG::Exporter.zip_qrda_cat_1_patients(@patients, measure_defs)
-
-    # entries = []
-    # Zip::ZipFile.open(zip.path) do |zip|
-    #   zip.entries.each do |entry|
-    #     entries << entry.name
-    #     assert entry.size > 0
-    #   end
-    # end
-
-    # patient = @patients.values.first
-    # binding.pry
-    # expected = [File.join("0043", "#{patient.first}_#{patient.last}.html")]
-    # assert_equal entries.size, expected.size
-    # expected.each {|entry| assert entries.include? entry}
   end
 end

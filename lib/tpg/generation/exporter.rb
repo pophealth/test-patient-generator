@@ -67,11 +67,11 @@ module TPG
       
       Zip::ZipOutputStream.open(file.path) do |zip|
         measure_patients.each do |nqf_id, patient|
-          measure_def = measures.find {|m| m.nqf_id == nqf_id}
+          measure_def = measures.find {|m| m.id == nqf_id}
           # Create a directory for this measure and insert the HTML for this patient.
-          zip.put_next_entry(File.join(measures_def.hqmf_id, "#{patient_filename(patient)}.xml"))
-          puts "Generating patient for measure #{measure}"
-          zip << QrdaGenerator::Export::Cat1.export(patient, measures_def, Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
+          zip.put_next_entry(File.join(measure_def.hqmf_id, "#{patient_filename(patient)}.xml"))
+          puts "Generating patient for measure #{nqf_id}"
+          zip << QrdaGenerator::Export::Cat1.export(patient, measure_def, Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
         end
       end
       
