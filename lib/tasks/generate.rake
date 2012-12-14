@@ -29,28 +29,30 @@ namespace :generate do
     format = args[:format]
     out_path = args[:out_path]
 
-    # Make a mapping of each measure found in measure_dir to its data criteria
-    measure_needs = {}
+    measures = []
     Dir.foreach(measures_dir) do |entry|
       next if entry.starts_with? '.'
       
       # Read and parse the measure file
       measure_path = File.join(measures_dir, entry)
-      measure = JSON.parse(File.open(measure_path).read, max_nesting: 500)
-
-      # Extract the data criteria and add it as the requirements for this measure
-      data_criteria = measure["data_criteria"].map{|data_criteria| data_criteria.values.first}
-      measure_needs[measure["nqf_id"]] = data_criteria
+      measure_json = JSON.parse(File.open(measure_path).read, max_nesting: 500)
+      measure = HQMF::Document.from_json(measure_json)
+      measures << measure
     end
     
     # Generate the patients and export them in the requested format to the out_path
-    patients = HQMF::Generator.generate_qrda_patients(measure_needs)
-    zip = TPG::Exporter.send("zip_#{format}_patients", patients, measure_needs)
+    patients = HQMF::Generator.generate_qrda_patients(HQMF::Generator.determine_measure_needs(measures))
+    zip = case format
+    when 'qrda_html'
+      TPG::Exporter.zip_qrda_html_patients(patients, HQMF::Generator.determine_measure_needs(measures))
+    when 'qrda_cat_1'
+      TPG::Exporter.zip_qrda_cat_1_patients(patients, measures)
+    end
     
     # Create the outpath if it doesn't already exist and then write out the generated zip file.
     out_file = File.join(out_path, "patients.zip")
     FileUtils.mkdir_p out_path
     FileUtils.mv(zip.path, out_file)
-    puts "Generated #{measure_needs.size} #{format} patients. Saved to #{out_file}"
+    puts "Generated #{measures.size} #{format} patients. Saved to #{out_file}"
   end
 end

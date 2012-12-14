@@ -9,7 +9,7 @@ class GeneratorTest < MiniTest::Unit::TestCase
     collection_fixtures("data_criteria", "_id")
     collection_fixtures("health_data_standards_svs_value_sets", "_id")
 
-    all_data_criteria = MONGO_DB["data_criteria"].find({}).to_a
+    all_data_criteria = MONGO_DB["data_criteria"].find({}).map { |dc| HQMF::DataCriteria.from_json(dc["id"], dc) }
     measure_needs = {"123" => all_data_criteria, "456" => all_data_criteria}
     measure_patients = HQMF::Generator.generate_qrda_patients(measure_needs)
     patients = measure_patients.values

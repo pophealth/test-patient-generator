@@ -5,13 +5,11 @@ module HQMF
     # 
     # @param [Hash] measure_needs A hash of measure IDs mapped to a list of all their data criteria in JSON.
     # @return [Hash] A hash of measure IDs mapped to a Record that includes all the given data criteria (values and times are arbitrary).
-    def self.generate_qrda_patients(measure_needs)
+    def self.generate_qrda_patients(measure_needs)      
       return {} if measure_needs.nil?
       
       measure_patients = {}
-      measure_needs.each do |measure, all_data_criteria|
-        data_criteria_models = all_data_criteria.map {|data_criteria| HQMF::DataCriteria.from_json(data_criteria["id"], data_criteria)}
-
+      measure_needs.each do |measure, data_criteria_models|
         data_criteria_models.flatten!
         data_criteria_models.uniq!
 
@@ -111,6 +109,16 @@ module HQMF
       end
       
       patient
+    end
+
+    # Takes an Array of meassures and builds a Hash keyed by NQF ID
+    # with the values being an Array of data criteria
+    def self.determine_measure_needs(measures)
+      measure_needs = {}
+      measures.each do |measure|
+        measure_needs[measure.nqf_id] = measure.all_data_criteria
+      end
+      measure_needs
     end
     
     # Map all patient api coded entry types from HQMF data criteria to Record sections.
