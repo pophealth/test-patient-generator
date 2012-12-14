@@ -10,15 +10,15 @@ module HQMF
       
       measure_patients = {}
       measure_needs.each do |measure, all_data_criteria|
-        all_data_criteria.map! {|data_criteria| HQMF::DataCriteria.from_json(data_criteria["id"], data_criteria)}
+        data_criteria_models = all_data_criteria.map {|data_criteria| HQMF::DataCriteria.from_json(data_criteria["id"], data_criteria)}
 
-        all_data_criteria.flatten!
-        all_data_criteria.uniq!
+        data_criteria_models.flatten!
+        data_criteria_models.uniq!
 
         # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
         # so to minimize time we only want to include each kind of data once.
         unique_data_criteria = []
-        all_data_criteria.each do |data_criteria|
+        data_criteria_models.each do |data_criteria|
           index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
           unique_data_criteria << data_criteria if index.nil?
         end

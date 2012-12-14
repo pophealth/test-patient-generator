@@ -20,7 +20,12 @@
     },
     "DISCHARGE_DATETIME": {
       "type": "TS",
-      "value": "19740101144200"
+      "value": "19740116104800"
+    },
+    "DISCHARGE_STATUS": {
+      "type": "CD",
+      "code_list_id": "2.16.840.1.113883.3.117.1.7.1.82",
+      "title": "discharge_to_home_or_police_custody (8A4D92B2-37BF-6F1B-0137-CCD612A40D0E)"
     }
   },
   "oid": "2.16.840.1.113883.3.117.1.7.1.23",

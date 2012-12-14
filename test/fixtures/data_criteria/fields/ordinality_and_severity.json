@@ -18,6 +18,11 @@
       "type" : "CD",
       "code_list_id" : "2.16.840.1.113883.3.117.2.7.1.14",
       "title" : "principal_diagnosis (5089380b044a11375400087b)"
+    },
+    "SEVERITY" : {
+      "type" : "CD",
+      "code_list_id" : "2.16.840.1.113883.3.666.5.1153",
+      "title" : "hospital_measures_severe (508936bd044a113754000001)"
     }
   },
   "oid" : "2.16.840.1.113883.3.117.1.7.1.202",
