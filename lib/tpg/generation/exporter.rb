@@ -41,7 +41,7 @@ module TPG
     #
     # @param [Hash] measure_patients Measures mapped to the patient that was generated for it.
     # @return A zip file containing all of the QRDA Category 1 patients that were passed in.
-    def self.zip_qrda_patients(measure_patients, measure_needs)
+    def self.zip_qrda_html_patients(measure_patients, measure_needs)
       file = Tempfile.new("patients-#{Time.now.to_i}")
       
       Zip::ZipOutputStream.open(file.path) do |zip|
@@ -62,15 +62,16 @@ module TPG
     #
     # @param [Hash] measure_patients Measures mapped to the patient that was generated for it.
     # @return A zip file containing all of the QRDA Category 1 patients that were passed in.
-    def self.zip_qrda_cat_1_patients(measure_patients, measure_needs)
+    def self.zip_qrda_cat_1_patients(measure_patients, measures)
       file = Tempfile.new("patients-#{Time.now.to_i}")
       
       Zip::ZipOutputStream.open(file.path) do |zip|
-        measure_patients.each do |measure, patient|
+        measure_patients.each do |nqf_id, patient|
+          measure_def = measures.find {|m| m.nqf_id == nqf_id}
           # Create a directory for this measure and insert the HTML for this patient.
-          zip.put_next_entry(File.join(measure_defs[measure].hqmf_id, "#{patient_filename(patient)}.xml"))
+          zip.put_next_entry(File.join(measures_def.hqmf_id, "#{patient_filename(patient)}.xml"))
           puts "Generating patient for measure #{measure}"
-          zip << QrdaGenerator::Export::Cat1.export(patient, measure_needs[measure], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
+          zip << QrdaGenerator::Export::Cat1.export(patient, measures_def, Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
         end
       end
       
