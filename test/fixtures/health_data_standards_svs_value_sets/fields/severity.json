@@ -1,0 +1,11 @@
+{ "_id" : "50c761aa7093574a0b001319",
+  "oid" : "2.16.840.1.113883.3.666.5.1153",
+  "display_name" : "Hospital Measures-Severe",
+  "version" : "20121025",
+  "concepts" : [ 
+    { "_id" : "50c761aa7093574a0b00131a",
+      "code" : "123abc",
+      "code_system_name" : "SNOMED-CT",
+      "code_system_version" : null,
+      "display_name" : "Severe (severity modifier) (qualifier value)",
+      "code_system" : null } ] }

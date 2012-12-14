@@ -6,7 +6,14 @@ class GeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_generate_qrda_patients
-    binding.pry
+    collection_fixtures("data_criteria", "_id")
+    collection_fixtures("health_data_standards_svs_value_sets", "_id")
+
+    all_data_criteria = MONGO_DB["data_criteria"].find({}).to_a
+    measure_needs = {"123" => all_data_criteria}
+    patients = HQMF::Generator.generate_qrda_patients(measure_needs)
+
+    skip "We need to assert somethin' er other"
   end
 
   def test_create_base_patient

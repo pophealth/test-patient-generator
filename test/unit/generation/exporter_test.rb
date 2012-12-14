@@ -2,24 +2,12 @@ require 'test_helper'
 
 class ExporterTest < MiniTest::Unit::TestCase
   def setup
-    measure_dir = File.join('test', 'fixtures', 'measure-defs', '0043')
-    hqmf_path = File.join(measure_dir, '0043.xml')
-    value_set_path = File.join(measure_dir,'0043.xls')
-    
-    # Parse all of the value sets
-    value_set_parser = HQMF::ValueSet::Parser.new()
-    value_set_format = HQMF::ValueSet::Parser.get_format(value_set_path)
-    value_sets = value_set_parser.parse(value_set_path, {format: value_set_format})
+    collection_fixtures("data_criteria", "_id")
+    collection_fixtures("health_data_standards_svs_value_sets", "_id")
 
-    # Parsed the HQMF file into a model
-    codes_by_oid = HQMF2JS::Generator::CodesToJson.from_value_sets(value_sets)
-    hqmf_contents = File.read(hqmf_path)
-    @hqmf = HQMF::Parser.parse(hqmf_contents, HQMF::Parser::HQMF_VERSION_1, codes_by_oid)
-    
-    # Generate the patients and export them in the requested format to the out_path
-    @patients = HQMF::Generator.generate_qrda_patients(
-      {@hqmf.id => @hqmf.referenced_data_criteria},
-      {@hqmf.id => value_sets})
+    all_data_criteria = MONGO_DB["data_criteria"].find({}).to_a
+    @measure_needs = {"123" => all_data_criteria}
+    @patients = HQMF::Generator.generate_qrda_patients(@measure_needs)
   end
 
   def test_zip
@@ -44,7 +32,7 @@ class ExporterTest < MiniTest::Unit::TestCase
   end
 
   def test_zip_qrda_patients
-    zip = TPG::Exporter.zip_qrda_patients(@patients)
+    zip = TPG::Exporter.zip_qrda_patients(@patients, @measure_needs)
 
     entries = []
     Zip::ZipFile.open(zip.path) do |zip|
@@ -55,7 +43,7 @@ class ExporterTest < MiniTest::Unit::TestCase
     end
 
     patient = @patients.values.first
-    expected = [File.join("0043", "#{patient.first}_#{patient.last}.html")]
+    expected = [File.join("123", "#{patient.first}_#{patient.last}.html")]
     assert_equal entries.size, expected.size
     expected.each {|entry| assert entries.include? entry}
   end

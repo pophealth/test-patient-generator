@@ -9,6 +9,7 @@ gem 'qrda_generator', git: 'http://github.com/eedrummer/qrda_generator', branch:
 gem 'rake'
 gem 'pry'
 gem 'pry-nav'
+gem 'pry-stack_explorer'
 
 group :test do
   gem 'simplecov'

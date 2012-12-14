@@ -1,0 +1,11 @@
+{ "_id" : "50c761ad7093574a0b001350",
+  "oid" : "2.16.840.1.113883.3.526.2.8001",
+  "display_name" : "Hospital Measures - Principal",
+  "version" : "20121025",
+  "concepts" : [ 
+    { "_id" : "50c761ad7093574a0b001351",
+      "code" : "123abc",
+      "code_system_name" : "SNOMED-CT",
+      "code_system_version" : null,
+      "display_name" : "Principal (qualifier value)",
+      "code_system" : null } ] }
