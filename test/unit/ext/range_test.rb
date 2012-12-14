@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RangeTest < MiniTest::Unit::TestCase
   def test_format
-    now = Time.at(1234567890)
+    now = Time.at(1234567890).utc
     low = HQMF::Value.new("TS", nil, HQMF::Value.time_to_ts(now), true, false, false)
 
     later = now + (60 * 60 * 24 * 7)
