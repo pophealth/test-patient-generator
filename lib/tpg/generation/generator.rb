@@ -5,20 +5,18 @@ module HQMF
     # 
     # @param [Hash] measure_needs A hash of measure IDs mapped to a list of all their data criteria in JSON.
     # @return [Hash] A hash of measure IDs mapped to a Record that includes all the given data criteria (values and times are arbitrary).
-    def self.generate_qrda_patients(measure_needs)
+    def self.generate_qrda_patients(measure_needs)      
       return {} if measure_needs.nil?
       
       measure_patients = {}
-      measure_needs.each do |measure, all_data_criteria|
-        all_data_criteria.map! {|data_criteria| HQMF::DataCriteria.from_json(data_criteria["id"], data_criteria)}
-
-        all_data_criteria.flatten!
-        all_data_criteria.uniq!
+      measure_needs.each do |measure, data_criteria_models|
+        data_criteria_models.flatten!
+        data_criteria_models.uniq!
 
         # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
         # so to minimize time we only want to include each kind of data once.
         unique_data_criteria = []
-        all_data_criteria.each do |data_criteria|
+        data_criteria_models.each do |data_criteria|
           index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
           unique_data_criteria << data_criteria if index.nil?
         end
@@ -111,6 +109,16 @@ module HQMF
       end
       
       patient
+    end
+
+    # Takes an Array of meassures and builds a Hash keyed by NQF ID
+    # with the values being an Array of data criteria
+    def self.determine_measure_needs(measures)
+      measure_needs = {}
+      measures.each do |measure|
+        measure_needs[measure.id] = measure.all_data_criteria
+      end
+      measure_needs
     end
     
     # Map all patient api coded entry types from HQMF data criteria to Record sections.

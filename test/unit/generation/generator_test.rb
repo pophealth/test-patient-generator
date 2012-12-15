@@ -9,11 +9,22 @@ class GeneratorTest < MiniTest::Unit::TestCase
     collection_fixtures("data_criteria", "_id")
     collection_fixtures("health_data_standards_svs_value_sets", "_id")
 
-    all_data_criteria = MONGO_DB["data_criteria"].find({}).to_a
-    measure_needs = {"123" => all_data_criteria}
-    patients = HQMF::Generator.generate_qrda_patients(measure_needs)
+    all_data_criteria = MONGO_DB["data_criteria"].find({}).map { |dc| HQMF::DataCriteria.from_json(dc["id"], dc) }
+    measure_needs = {"123" => all_data_criteria, "456" => all_data_criteria}
+    measure_patients = HQMF::Generator.generate_qrda_patients(measure_needs)
+    patients = measure_patients.values
 
-    skip "We need to assert somethin' er other"
+    assert_equal patients.size, 2
+    refute_nil measure_patients["123"]
+    refute_nil measure_patients["456"]
+
+    patients.each do |patient|
+      assert_equal patient.encounters.size, 3
+      assert_equal patient.medical_equipment.size, 1
+      assert_equal patient.medications.size, 1
+      assert_equal patient.conditions.size, 1
+      assert_equal patient.procedures.size, 1
+    end
   end
 
   def test_create_base_patient

@@ -1,11 +1,12 @@
 GIT
   remote: http://github.com/eedrummer/qrda_generator
-  revision: c20feeb95e28e26c3e62a7b3d94877e3fe4c1a4e
+  revision: 1353c24b932c2e861d62c9cefc6b4e2e3b78aaed
   branch: master
   specs:
     qrda_generator (0.1.0)
       health-data-standards (~> 2.1.4)
       hqmf-parser (~> 1.0.6)
+      log4r (~> 1.1.10)
       mongoid (~> 3.0.6)
       nokogiri (~> 1.5.5)
       uuid (~> 2.3.5)
@@ -18,19 +19,8 @@ GIT
     hquery-patient-api (0.1.0)
 
 GIT
-  remote: http://github.com/pophealth/hqmf-parser.git
-  revision: f201412aa2f7acac392c2e8f6088284569ce1162
-  branch: develop
-  specs:
-    hqmf-parser (1.0.6)
-      google-spreadsheet-ruby (= 0.1.8)
-      roo (= 1.10.1)
-      rubyzip
-      spreadsheet (= 0.6.8)
-
-GIT
   remote: http://github.com/pophealth/hqmf2js.git
-  revision: 150d3906d2aef978198315026c3f97b662587a08
+  revision: f55204c86373282ee6fda8c322c258ef14cc5cb7
   branch: develop
   specs:
     hqmf2js (1.1.0)
@@ -41,7 +31,7 @@ GIT
 
 GIT
   remote: http://github.com/projectcypress/health-data-standards.git
-  revision: 5af99f41b932b879b5e94b43ae07bcb48e8014a2
+  revision: 7283481cac90c10e1c1e3e54b0f10086cb6d227a
   branch: develop
   specs:
     health-data-standards (2.1.4)
@@ -52,6 +42,15 @@ GIT
       nokogiri (~> 1.5.5)
       rest-client (~> 1.6.7)
       uuid (~> 2.3.5)
+
+PATH
+  remote: ../hqmf-parser
+  specs:
+    hqmf-parser (1.0.6)
+      google-spreadsheet-ruby (= 0.1.8)
+      roo (= 1.10.1)
+      rubyzip
+      spreadsheet (= 0.6.8)
 
 GEM
   remote: http://rubygems.org/
@@ -121,7 +120,7 @@ GEM
     pry-stack_explorer (0.4.7)
       binding_of_caller (~> 0.6.8)
     rack (1.4.1)
-    rake (10.0.2)
+    rake (10.0.3)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     roo (1.10.1)
