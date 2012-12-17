@@ -19,6 +19,17 @@ GIT
     hquery-patient-api (0.1.0)
 
 GIT
+  remote: http://github.com/pophealth/hqmf-parser.git
+  revision: c227a74f1c107ed6cde7ba27a73b3d86ed331aef
+  branch: develop
+  specs:
+    hqmf-parser (1.0.6)
+      google-spreadsheet-ruby (= 0.1.8)
+      roo (= 1.10.1)
+      rubyzip
+      spreadsheet (= 0.6.8)
+
+GIT
   remote: http://github.com/pophealth/hqmf2js.git
   revision: f55204c86373282ee6fda8c322c258ef14cc5cb7
   branch: develop
@@ -31,7 +42,7 @@ GIT
 
 GIT
   remote: http://github.com/projectcypress/health-data-standards.git
-  revision: 7283481cac90c10e1c1e3e54b0f10086cb6d227a
+  revision: deb3d75641e27effda6a6f545499e95f386b247d
   branch: develop
   specs:
     health-data-standards (2.1.4)
@@ -42,15 +53,6 @@ GIT
       nokogiri (~> 1.5.5)
       rest-client (~> 1.6.7)
       uuid (~> 2.3.5)
-
-PATH
-  remote: ../hqmf-parser
-  specs:
-    hqmf-parser (1.0.6)
-      google-spreadsheet-ruby (= 0.1.8)
-      roo (= 1.10.1)
-      rubyzip
-      spreadsheet (= 0.6.8)
 
 GEM
   remote: http://rubygems.org/

@@ -43,6 +43,7 @@ module HQMF
           next if data_criteria.derivation_operator.present?
 
           # Generate a random time for this data criteria.
+          # TODO should bound other data criteria
           time = Randomizer.randomize_range(patient.birthdate, patient.deathdate)
 
           # Some fields come in with no value or marked as AnyValue (i.e. any value is acceptable, there just must be one). If that's the case, we pick a default here.
@@ -67,6 +68,7 @@ module HQMF
             end
           end
           
+          puts "generating for #{measure}"
           data_criteria.modify_patient(patient, time, value_sets)
         end
         patient.measure_ids ||= []
@@ -105,7 +107,7 @@ module HQMF
       
       if patient.gender.nil?
         patient.gender = "F"
-        patient.first = Randomizer.randomize_first_name(patient.gender)
+        patient.first ||= Randomizer.randomize_first_name(patient.gender)
       end
       
       patient
@@ -119,6 +121,23 @@ module HQMF
         measure_needs[measure.id] = measure.all_data_criteria
       end
       measure_needs
+    end
+
+    # Parses a JSON representation of a measure from a Bonnie Bundle into an hqmf-parser ready format.
+    #
+    # @param [Hash] measure JSON representation of a measure
+    # @return Tweaked JSON that has fields in the places hqmf-parser expects
+    def self.parse_measure(measure_json)
+      # HQMF Parser expects just a hash of ID => data_criteria, so translate to that format here.
+      translated_data_criteria = {}
+      measure_json["data_criteria"].each { |data_criteria| translated_data_criteria[data_criteria.keys.first] = data_criteria.values.first }
+      measure_json["data_criteria"] = translated_data_criteria
+      
+      # HQMF::Documents have fields for hqmf_id and id, but not NQF ID. We'll store NQF_ID in ID.
+      measure_json["id"] = measure_json["nqf_id"]
+      measure_json["source_data_criteria"] = []
+      
+      measure = HQMF::Document.from_json(measure_json)
     end
     
     # Map all patient api coded entry types from HQMF data criteria to Record sections.

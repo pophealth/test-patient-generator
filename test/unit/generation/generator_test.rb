@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class GeneratorTest < MiniTest::Unit::TestCase
-  def setup
-
-  end
-
   def test_generate_qrda_patients
     collection_fixtures("data_criteria", "_id")
     collection_fixtures("health_data_standards_svs_value_sets", "_id")
@@ -48,6 +44,14 @@ class GeneratorTest < MiniTest::Unit::TestCase
     HQMF::Generator.finalize_patient(patient)
     refute_nil patient.first
     refute_nil patient.birthdate
+  end
+
+  def test_determine_measure_needs
+    
+  end
+
+  def test_parse_measure
+    
   end
 
   def test_classify_entry
