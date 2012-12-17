@@ -127,7 +127,6 @@ module HQMF
             field_value = facility
           end
 
-
           begin
             field_accessor ||= HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
             entry.send("#{field_accessor}=", field_value)
