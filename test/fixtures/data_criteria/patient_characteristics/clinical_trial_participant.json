@@ -1,0 +1,14 @@
+{
+  "id": "PatientCharacteristicClinicalTrialParticipantClinicalTrialParticipant_precondition_3536",
+  "title": "Clinical Trial Participant",
+  "description": 
+  "Patient Characteristic Clinical Trial Participant: Clinical Trial Participant",
+  "standard_category": "individual_characteristic",
+  "qds_data_type": "individual_characteristic",
+  "code_list_id": "2.16.840.1.113883.3.526.3.1125",
+  "property": "clinicalTrialParticipant",
+  "type": "characteristic",
+  "definition": "patient_characteristic_clinical_trial_participant",
+  "hard_status": false,
+  "negation": false
+}

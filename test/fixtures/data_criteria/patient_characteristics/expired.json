@@ -1,0 +1,13 @@
+{
+  "id": "PatientCharacteristicExpiredDeceased_precondition_4213",
+  "title": "Deceased",
+  "description": "Patient Characteristic Expired: Deceased",
+  "standard_category": "individual_characteristic",
+  "qds_data_type": "individual_characteristic",
+  "code_list_id": "2.16.840.1.113883.3.67.1.101.11.721",
+  "property": "expired",
+  "type": "characteristic",
+  "definition": "patient_characteristic_expired",
+  "hard_status": false,
+  "negation": false
+}

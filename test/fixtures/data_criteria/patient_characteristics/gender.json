@@ -1,0 +1,18 @@
+{
+  "id": "PatientCharacteristicSexFemale_precondition_1163",
+  "title": "Female",
+  "description": "Patient Characteristic Sex: Female",
+  "standard_category": "individual_characteristic",
+  "qds_data_type": "individual_characteristic",
+  "code_list_id": "2.16.840.1.113883.3.560.100.2",
+  "property": "gender",
+  "type": "characteristic",
+  "definition": "patient_characteristic_gender",
+  "hard_status": false,
+  "negation": false,
+  "value": {
+    "type": "CD",
+    "system": "Administrative Sex",
+    "code": "F"
+  }
+}
