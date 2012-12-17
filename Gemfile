@@ -7,10 +7,11 @@ gem 'health-data-standards', git: 'http://github.com/projectcypress/health-data-
 gem 'qrda_generator', git: 'http://github.com/eedrummer/qrda_generator', branch: 'master'
 
 gem 'rake'
-gem 'pry'
-gem 'pry-nav'
-gem 'pry-stack_explorer'
 
 group :test do
   gem 'simplecov'
+  gem 'turn'
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-stack_explorer'
 end

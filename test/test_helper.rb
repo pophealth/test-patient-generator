@@ -1,6 +1,10 @@
 require_relative "./simplecov"
 require_relative '../lib/test-patient-generator'
 
+require 'pry'
+require 'turn'
+require 'minitest/autorun'
+
 Mongoid.configure do |config|
   config.sessions = {
     default: {
@@ -10,9 +14,6 @@ Mongoid.configure do |config|
   }
 end
 MONGO_DB = Mongoid.default_session
-
-require 'pry'
-require 'minitest/autorun'
 
 # Patch on some useful utility functions for our tests.
 class MiniTest::Unit::TestCase
