@@ -29,7 +29,7 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified patient.
     def modify_patient_with_characteristic(patient, time, value_sets)
-      return nil unless type == :characteristic and property != nil and patient_api_function == nil
+      return nil unless characteristic?
 
       if property == :birthtime
         patient.birthdate = time.low.to_seconds
@@ -41,6 +41,8 @@ module HQMF
         patient.clinicalTrialParticipant = true
       elsif property == :expired
         patient.expired = true
+      else
+        binding.pry
       end
     end
 
@@ -50,7 +52,7 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return A coded entry with basic data defined by this data criteria.
     def derive_entry(time, value_sets)
-      return nil if type == :characteristic
+      return nil if characteristic?
 
       entry_type = Generator.classify_entry(patient_api_function)
       entry = entry_type.classify.constantize.new
@@ -69,15 +71,15 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified coded entry.
     def modify_entry_with_values(entry, value_sets)
-      return nil unless values.present?
+      return nil unless entry.present? && values.present?
 
       # If the value itself has a code, it will be a Coded type. Otherwise, it's just a regular value with a unit.
       entry.values ||= []
       values.each do |value|
         if value.type == "CD"
-          entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
+          entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets), description: HQMF::Coded.select_value_sets(value.code_list_id, value_sets)["concept"]})
         else
-           entry.values << PhysicalQuantityResultValue.new(value.format)
+          entry.values << PhysicalQuantityResultValue.new(value.format)
         end
       end
     end
@@ -88,7 +90,7 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified coded entry.
     def modify_entry_with_negation(entry, value_sets)
-      return nil unless negation && negation_code_list_id.present?
+      return nil unless entry.present? && negation && negation_code_list_id.present?
       
       entry.negation_ind = true
       entry.negation_reason = Coded.select_code(negation_code_list_id, value_sets)
@@ -100,7 +102,7 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified coded entry.
     def modify_entry_with_fields(entry, value_sets)
-      return nil unless field_values.present?
+      return nil unless entry.present? && field_values.present?
 
       field_values.each do |name, field|
         next if field.nil?
@@ -108,6 +110,7 @@ module HQMF
         # Format the field to be stored in a Record.
         if field.type == "CD"
           field_value = Coded.select_code(field.code_list_id, value_sets)
+          field_value["title"] = HQMF::Coded.select_value_sets(field.code_list_id, value_sets)["concept"]
         else
           field_value = field.format
         end
@@ -160,6 +163,10 @@ module HQMF
       section.push(entry)
       
       patient
+    end
+
+    def characteristic?
+      type == :characteristic && patient_api_function.nil? ? true : false
     end
   end
 end

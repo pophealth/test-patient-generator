@@ -95,8 +95,8 @@ module HQMF
     def self.create_oid_dictionary(oids)
       value_sets = []
       HealthDataStandards::SVS::ValueSet.any_in(oid: oids).each do |value_set|
-        code_sets = value_set.concepts.map {|concept| {"code_set" => concept.code_system_name, "codes" => [concept.code]}}
-        value_sets << {"code_sets" => code_sets, "oid" => value_set.oid}
+        code_sets = value_set.concepts.map { |concept| {"code_set" => concept.code_system_name, "codes" => [concept.code]} }
+        value_sets << {"code_sets" => code_sets, "oid" => value_set.oid, "concept" => value_set.display_name}
       end
 
       value_sets
@@ -112,10 +112,16 @@ module HQMF
         oids << dc.code_list_id if dc.code_list_id.present?
         oids << dc.negation_code_list_id if dc.negation_code_list_id.present?
         oids << dc.value.code_list_id if dc.value.present? && dc.value.type == "CD"
+
+        dc.field_values.each {|name, field| oids << field.code_list_id if field.present? && field.type == "CD"} if dc.field_values.present?
       end
+
+      oids << "2.16.840.1.113883.3.117.1.7.1.70"
+      oids << "2.16.840.1.113883.3.117.2.7.1.14"
 
       oids.flatten!
       oids.uniq!
+      oids.compact
     end
 
     #
@@ -146,7 +152,7 @@ module HQMF
             data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.70", "birth")
           elsif name == "ORDINAL"
             # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign it to be not principle
-            data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.265", "not principle")
+            data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.2.7.1.14", "principle")
           end
         end
       end
@@ -180,6 +186,12 @@ module HQMF
       measure_json["source_data_criteria"] = []
 
       measure = HQMF::Document.from_json(measure_json)
+      measure.all_data_criteria.each do |data_criteria|
+        data_criteria.values ||= []
+        data_criteria.values << data_criteria.value if data_criteria.value && data_criteria.value.type != "ANYNonNull"
+      end
+
+      measure
     end
     
     # Map all patient api coded entry types from HQMF data criteria to Record sections.
