@@ -6,7 +6,7 @@ class ExporterTest < MiniTest::Unit::TestCase
     collection_fixtures("health_data_standards_svs_value_sets", "_id")
     collection_fixtures("measures")
 
-    measure_path = File.join("test", "fixtures", "measures", "0142.json")
+    measure_path = File.join("test", "fixtures", "measures", "1234.json")
     measure_json = JSON.parse(File.open(measure_path).read, max_nesting: 500)
     @measures = [HQMF::Generator.parse_measure(measure_json)]
 
@@ -47,7 +47,7 @@ class ExporterTest < MiniTest::Unit::TestCase
 
     patient = @patients.values.first
     filename = TPG::Exporter.patient_filename(patient)
-    expected = [File.join("0142", "#{filename}.html")]
+    expected = [File.join("1234", "#{filename}.html")]
     assert_equal entries.size, expected.size
     expected.each {|entry| assert entries.include? entry}
   end

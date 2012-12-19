@@ -14,8 +14,8 @@
     "code_list_id": "2.16.840.1.113883.3.526.2.8001",
     "title": "hospital_measures_principal (5069c0e5044a11f31c00070c)"
   },
-  "negation": "",
-  "negation_code_list_id": null,
+  "negation": true,
+  "negation_code_list_id": "2.16.840.1.113883.3.526.3.1007",
   "field_values": {
     "INCISION_DATETIME": {
       "type": "TS",

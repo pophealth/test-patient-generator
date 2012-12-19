@@ -9,32 +9,11 @@ module HQMF
       return {} if measure_needs.nil?
       
       measure_patients = {}
-      measure_needs.each do |measure, data_criteria_models|
-        data_criteria_models.flatten!
-        data_criteria_models.uniq!
-
-        # Prune out all data criteria that create similar entries. Category 1 validation is only checking for ability to access information
-        # so to minimize time we only want to include each kind of data once.
-        unique_data_criteria = []
-        data_criteria_models.each do |data_criteria|
-          index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
-          unique_data_criteria << data_criteria if index.nil?
-        end
-
-        oids = []
-        unique_data_criteria.each do |dc|
-          oids << dc.code_list_id if dc.code_list_id.present?
-          oids << dc.negation_code_list_id if dc.negation_code_list_id.present?
-          oids << dc.value.code_list_id if dc.value.present? && dc.value.type == "CD"
-        end
-        oids.flatten!
-        oids.uniq!
-        
-        value_sets = []
-        HealthDataStandards::SVS::ValueSet.any_in(oid: oids).each do |value_set|
-          code_sets = value_set.concepts.map {|concept| {"code_set" => concept.code_system_name, "codes" => [concept.code]}}
-          value_sets << {"code_sets" => code_sets, "oid" => value_set.oid}
-        end
+      measure_needs.each do |measure, all_data_criteria|
+        # Define a list of unique data criteria and matching value sets to create a patient for this measure.
+        unique_data_criteria = select_unique_data_criteria(all_data_criteria)
+        oids = select_unique_oids(all_data_criteria)
+        value_sets = create_oid_dictionary(oids)
         
         # Create a patient that includes an entry for every data criteria included in this measure.
         patient = Generator.create_base_patient
@@ -42,35 +21,13 @@ module HQMF
           # Ignore data criteria that are really just containers.
           next if data_criteria.derivation_operator.present?
 
-          # Generate a random time for this data criteria.
-          # TODO should bound other data criteria
-          time = Randomizer.randomize_range(patient.birthdate, patient.deathdate)
-
-          # Some fields come in with no value or marked as AnyValue (i.e. any value is acceptable, there just must be one). If that's the case, we pick a default here.
-          if data_criteria.field_values.present?
-            data_criteria.field_values.each do |name, field|
-              if field.is_a? HQMF::AnyValue
-                if ["ADMISSION_DATETIME", "START_DATETIME", "INCISION_DATETIME"].include? name
-                  data_criteria.field_values[name] = time.low
-                elsif ["DISCHARGE_DATETIME", "STOP_DATETIME", "REMOVAL_DATETIME"].include? name
-                  data_criteria.field_values[name] = time.high
-                elsif name.include? "FACILITY"
-                  codes = Coded.select_codes(field.code_list_id, value_sets)
-                  field_value = Facility.new("name" => field.title, "codes" => codes)
-                elsif name == "REASON"
-                  # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (birth)
-                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.70", "birth")
-                elsif name == "ORDINAL"
-                  # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign it to be not principle
-                  data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.265", "not principle")
-                end
-              end
-            end
-          end
-          
-          puts "generating for #{measure}"
+          # Prepare and apply our parameters for modifying the patient based on the data criteria.
+          time = select_valid_time_range(patient, data_criteria)
+          apply_field_defaults(data_criteria, time)
           data_criteria.modify_patient(patient, time, value_sets)
         end
+
+        # Add final data for the patient, e.g. that they were designed for the measure, possibly a birthdate, etc.
         patient.measure_ids ||= []
         patient.measure_ids << measure
         patient.type = "qrda"
@@ -113,13 +70,98 @@ module HQMF
       patient
     end
 
-    # Takes an Array of meassures and builds a Hash keyed by NQF ID
-    # with the values being an Array of data criteria
+    # Select all unique data criteria from a list. Category 1 validation is only checking for ability to access information
+    # so to minimize time we only want to include each kind of data once.
+    #
+    # @param [Array] all_data_criteria A list of HQMF::DataCriteria to be sifted through.
+    # @return The unique list of data criteria extracted from all_data_criteria
+    def self.select_unique_data_criteria(all_data_criteria)
+      all_data_criteria.flatten!
+      all_data_criteria.uniq!
+      
+      unique_data_criteria = []
+      all_data_criteria.each do |data_criteria|
+        index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
+        unique_data_criteria << data_criteria if index.nil?
+      end
+
+      unique_data_criteria
+    end
+
+    #
+    #
+    # @param [Array] oids 
+    # @return 
+    def self.create_oid_dictionary(oids)
+      value_sets = []
+      HealthDataStandards::SVS::ValueSet.any_in(oid: oids).each do |value_set|
+        code_sets = value_set.concepts.map {|concept| {"code_set" => concept.code_system_name, "codes" => [concept.code]}}
+        value_sets << {"code_sets" => code_sets, "oid" => value_set.oid}
+      end
+
+      value_sets
+    end
+
+    #
+    #
+    # @param [Array] all_data_criteria
+    # @return
+    def self.select_unique_oids(all_data_criteria)
+      oids = []
+      all_data_criteria.each do |dc|
+        oids << dc.code_list_id if dc.code_list_id.present?
+        oids << dc.negation_code_list_id if dc.negation_code_list_id.present?
+        oids << dc.value.code_list_id if dc.value.present? && dc.value.type == "CD"
+      end
+
+      oids.flatten!
+      oids.uniq!
+    end
+
+    #
+    #
+    # @param [Record] patient
+    # @param [HQMF::DataCriteria] data_criteria
+    # @return
+    def self.select_valid_time_range(patient, data_criteria)
+      time = Randomizer.randomize_range(patient.birthdate, patient.deathdate)
+    end
+
+    #
+    #
+    # @param [HQMF::DataCriteria] date_criteria
+    # @return
+    def self.apply_field_defaults(data_criteria, time)
+      return nil if data_criteria.field_values.nil?
+
+      # Some fields come in with no value or marked as AnyValue (i.e. any value is acceptable, there just must be one). If that's the case, we pick a default here.
+      data_criteria.field_values.each do |name, field|
+        if field.is_a? HQMF::AnyValue
+          if ["ADMISSION_DATETIME", "START_DATETIME", "INCISION_DATETIME"].include? name
+            data_criteria.field_values[name] = time.low
+          elsif ["DISCHARGE_DATETIME", "STOP_DATETIME", "REMOVAL_DATETIME"].include? name
+            data_criteria.field_values[name] = time.high
+          elsif name == "REASON"
+            # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign a random one (birth)
+            data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.70", "birth")
+          elsif name == "ORDINAL"
+            # If we're not explicitly given a code (e.g. HQMF dictates there must be a reason but any is ok), we assign it to be not principle
+            data_criteria.field_values[name] = Coded.for_code_list("2.16.840.1.113883.3.117.1.7.1.265", "not principle")
+          end
+        end
+      end
+    end
+
+    # Takes an Array of meassures and builds a Hash keyed by NQF ID with the values being an Array of data criteria.
+    #
+    # @param [Array] measures A list of HQMF::Documents for which patients will be generated.
+    # @return A hash of measure IDs for which we're generating patients, mapped to an array of HQMF::DataCriteria.
     def self.determine_measure_needs(measures)
       measure_needs = {}
       measures.each do |measure|
         measure_needs[measure.id] = measure.all_data_criteria
       end
+
       measure_needs
     end
 
@@ -136,7 +178,7 @@ module HQMF
       # HQMF::Documents have fields for hqmf_id and id, but not NQF ID. We'll store NQF_ID in ID.
       measure_json["id"] = measure_json["nqf_id"]
       measure_json["source_data_criteria"] = []
-      
+
       measure = HQMF::Document.from_json(measure_json)
     end
     
@@ -145,7 +187,6 @@ module HQMF
     # @param [String] type The type of the coded entry requried by a data criteria.
     # @return The section type for the given patient api function type
     def self.classify_entry(type)
-      
       # The possible matches per patientAPI function can be found in hqmf-parser's README
       case type
       when :allProcedures
@@ -173,4 +214,4 @@ module HQMF
       end
     end
   end
-end
+end 

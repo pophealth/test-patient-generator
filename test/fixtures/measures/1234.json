@@ -1,0 +1,144 @@
+/**
+ * This is a fake measure populated by the data criteria fixtures.
+ * This measure is used to verify generation from bundle measure JSON and to test that ANYNonNull data criteria field values correctly use defaults.
+*/
+
+{
+  "id": "8A4D92B2-3887-5DF3-0139-0D01C6626E46",
+  "nqf_id": "1234",
+  "hqmf_id": "8A4D92B2-3887-5DF3-0139-0D01C6626E46",
+  "hqmf_set_id": "BB481284-30DD-4383-928C-82385BBF1B17",
+  "hqmf_version_number": 1,
+  "endorser": null,
+  "name": "Phakey phake",
+  "description": "A fake measure can generate patients and export formats correctly.",
+  "type": "eh",
+  "category": "Acute Generation Success",
+  "steward": null,
+  "data_criteria": [
+    {
+      "EncounterPerformedHospitalMeasuresEncounterInpatient": {
+        "id": "EncounterPerformedHospitalMeasuresEncounterInpatient",
+        "standard_category" : "encounter",
+        "qds_data_type" : "encounter",
+        "type" : "encounters",
+        "definition" : "encounter",
+        "status" : "performed",
+        "hard_status" : false,
+        "start_date": 1272657600000,
+        "end_date": 1273118400000,
+        "value": null,
+        "negation": "",
+        "negation_code_list_id": null,
+        "field_values": {
+          "ADMISSION_DATETIME": {
+            "type": "ANYNonNull"
+          },
+          "DISCHARGE_DATETIME": {
+            "type": "ANYNonNull"
+          },
+          "REASON": {
+            "type": "ANYNonNull"
+          },
+          "START_DATETIME": {
+            "type": "ANYNonNull"
+          },
+          "STOP_DATETIME": {
+            "type": "ANYNonNull"
+          }
+        },
+        "oid": "2.16.840.1.113883.3.666.5.625",
+        "code_list_id": "2.16.840.1.113883.3.666.5.625"
+      }
+    },
+
+    {
+      "ProcedurePerformedHospitalMeasuresCabg": {
+        "id": "ProcedurePerformedHospitalMeasuresCabg",
+        "description" : "Procedure, Performed: Hospital measures-CABG",
+        "standard_category" : "procedure",
+        "qds_data_type" : "procedure_performed",
+        "type" : "procedures",
+        "definition" : "procedure",
+        "status" : "performed",
+        "hard_status" : false,
+        "start_date": 1267527600000,
+        "end_date": 1267549200000,
+        "value": {
+          "type": "CD",
+          "code_list_id": "2.16.840.1.113883.3.526.2.8001",
+          "title": "hospital_measures_principal (5069c0e5044a11f31c00070c)"
+        },
+        "negation": "",
+        "negation_code_list_id": null,
+        "field_values": {
+          "INCISION_DATETIME": {
+            "type": "TS",
+            "value": "19740106210600"
+          }
+        },
+        "oid": "2.16.840.1.113883.3.666.5.694",
+        "code_list_id": "2.16.840.1.113883.3.666.5.694"
+      }
+    },
+
+    {
+      "DeviceAppliedHospitalMeasuresIndwellingUrinaryCatheter": {
+        "id": "DeviceAppliedHospitalMeasuresIndwellingUrinaryCatheter",
+        "description" : "Device, Applied: Hospital Measures-Indwelling urinary catheter",
+        "standard_category" : "device",
+        "qds_data_type" : "device_applied",
+        "type" : "devices",
+        "definition" : "device",
+        "status" : "applied",
+        "hard_status" : true,
+        "start_date": 1267529400000,
+        "end_date": 1267765200000,
+        "value": {
+          "type": "CD",
+          "type": "ANYNonNull"
+        },
+        "negation": "",
+        "negation_code_list_id": null,
+        "field_values": {
+          "ANATOMICAL_STRUCTURE": {
+            "type": "CD",
+            "code_list_id": "2.16.840.1.113883.3.666.5.1130",
+            "title": "hospital_measures_urethra (8A4D92B2-3A58-B777-013A-670AB6932A3B)"
+          },
+          "REMOVAL_DATETIME": {
+            "type": "ANYNonNull"
+          }
+        },
+        "oid": "2.16.840.1.113883.3.666.5.820",
+        "code_list_id": "2.16.840.1.113883.3.666.5.820"
+      }
+    },
+
+    {
+      "DiagnosisInactiveAtrialFibrillationFlutter": {
+        "id" : "DiagnosisInactiveAtrialFibrillationFlutter",
+      "description" : "Diagnosis, Inactive: Atrial Fibrillation/Flutter",
+      "standard_category" : "diagnosis_condition_problem",
+      "qds_data_type" : "diagnosis_inactive",
+      "type" : "conditions",
+      "definition" : "diagnosis",
+      "status" : "inactive",
+      "hard_status" : true,
+      "negation" : false,
+      "start_date" : 1262322000000,
+      "end_date" : 1262322000000,
+      "value" : null,
+      "negation" : "",
+      "negation_code_list_id" : null,
+      "field_values" : {
+        "ORDINAL" : {
+          "type": "ANYNonNull"
+        }
+      },
+      "oid" : "2.16.840.1.113883.3.117.1.7.1.202",
+      "code_list_id" : "2.16.840.1.113883.3.117.1.7.1.202"  
+      }
+    }
+  ]
+}
