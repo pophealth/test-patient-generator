@@ -38,7 +38,7 @@ module HQMF
       code_system = codes.keys()[0]
       return nil if code_system.nil?
       {
-        'codeSystem' => code_system,
+        'code_system' => code_system,
         'code' => codes[code_system][0]
       }
     end

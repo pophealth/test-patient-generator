@@ -3,6 +3,8 @@ require 'hqmf2js'
 
 class DataCriteriaTest < MiniTest::Unit::TestCase
   def setup
+    collection_fixtures("health_data_standards_svs_value_sets", "_id")
+    
     @all_data_criteria = MONGO_DB["data_criteria"].find({}).to_a.map { |data_criteria| HQMF::DataCriteria.from_json(data_criteria["id"], data_criteria) }
     @characteristic_criteria = @all_data_criteria.find_all { |dc| dc.property.present? }
     @negation_criteria = @all_data_criteria.find_all { |dc| dc.negation_code_list_id.present? }
