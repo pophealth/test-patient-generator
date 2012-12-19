@@ -185,12 +185,14 @@ module HQMF
     #
     # @param [Time] earliest_time The lowest possible value for the low in this Range. nil implies unbounded.
     # @param [Time] latest_time The highest possible value for the high in this Range. nil implies unbounded.
+    # @param [Hash] maximum_length Optionally used to bound the length of a range. This is a hash that can be passed as a parameter to Time.advance.
     # @return A Range that represents a start time and end time within the acceptable bounds supplied.
-    def self.randomize_range(earliest_time, latest_time)
+    def self.randomize_range(earliest_time, latest_time, maximum_length = nil)
       earliest_time ||= Time.now.advance(years: -18)
       latest_time ||= Time.now.to_i
       
       low = Time.at(Randomizer.between(earliest_time.to_i, latest_time.to_i))
+      latest_time = low.advance(maximum_length) if maximum_length
       high = Time.at(Randomizer.between(low, latest_time.to_i))
       
       low = Value.new("TS", nil, Value.time_to_ts(low), true, false, false)
