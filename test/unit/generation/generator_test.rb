@@ -46,12 +46,12 @@ class GeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_select_unique_data_criteria
-    
+    skip
   end
 
   def test_create_oid_dictionary
     oids = ["2.16.840.1.113883.3.666.5.1130", "2.16.840.1.113883.3.117.1.7.1.82", "2.16.840.1.113883.3.666.5.1083", "2.16.840.1.113883.3.666.5.1083"]
-    #unique_oids = HQMF::Generator.select_unique_oids(oids)
+    skip
   end
 
   def test_select_unique_oids
@@ -63,15 +63,15 @@ class GeneratorTest < MiniTest::Unit::TestCase
     negation_oids = ["2.16.840.1.113883.3.526.3.1007"]
     unique_oids = entry_oids + field_oids + negation_oids
 
-    # assert_equal HQMF::Generator.select_unique_oids(encounters), unique_oids
+    skip
   end
 
   def test_select_valid_time_range
-
+    skip
   end
 
   def test_apply_field_defaults
-    
+    skip
   end
 
   def test_determine_measure_needs
