@@ -41,8 +41,7 @@ module HQMF
         patient.clinicalTrialParticipant = true
       elsif property == :expired
         patient.expired = true
-      else
-        binding.pry
+        patient.deathdate = time.high.to_seconds
       end
     end
 
