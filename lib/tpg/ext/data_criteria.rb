@@ -77,7 +77,7 @@ module HQMF
         if value.type == "CD"
           entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
         else
-           entry.values << PhysicalQuantityResultValue.new(value.format)
+          entry.values << PhysicalQuantityResultValue.new(value.format)
         end
       end
     end

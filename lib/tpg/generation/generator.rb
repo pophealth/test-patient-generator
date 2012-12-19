@@ -180,6 +180,11 @@ module HQMF
       measure_json["source_data_criteria"] = []
 
       measure = HQMF::Document.from_json(measure_json)
+      measure.all_data_criteria.each do |data_criteria|
+        data_criteria.values ||= []
+        data_criteria.values << data_criteria.value if data_criteria.value && data_criteria.value.type != "ANYNonNull"
+      end
+      measure
     end
     
     # Map all patient api coded entry types from HQMF data criteria to Record sections.
