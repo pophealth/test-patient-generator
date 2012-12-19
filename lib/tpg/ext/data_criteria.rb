@@ -29,18 +29,18 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified patient.
     def modify_patient_with_characteristic(patient, time, value_sets)
-      if type == :characteristic and property != nil and patient_api_function == nil
-        if property == :birthtime
-          patient.birthdate = time.low.to_seconds
-        elsif property == :gender
-          gender = value.code
-          patient.gender = gender
-          patient.first = Randomizer.randomize_first_name(gender)
-        elsif property == :clinicalTrialParticipant
-          patient.clinicalTrialParticipant = true
-        elsif property == :expired
-          patient.expired = true
-        end
+      return nil unless type == :characteristic and property != nil and patient_api_function == nil
+
+      if property == :birthtime
+        patient.birthdate = time.low.to_seconds
+      elsif property == :gender
+        gender = value.code
+        patient.gender = gender
+        patient.first = Randomizer.randomize_first_name(gender)
+      elsif property == :clinicalTrialParticipant
+        patient.clinicalTrialParticipant = true
+      elsif property == :expired
+        patient.expired = true
       end
     end
 
@@ -69,15 +69,15 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified coded entry.
     def modify_entry_with_values(entry, value_sets)
+      return nil unless values.present?
+
       # If the value itself has a code, it will be a Coded type. Otherwise, it's just a regular value with a unit.
-      if values.present?
-        entry.values ||= []
-        values.each do |value|
-          if value.type == "CD"
-            entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
-          else
-             entry.values << PhysicalQuantityResultValue.new(value.format)
-          end
+      entry.values ||= []
+      values.each do |value|
+        if value.type == "CD"
+          entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets)})
+        else
+           entry.values << PhysicalQuantityResultValue.new(value.format)
         end
       end
     end
@@ -88,10 +88,10 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified coded entry.
     def modify_entry_with_negation(entry, value_sets)
-      if negation && negation_code_list_id.present?
-        entry.negation_ind = true
-        entry.negation_reason = Coded.select_code(negation_code_list_id, value_sets)
-      end
+      return nil unless negation && negation_code_list_id.present?
+      
+      entry.negation_ind = true
+      entry.negation_reason = Coded.select_code(negation_code_list_id, value_sets)
     end
 
     # Add this data criteria's field related data to a coded entry.
@@ -100,43 +100,42 @@ module HQMF
     # @param [Hash] value_sets The value sets that this data criteria references.
     # @return The modified coded entry.
     def modify_entry_with_fields(entry, value_sets)
-      # Modify the entry with any additional fields added to the data criteria.
-      if field_values.present?
-        field_values.each do |name, field|
-          next if field.nil?
+      return nil unless field_values.present?
 
-          # Format the field to be stored in a Record.
-          if field.type == "CD"
-            field_value = Coded.select_code(field.code_list_id, value_sets)
-          else
-            field_value = field.format
-          end
+      field_values.each do |name, field|
+        next if field.nil?
+
+        # Format the field to be stored in a Record.
+        if field.type == "CD"
+          field_value = Coded.select_code(field.code_list_id, value_sets)
+        else
+          field_value = field.format
+        end
+        
+        field_accessor = nil
+        # Facilities are a special case where we store a whole object on the entry in Record. Create or augment the existing facility with this piece of data.
+        if name.include? "FACILITY"
+          facility = entry.facility
+          facility ||= Facility.new
+          facility_map = {"FACILITY_LOCATION" => :code, "FACILITY_LOCATION_ARRIVAL_DATETIME" => :start_time, "FACILITY_LOCATION_DEPARTURE_DATETIME" => :end_time}
           
-          field_accessor = nil
-          # Facilities are a special case where we store a whole object on the entry in Record. Create or augment the existing facility with this piece of data.
-          if name.include? "FACILITY"
-            facility = entry.facility
-            facility ||= Facility.new
-            facility_map = {"FACILITY_LOCATION" => :code, "FACILITY_LOCATION_ARRIVAL_DATETIME" => :start_time, "FACILITY_LOCATION_DEPARTURE_DATETIME" => :end_time}
-            
-            facility.name = field.title if type == "CD"
-            facility_accessor = facility_map[name]
-            facility.send("#{facility_accessor}=", field_value)
-            
-            field_accessor = :facility
-            field_value = facility
-          end
+          facility.name = field.title if type == "CD"
+          facility_accessor = facility_map[name]
+          facility.send("#{facility_accessor}=", field_value)
+          
+          field_accessor = :facility
+          field_value = facility
+        end
 
-          begin
-            field_accessor ||= HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
-            entry.send("#{field_accessor}=", field_value)
-          rescue
-            # Give some feedback if we hit an unexpected error. Some fields have no action expected, so we'll suppress those messages.
-            noop_fields = ["LENGTH_OF_STAY", "START_DATETIME", "STOP_DATETIME"]
-            unless noop_fields.include? name
-              field_accessor = HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
-              puts "Unknown field #{name} was unable to be added via #{field_accessor} to the patient" 
-            end
+        begin
+          field_accessor ||= HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
+          entry.send("#{field_accessor}=", field_value)
+        rescue
+          # Give some feedback if we hit an unexpected error. Some fields have no action expected, so we'll suppress those messages.
+          noop_fields = ["LENGTH_OF_STAY", "START_DATETIME", "STOP_DATETIME"]
+          unless noop_fields.include? name
+            field_accessor = HQMF::DataCriteria::FIELDS[name][:coded_entry_method]
+            puts "Unknown field #{name} was unable to be added via #{field_accessor} to the patient" 
           end
         end
       end

@@ -90,7 +90,7 @@ module HQMF
 
     #
     #
-    # @param [Array] oids
+    # @param [Array] oids 
     # @return 
     def self.create_oid_dictionary(oids)
       value_sets = []
@@ -214,4 +214,4 @@ module HQMF
       end
     end
   end
-end
+end 
