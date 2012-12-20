@@ -109,7 +109,7 @@ module HQMF
         # Format the field to be stored in a Record.
         if field.type == "CD"
           field_value = Coded.select_code(field.code_list_id, value_sets)
-          field_value["title"] = HQMF::Coded.select_value_sets(field.code_list_id, value_sets)["concept"]
+          field_value["title"] = HQMF::Coded.select_value_sets(field.code_list_id, value_sets)["concept"] if field_value
         else
           field_value = field.format
         end
