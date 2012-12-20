@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors = ["Adam Goldstein"]
   s.version = '1.1.1'
 
-  s.add_dependency 'health-data-standards', '~> 2.2.0'
+  s.add_dependency 'health-data-standards', '~> 2.2.1'
   s.add_dependency 'hquery-patient-api', '~> 1.0.0'
   s.add_dependency 'hqmf-parser', '~> 1.1.0'
   s.add_dependency 'hqmf2js', '~> 1.1.0'

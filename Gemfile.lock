@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    test-patient-generator (1.0.2)
-      health-data-standards (~> 2.2.0)
+    test-patient-generator (1.1.1)
+      health-data-standards (~> 2.2.1)
       hqmf-parser (~> 1.1.0)
       hqmf2js (~> 1.1.0)
       hquery-patient-api (~> 1.0.0)
@@ -35,7 +35,7 @@ GEM
       nokogiri (>= 1.4.3.1)
       oauth (>= 0.3.6)
       oauth2 (>= 0.5.0)
-    health-data-standards (2.2.0)
+    health-data-standards (2.2.1)
       activesupport (~> 3.2.9)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
