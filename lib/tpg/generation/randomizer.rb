@@ -172,12 +172,14 @@ module HQMF
     
     # More accurately, randomize a believable birthdate. Given a patient, find all coded entries that
     # have age-related implications and make sure the patient is at least that old. Since that is complicated,
-    # for now let's just make them 45
+    # for now let's just make them 40
     #
     # @param A patient with coded entries that dictate potential birthdates
     # @return A realistic birthdate for the given patient
     def self.randomize_birthdate(patient)
-      Time.now.advance(years: -45).to_i
+      now = Time.now
+      range = randomize_range(now.advance(years: -40), now.advance(years: -35))
+      range.low.to_time_object
     end
     
     # Randomly generate a Range object that is within a lower and upper bounds. It is guaranteed that the high of the
@@ -185,12 +187,14 @@ module HQMF
     #
     # @param [Time] earliest_time The lowest possible value for the low in this Range. nil implies unbounded.
     # @param [Time] latest_time The highest possible value for the high in this Range. nil implies unbounded.
+    # @param [Hash] maximum_length Optionally used to bound the length of a range. This is a hash that can be passed as a parameter to Time.advance.
     # @return A Range that represents a start time and end time within the acceptable bounds supplied.
-    def self.randomize_range(earliest_time, latest_time)
-      earliest_time ||= Time.now.advance(years: -18)
-      latest_time ||= Time.now.to_i
+    def self.randomize_range(earliest_time, latest_time, maximum_length = nil)
+      earliest_time ||= Time.now.advance(years: -35)
+      latest_time ||= Time.now.advance(days: -1)
       
       low = Time.at(Randomizer.between(earliest_time.to_i, latest_time.to_i))
+      latest_time = low.advance(maximum_length) if maximum_length
       high = Time.at(Randomizer.between(low, latest_time.to_i))
       
       low = Value.new("TS", nil, Value.time_to_ts(low), true, false, false)

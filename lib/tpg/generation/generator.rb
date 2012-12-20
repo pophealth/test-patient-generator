@@ -88,7 +88,7 @@ module HQMF
       unique_data_criteria
     end
 
-    #
+    # 
     #
     # @param [Array] oids 
     # @return 
@@ -124,13 +124,27 @@ module HQMF
       oids.compact
     end
 
+    # Create a random time range for an entry to occur. It is guaranteed to be within the lifespan of the patient and will last no longer than a day.
     #
-    #
-    # @param [Record] patient
-    # @param [HQMF::DataCriteria] data_criteria
-    # @return
+    # @param [Record] patient The patient for whom this range is being generated.
+    # @param [HQMF::DataCriteria] data_criteria The data criteria for which we're creating an entry.
+    # @return A time range that can be used to create an entry for this data criteria.
     def self.select_valid_time_range(patient, data_criteria)
-      time = Randomizer.randomize_range(patient.birthdate, patient.deathdate)
+      earliest_time = patient.birthdate
+      latest_time = patient.deathdate
+
+      # Make sure all ranges occur within the bounds of birth and death. If this data criteria is deciding one of those two, place this range outside of our 35 year range for entries.
+      if data_criteria.property.present?
+        if data_criteria.property == :birthtime
+          earliest_time = HQMF::Randomizer.randomize_birthdate(patient)
+          latest_time = earliest_time.advance(days: 1)
+        elsif data_criteria.property == :expired
+          earliest_time = Time.now
+          latest_time = earliest_time.advance(days: 1)
+        end
+      end
+
+      time = Randomizer.randomize_range(earliest_time, latest_time, {days: 1})
     end
 
     #
