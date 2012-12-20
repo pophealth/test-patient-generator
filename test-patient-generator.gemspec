@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.email = "talk@projectpophealth.org"
   s.homepage = "https://github.com/pophealth/test-patient-generator"
   s.authors = ["Adam Goldstein"]
-  s.version = '1.1.0'
+  s.version = '1.1.1'
 
   s.add_dependency 'health-data-standards', '~> 2.2.0'
   s.add_dependency 'hquery-patient-api', '~> 1.0.0'
