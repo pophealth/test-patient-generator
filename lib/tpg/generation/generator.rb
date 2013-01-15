@@ -81,7 +81,7 @@ module HQMF
       
       unique_data_criteria = []
       all_data_criteria.each do |data_criteria|
-        index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status}
+        index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status && dc.definition == data_criteria.definition}
         unique_data_criteria << data_criteria if index.nil?
       end
 
