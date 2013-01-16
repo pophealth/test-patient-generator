@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     test-patient-generator (1.1.1)
-      health-data-standards (~> 2.2.0)
+      health-data-standards (~> 2.2.1)
       hqmf-parser (~> 1.1.0)
       hqmf2js (~> 1.1.0)
       hquery-patient-api (~> 1.0.0)
