@@ -15,13 +15,13 @@ module TPG
 
           if format == "c32"
             z.put_next_entry("#{next_entry_path}.xml")
-            z << HealthDataStandards::Export::C32.export(patient)
+            z << HealthDataStandards::Export::C32.new.export(patient)
           elsif format == "ccr"
             z.put_next_entry("#{next_entry_path}.xml")
             z << HealthDataStandards::Export::CCR.export(patient)
           elsif format == "ccda"
             z.put_next_entry("#{next_entry_path}.xml")
-            z << HealthDataStandards::Export::CCDA.export(patient)
+            z << HealthDataStandards::Export::CCDA.new.export(patient)
           elsif format == "html"
             z.put_next_entry("#{next_entry_path}.html")
             z << html_contents(patient, concept_map)
@@ -70,7 +70,7 @@ module TPG
           measure_defs = measures.find {|m| m.id == nqf_id}
           # Create a directory for this measure and insert the HTML for this patient.
           zip.put_next_entry(File.join(measure_defs.hqmf_id, "#{patient_filename(patient)}.xml"))
-          zip << QrdaGenerator::Export::Cat1.export(patient, [measure_defs], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
+          zip << HealthDataStandards::Export::Cat1.new.export(patient, [measure_defs], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
         end
       end
       
@@ -83,7 +83,7 @@ module TPG
     # @param [Record] patient The Record for which we're generating HTML content.
     # @return HTML content to be exported for a Record.
     def self.html_contents(patient, concept_map=nil)
-      HealthDataStandards::Export::HTML.export(patient, concept_map)
+      HealthDataStandards::Export::HTML.new.export(patient, concept_map)
     end
     
     # Join the first and last name with an underscore and replace any other punctuation that might interfere with file names.

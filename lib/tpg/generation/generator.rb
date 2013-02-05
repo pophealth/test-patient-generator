@@ -95,10 +95,9 @@ module HQMF
     def self.create_oid_dictionary(oids)
       value_sets = []
       HealthDataStandards::SVS::ValueSet.any_in(oid: oids).each do |value_set|
-        code_sets = value_set.concepts.map { |concept| {"code_set" => concept.code_system_name, "codes" => [concept.code]} }
-        value_sets << {"code_sets" => code_sets, "oid" => value_set.oid, "concept" => value_set.display_name}
+        code_sets = value_set.concepts
+        value_sets << {"concepts" => code_sets, "oid" => value_set.oid}
       end
-
       value_sets
     end
 
