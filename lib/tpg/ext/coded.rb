@@ -9,8 +9,8 @@ module HQMF
     def self.select_codes(oid, value_sets)
       value_sets = HQMF::Coded.select_value_sets(oid, value_sets)
       code_sets = {}
-      value_sets["code_sets"].each do |value_set|
-        code_sets[value_set["code_set"]] = [value_set["codes"].first]
+      value_sets["concepts"].each do |concept|
+        code_sets[concept["code_system_name"]] = [concept["code"]]
       end
       code_sets
     end
@@ -23,7 +23,7 @@ module HQMF
     def self.select_value_sets(oid, value_sets)
       # Pick the value set for this DataCriteria. If it can't be found, it is an error from the value set source. We'll add the entry without codes for now.
       index = value_sets.index{|value_set| value_set["oid"] == oid}
-      value_sets = index.nil? ? { "code_sets" => [] } : value_sets[index]
+      value_sets = index.nil? ? { "concepts" => [] } : value_sets[index]
       value_sets
     end
 
