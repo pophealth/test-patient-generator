@@ -10,7 +10,7 @@ module HQMF
       value_sets = HQMF::Coded.select_value_sets(oid, value_sets)
       code_sets = {}
       value_sets["concepts"].each do |concept|
-        code_sets[concept["code_system_name"]] = [concept["code"]]
+        code_sets[concept["code_system_name"]] ||= [concept["code"]]
       end
       code_sets
     end

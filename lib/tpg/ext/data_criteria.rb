@@ -76,7 +76,7 @@ module HQMF
       entry.values ||= []
       values.each do |value|
         if value.type == "CD"
-          entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets), description: HQMF::Coded.select_value_sets(value.code_list_id, value_sets)["concept"]})
+          entry.values << CodedResultValue.new({codes: Coded.select_codes(value.code_list_id, value_sets), description: HQMF::Coded.select_value_sets(value.code_list_id, value_sets)["display_name"]})
         else
           entry.values << PhysicalQuantityResultValue.new(value.format)
         end
@@ -109,7 +109,7 @@ module HQMF
         # Format the field to be stored in a Record.
         if field.type == "CD"
           field_value = Coded.select_code(field.code_list_id, value_sets)
-          field_value["title"] = HQMF::Coded.select_value_sets(field.code_list_id, value_sets)["concept"] if field_value
+          field_value["title"] = HQMF::Coded.select_value_sets(field.code_list_id, value_sets)["display_name"] if field_value
         else
           field_value = field.format
         end
