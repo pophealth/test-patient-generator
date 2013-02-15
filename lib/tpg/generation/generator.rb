@@ -1,11 +1,13 @@
 module HQMF
   class Generator
+
     # Generate patients from lists of DataCriteria. This is originally created for QRDA Category 1 validation testing,
     # i.e. a single patient will be generated per measure with an entry for every data criteria involved in the measure.
     # 
     # @param [Hash] measure_needs A hash of measure IDs mapped to a list of all their data criteria in JSON.
+    # @param [Hash] Value set hash to use for looking up codes for the data criteria passed in.  If null will resort to original behavior of 
     # @return [Hash] A hash of measure IDs mapped to a Record that includes all the given data criteria (values and times are arbitrary).
-    def self.generate_qrda_patients(measure_needs)      
+    def self.generate_qrda_patients(measure_needs, value_sets=nil)      
       return {} if measure_needs.nil?
       
       measure_patients = {}
@@ -13,7 +15,7 @@ module HQMF
         # Define a list of unique data criteria and matching value sets to create a patient for this measure.
         unique_data_criteria = select_unique_data_criteria(all_data_criteria)
         oids = select_unique_oids(all_data_criteria)
-        value_sets = create_oid_dictionary(oids)
+        value_sets = create_oid_dictionary(oids) if value_sets.nil?
         
         # Create a patient that includes an entry for every data criteria included in this measure.
         patient = Generator.create_base_patient
@@ -81,8 +83,18 @@ module HQMF
       
       unique_data_criteria = []
       all_data_criteria.each do |data_criteria|
-        index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.field_values == data_criteria.field_values && dc.status == data_criteria.status && dc.definition == data_criteria.definition}
-        unique_data_criteria << data_criteria if index.nil?
+
+        fields1 = data_criteria.field_values || {}
+
+        index = unique_data_criteria.index {|dc| dc.code_list_id == data_criteria.code_list_id && dc.negation_code_list_id == data_criteria.negation_code_list_id && dc.status == data_criteria.status && dc.definition == data_criteria.definition}
+       
+        if index
+          crit = unique_data_criteria[index]
+          crit.field_values ||= {}
+          crit.field_values.merge! data_criteria.field_values || {} 
+        else
+         unique_data_criteria << data_criteria 
+        end
       end
 
       unique_data_criteria

@@ -8,7 +8,7 @@ gem 'hquery-patient-api', :git => 'https://github.com/pophealth/patientapi.git',
 
 
 gem 'rake'
-
+gem 'health-data-standards', :git => 'https://github.com/projectcypress/health-data-standards.git', :branch => 'develop'
 group :test do
   gem 'simplecov'
   gem 'turn'
