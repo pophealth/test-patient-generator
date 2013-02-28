@@ -64,13 +64,15 @@ module TPG
     # @return A zip file containing all of the QRDA Category 1 patients that were passed in.
     def self.zip_qrda_cat_1_patients(measure_patients, measures)
       file = Tempfile.new("patients-#{Time.now.to_i}")
-      
       Zip::ZipOutputStream.open(file.path) do |zip|
-        measure_patients.each do |nqf_id, patient|
+        measure_patients.each do |nqf_id, patients|
           measure_defs = measures.find {|m| m.id == nqf_id}
-          # Create a directory for this measure and insert the HTML for this patient.
-          zip.put_next_entry(File.join(measure_defs.hqmf_id, "#{patient_filename(patient)}.xml"))
-          zip << HealthDataStandards::Export::Cat1.new.export(patient, [measure_defs], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
+          patients = [patients] unless patients.is_a? Array # we should be able to support multiple patients... however, the qrda patient generation just passes a single patient... lame.
+          patients.each do |patient|
+            # Create a directory for this measure and insert the HTML for this patient.
+            zip.put_next_entry(File.join(measure_defs.hqmf_id, "#{patient_filename(patient)}.xml"))
+            zip << HealthDataStandards::Export::Cat1.new.export(patient, [measure_defs], Time.gm(2011, 1, 1), Time.gm(2011, 12, 31))
+          end
         end
       end
       
