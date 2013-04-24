@@ -7,11 +7,11 @@ Gem::Specification.new do |s|
   s.email = "talk@projectpophealth.org"
   s.homepage = "https://github.com/pophealth/test-patient-generator"
   s.authors = ["Adam Goldstein", "Andre Quina"]
-  s.version = '1.2.0'
+  s.version = '1.2.1'
 
-  s.add_dependency 'health-data-standards', '~> 3.0.1'
-  s.add_dependency 'hquery-patient-api', '~> 1.0.1'
-  s.add_dependency 'hqmf2js', '~> 1.2.0'
+  s.add_dependency 'health-data-standards', '~> 3.1.1'
+  s.add_dependency 'hquery-patient-api', '~> 1.0.2'
+  s.add_dependency 'hqmf2js', '~> 1.2.1'
 
 
   s.files = Dir.glob('lib/**/*.rb') + ["Gemfile", "Rakefile", "public/cda.xsl"]
