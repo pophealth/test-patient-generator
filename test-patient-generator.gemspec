@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.authors = ["Adam Goldstein"]
   s.version = '1.1.3'
 
-  s.add_dependency 'health-data-standards', '~> 3.1.1'
-  s.add_dependency 'hquery-patient-api', '~> 1.0.2'
-  s.add_dependency 'hqmf2js', '~> 1.2.1'
+#  s.add_dependency 'health-data-standards', '~> 3.1.1'
+#  s.add_dependency 'hquery-patient-api', '~> 1.0.2'
+#  s.add_dependency 'hqmf2js', '~> 1.2.1'
 
 
   s.files = Dir.glob('lib/**/*.rb') + ["Gemfile", "Rakefile", "public/cda.xsl"]
