@@ -71,7 +71,7 @@ GEM
     pry-stack_explorer (0.4.7)
       binding_of_caller (~> 0.6.8)
     rack (1.5.2)
-    rake (10.0.3)
+    rake (12.3.3)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rubyzip (0.9.9)
